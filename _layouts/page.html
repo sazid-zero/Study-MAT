@@ -5,66 +5,88 @@ layout: base
 <div class="page-container">
   <aside class="sidebar">
     <div class="sidebar-header">
-      <h2>📚 CS Interview Prep</h2>
+      <h2><i class="fas fa-code"></i> CS Interview Prep</h2>
       <p class="tagline">Master the fundamentals</p>
     </div>
     
     <nav class="sidebar-nav">
+      <!-- C++ STL -->
       <div class="nav-section">
-        <h3 onclick="toggleSection(this)">📚 C++ STL Tutorial <span class="arrow">▼</span></h3>
+        <h3 onclick="toggleSection(this)">
+            <i class="fas fa-layer-group"></i> C++ STL 
+            <span class="arrow"><i class="fas fa-chevron-down"></i></span>
+        </h3>
         <ul>
-          <li><a href="{{ '/stl-guide/' | relative_url }}">📖 Overview</a></li>
+          <li><a href="{{ '/stl-guide/' | relative_url }}"><i class="fas fa-book-reader"></i> Overview</a></li>
           <li><a href="{{ '/stl-guide/' | relative_url }}#-sequence-containers">Sequence Containers</a></li>
           <li><a href="{{ '/stl-guide/' | relative_url }}#-associative-containers-sorted">Associative Containers</a></li>
           <li><a href="{{ '/stl-guide/' | relative_url }}#-unordered-associative-containers-hash-based-average-o1">Unordered Containers</a></li>
-          <li><a href="{{ '/stl-guide/' | relative_url }}#-container-adapters-wrappers">Container Adapters</a></li>
-          <li><a href="{{ '/stl-guide/' | relative_url }}#-3-algorithms">Algorithms</a></li>
+          <li><a href="{{ '/stl-guide/' | relative_url }}#-container-adapters-wrappers">Adapters</a></li>
           <li><a href="{{ '/stl-guide/' | relative_url }}#-2-iterators">Iterators</a></li>
+          <li><a href="{{ '/stl-guide/' | relative_url }}#-3-data-structures-operations-beyond-stl">Data Structures</a></li>
+        </ul>
+      </div>
+
+      <!-- Algorithms -->
+      <div class="nav-section">
+        <h3 onclick="toggleSection(this)">
+            <i class="fas fa-microchip"></i> Algorithms 
+            <span class="arrow"><i class="fas fa-chevron-down"></i></span>
+        </h3>
+        <ul>
+          <li><a href="{{ '/algorithms/' | relative_url }}"><i class="fas fa-book-reader"></i> Overview</a></li>
+          <li><a href="{{ '/algorithms/' | relative_url }}#-standard-algorithms">Standard Algorithms</a></li>
+          <li><a href="{{ '/algorithms/' | relative_url }}#-functors-function-objects">Functors</a></li>
+          <li><a href="{{ '/algorithms/' | relative_url }}#-common-algorithmic-patterns">Patterns</a></li>
         </ul>
       </div>
       
+      <!-- OOP -->
       <div class="nav-section">
-        <h3 onclick="toggleSection(this)">💡 OOP Fundamentals <span class="arrow">▼</span></h3>
+        <h3 onclick="toggleSection(this)">
+            <i class="fas fa-cubes"></i> OOP 
+            <span class="arrow"><i class="fas fa-chevron-down"></i></span>
+        </h3>
         <ul>
-          <li><a href="{{ '/oop-fundamentals/' | relative_url }}">📖 Overview</a></li>
+          <li><a href="{{ '/oop-fundamentals/' | relative_url }}"><i class="fas fa-book-reader"></i> Overview</a></li>
           <li><a href="{{ '/oop-fundamentals/' | relative_url }}#-classes-and-objects">Classes & Objects</a></li>
           <li><a href="{{ '/oop-fundamentals/' | relative_url }}#%EF%B8%8F-the-four-pillars-of-oop">Four Pillars</a></li>
-          <li><a href="{{ '/oop-fundamentals/' | relative_url }}#1-encapsulation">&nbsp;&nbsp;• Encapsulation</a></li>
-          <li><a href="{{ '/oop-fundamentals/' | relative_url }}#2-inheritance">&nbsp;&nbsp;• Inheritance</a></li>
-          <li><a href="{{ '/oop-fundamentals/' | relative_url }}#3-polymorphism">&nbsp;&nbsp;• Polymorphism</a></li>
-          <li><a href="{{ '/oop-fundamentals/' | relative_url }}#4-abstraction">&nbsp;&nbsp;• Abstraction</a></li>
-          <li><a href="{{ '/oop-fundamentals/' | relative_url }}#-advanced-concepts">Advanced Concepts</a></li>
           <li><a href="{{ '/oop-fundamentals/' | relative_url }}#-solid-principles">SOLID Principles</a></li>
         </ul>
       </div>
       
+      <!-- Database -->
       <div class="nav-section">
-        <h3 onclick="toggleSection(this)">🗄️ Database Fundamentals <span class="arrow">▼</span></h3>
+        <h3 onclick="toggleSection(this)">
+            <i class="fas fa-database"></i> Database 
+            <span class="arrow"><i class="fas fa-chevron-down"></i></span>
+        </h3>
         <ul>
-          <li><a href="{{ '/database-fundamentals/' | relative_url }}">📖 Overview</a></li>
+          <li><a href="{{ '/database-fundamentals/' | relative_url }}"><i class="fas fa-book-reader"></i> Overview</a></li>
           <li><a href="{{ '/database-fundamentals/' | relative_url }}#%EF%B8%8F-dbms-concepts">DBMS Concepts</a></li>
           <li><a href="{{ '/database-fundamentals/' | relative_url }}#-relational-database-design">Database Design</a></li>
           <li><a href="{{ '/database-fundamentals/' | relative_url }}#-sql-basics">SQL Basics</a></li>
-          <li><a href="{{ '/database-fundamentals/' | relative_url }}#-advanced-sql">Advanced SQL</a></li>
-          <li><a href="{{ '/database-fundamentals/' | relative_url }}#-normalization">Normalization</a></li>
-          <li><a href="{{ '/database-fundamentals/' | relative_url }}#-transactions--acid">Transactions & ACID</a></li>
           <li><a href="{{ '/database-fundamentals/' | relative_url }}#-indexing">Indexing</a></li>
         </ul>
       </div>
       
+      <!-- Practice -->
       <div class="nav-section">
-        <h3 onclick="toggleSection(this)">🔗 Practice Sites <span class="arrow">▼</span></h3>
+        <h3 onclick="toggleSection(this)">
+            <i class="fas fa-laptop-code"></i> Practice 
+            <span class="arrow"><i class="fas fa-chevron-down"></i></span>
+        </h3>
         <ul class="external-links">
-          <li><a href="https://leetcode.com" target="_blank" rel="noopener">LeetCode ↗</a></li>
-          <li><a href="https://codeforces.com" target="_blank" rel="noopener">Codeforces ↗</a></li>
-          <li><a href="https://www.geeksforgeeks.org" target="_blank" rel="noopener">GeeksforGeeks ↗</a></li>
-          <li><a href="https://cp-algorithms.com" target="_blank" rel="noopener">CP-Algorithms ↗</a></li>
+          <li><a href="https://leetcode.com" target="_blank" rel="noopener">LeetCode <i class="fas fa-external-link-alt"></i></a></li>
+          <li><a href="https://codeforces.com" target="_blank" rel="noopener">Codeforces <i class="fas fa-external-link-alt"></i></a></li>
+          <li><a href="https://www.geeksforgeeks.org" target="_blank" rel="noopener">GFG <i class="fas fa-external-link-alt"></i></a></li>
+          <li><a href="https://cp-algorithms.com" target="_blank" rel="noopener">CP-Algorithms <i class="fas fa-external-link-alt"></i></a></li>
         </ul>
       </div>
     </nav>
     
     <div class="sidebar-footer">
-      <p class="copyright">Built with ❤️</p>
+      <p class="copyright">Built with <i class="fas fa-heart" style="color: #e74c3c;"></i></p>
     </div>
   </aside>
 
@@ -72,7 +94,7 @@ layout: base
   <div class="sidebar-backdrop" onclick="closeSidebar()"></div>
 
   <main class="main-content">
-    <button class="mobile-menu-toggle" onclick="toggleSidebar()">
+    <button class="mobile-menu-toggle" onclick="toggleSidebar()" aria-label="Toggle Menu">
       <span></span>
       <span></span>
       <span></span>
@@ -89,7 +111,7 @@ layout: base
 </div>
 
 <script>
-// Accordion toggle for sidebar sections
+// Accordion toggle with local storage persistence
 function toggleSection(header) {
   const ul = header.nextElementSibling;
   const arrow = header.querySelector('.arrow');
@@ -97,136 +119,105 @@ function toggleSection(header) {
   header.classList.toggle('collapsed');
   ul.classList.toggle('collapsed');
   
-  // Save state in localStorage
+  // Save state
   const sectionName = header.textContent.trim().replace(/\s+/g, '-');
   const isCollapsed = header.classList.contains('collapsed');
   localStorage.setItem(`section-${sectionName}`, isCollapsed ? 'collapsed' : 'open');
 }
 
-// Sidebar state management with localStorage persistence
 const isMobile = () => window.innerWidth <= 768;
 
-// Initialize sidebar state from localStorage on page load
-function initializeSidebar() {
-  const sidebar = document.querySelector('.sidebar');
-  const mainContent = document.querySelector('.main-content');
-  const toggle = document.querySelector('.mobile-menu-toggle');
-  
-  // Initialize accordion sections
-  document.querySelectorAll('.nav-section h3').forEach(header => {
-    const sectionName = header.textContent.trim().replace(/\s+/g, '-');
-    const savedState = localStorage.getItem(`section-${sectionName}`);
-    
-    // Default: all sections open, unless saved as collapsed
-    if (savedState === 'collapsed') {
-      header.classList.add('collapsed');
-      header.nextElementSibling.classList.add('collapsed');
-    }
-  });
-  
-  // Get saved sidebar state (default: open on desktop, closed on mobile)
-  const savedState = localStorage.getItem('sidebarState');
-  const shouldBeOpen = savedState === 'open' || (savedState === null && !isMobile());
-  
-  if (!shouldBeOpen) {
-    sidebar.classList.add('closed');
-    mainContent.classList.add('sidebar-closed');
-  }
-  
-  // Ensure toggle is not marked as active on page load
-  toggle.classList.remove('active');
-}
-
-function toggleSidebar() {
-  const sidebar = document.querySelector('.sidebar');
-  const backdrop = document.querySelector('.sidebar-backdrop');
-  const toggle = document.querySelector('.mobile-menu-toggle');
-  const mainContent = document.querySelector('.main-content');
-  
-  if (isMobile()) {
-    // Mobile behavior: simple overlay toggle
-    const isActive = sidebar.classList.contains('mobile-active');
-    
-    if (!isActive) {
-      // Opening sidebar
-      sidebar.classList.remove('closed');
-      sidebar.classList.add('mobile-active');
-      backdrop.classList.add('active');
-      toggle.classList.add('active');
-    } else {
-      // Closing sidebar
-      closeSidebar();
-    }
-  } else {
-    // Desktop behavior: slide sidebar and adjust content
-    const isClosed = sidebar.classList.contains('closed');
-    
-    if (isClosed) {
-      // Opening sidebar
-      sidebar.classList.remove('closed');
-      mainContent.classList.remove('sidebar-closed');
-      toggle.classList.remove('active');
-      localStorage.setItem('sidebarState', 'open');
-    } else {
-      // Closing sidebar
-      sidebar.classList.add('closed');
-      mainContent.classList.add('sidebar-closed');
-      toggle.classList.add('active');
-      localStorage.setItem('sidebarState', 'closed');
-    }
-  }
-}
-
-function closeSidebar() {
-  const sidebar = document.querySelector('.sidebar');
-  const backdrop = document.querySelector('.sidebar-backdrop');
-  const toggle = document.querySelector('.mobile-menu-toggle');
-  
-  if (isMobile()) {
-    sidebar.classList.remove('mobile-active');
-    backdrop.classList.remove('active');
-    toggle.classList.remove('active');
-    // No scroll manipulation - let it behave normally
-  }
-}
-
-// Close sidebar when clicking on a link (mobile only)
-document.querySelectorAll('.sidebar a').forEach(link => {
-  link.addEventListener('click', function() {
-    if (isMobile()) {
-      setTimeout(closeSidebar, 200);
-    }
-  });
-});
-
-// Handle window resize
-let resizeTimer;
-window.addEventListener('resize', function() {
-  clearTimeout(resizeTimer);
-  resizeTimer = setTimeout(function() {
+function initSideBar() {
     const sidebar = document.querySelector('.sidebar');
     const mainContent = document.querySelector('.main-content');
     const toggle = document.querySelector('.mobile-menu-toggle');
-    
-    if (isMobile()) {
-      // Switched to mobile
-      closeSidebar();
-      sidebar.classList.remove('closed');
-      mainContent.classList.remove('sidebar-closed');
-    } else {
-      // Switched to desktop
-      sidebar.classList.remove('mobile-active');
-      backdrop.classList.remove('active');
-      
-      // Restore saved state
-      const savedState = localStorage.getItem('sidebarState');
-      if (savedState === 'closed') {
-        sidebar.classList.add('closed');
-        mainContent.classList.add('sidebar-closed');
-        toggle.classList.add('active');
-      }
+
+    // Restore accordion states
+    document.querySelectorAll('.nav-section h3').forEach(header => {
+        const sectionName = header.textContent.trim().replace(/\s+/g, '-');
+        const savedState = localStorage.getItem(`section-${sectionName}`);
+        if (savedState === 'collapsed') {
+            header.classList.add('collapsed');
+            header.nextElementSibling.classList.add('collapsed');
+        }
+    });
+
+    // Restore sidebar state (Desktop only)
+    if (!isMobile()) {
+        const savedState = localStorage.getItem('sidebarState');
+        if (savedState === 'closed') {
+            sidebar.classList.add('closed');
+            mainContent.classList.add('sidebar-closed');
+            toggle.classList.add('active');
+        }
     }
-  }, 250);
+}
+
+function toggleSidebar() {
+    const sidebar = document.querySelector('.sidebar');
+    const backdrop = document.querySelector('.sidebar-backdrop');
+    const toggle = document.querySelector('.mobile-menu-toggle');
+    const mainContent = document.querySelector('.main-content');
+
+    if (isMobile()) {
+        const isActive = sidebar.classList.contains('mobile-active');
+        if (!isActive) {
+            sidebar.classList.add('mobile-active');
+            backdrop.classList.add('active');
+            toggle.classList.add('active');
+        } else {
+            closeSidebar();
+        }
+    } else {
+        // Desktop
+        sidebar.classList.toggle('closed');
+        mainContent.classList.toggle('sidebar-closed');
+        toggle.classList.toggle('active');
+        
+        const isClosed = sidebar.classList.contains('closed');
+        localStorage.setItem('sidebarState', isClosed ? 'closed' : 'open');
+    }
+}
+
+function closeSidebar() {
+    // Only applied on mobile
+    if (isMobile()) {
+        document.querySelector('.sidebar').classList.remove('mobile-active');
+        document.querySelector('.sidebar-backdrop').classList.remove('active');
+        document.querySelector('.mobile-menu-toggle').classList.remove('active');
+    }
+}
+
+// Close sidebar on link click (mobile)
+document.querySelectorAll('.sidebar a').forEach(link => {
+    link.addEventListener('click', () => {
+        if(isMobile()) setTimeout(closeSidebar, 200);
+    });
+});
+
+// Handle resize
+let resizeTimer;
+window.addEventListener('resize', () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => {
+        const sidebar = document.querySelector('.sidebar');
+        const mainContent = document.querySelector('.main-content');
+        
+        if (isMobile()) {
+            sidebar.classList.remove('closed'); // Reset desktop class
+            mainContent.classList.remove('sidebar-closed');
+        } else {
+            sidebar.classList.remove('mobile-active'); // Reset mobile class
+            document.querySelector('.sidebar-backdrop').classList.remove('active');
+            
+            // Restore desktop preference
+            const savedState = localStorage.getItem('sidebarState');
+            if (savedState === 'closed') {
+                sidebar.classList.add('closed');
+                mainContent.classList.add('sidebar-closed');
+            }
+        }
+    }, 200);
 });
 
 // Smooth scroll for anchor links
@@ -240,6 +231,5 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   });
 });
 
-// Initialize on page load
-initializeSidebar();
+initSideBar();
 </script>

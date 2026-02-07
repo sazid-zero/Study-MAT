@@ -171,6 +171,12 @@ body {
   border-radius: 6px;
 }
 
+.nav-section h3 i {
+  margin-right: 8px;
+  width: 20px;
+  text-align: center;
+}
+
 .nav-section h3:hover {
   background: rgba(51, 153, 255, 0.1);
 }
@@ -214,6 +220,20 @@ body {
   font-size: var(--font-size-sm);
   position: relative;
   overflow: hidden;
+  display: flex;
+  align-items: center;
+}
+
+.nav-section a i {
+  margin-right: 10px;
+  width: 16px;
+  text-align: center;
+  opacity: 0.7;
+  transition: opacity 0.2s;
+}
+
+.nav-section a:hover i {
+  opacity: 1;
 }
 
 .nav-section a::before {
@@ -603,10 +623,11 @@ body.sidebar-open {
 @media (max-width: 768px) {
   .sidebar {
     transform: translate3d(-100%, 0, 0);
+    width: var(--sidebar-width);
   }
   
   .sidebar.mobile-active {
-    transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0) !important;
   }
   
   .main-content {
