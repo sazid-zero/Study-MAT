@@ -138,6 +138,22 @@ body.is-loading {
   box-shadow: var(--shadow-md);
 }
 
+/* Compact header on mobile */
+@media (max-width: 768px) {
+  .global-header {
+    padding: 0 1rem;
+    height: 60px; /* Slightly shorter on mobile if needed, or keep standard */
+  }
+  
+  .header-container {
+    gap: 1rem; /* Reduce gap between elements */
+  }
+  
+  .site-logo {
+    font-size: 1.25rem; /* Slightly smaller logo */
+  }
+}
+
 .header-container {
   width: 100%;
   display: flex;
