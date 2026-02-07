@@ -269,6 +269,22 @@ body.is-loading {
   backdrop-filter: blur(20px);
 }
 
+/* Mobile Search Results - Full Width */
+@media (max-width: 768px) {
+  .search-results-dropdown {
+    position: fixed;
+    top: 60px; /* Match mobile header height */
+    left: 0;
+    right: 0;
+    width: 100vw;
+    border-radius: 0 0 12px 12px;
+    border-left: none;
+    border-right: none;
+    margin-top: 0;
+    max-height: calc(100vh - 60px);
+  }
+}
+
 .search-results-dropdown::-webkit-scrollbar {
   width: 6px;
 }
