@@ -347,7 +347,6 @@ img { max-width: 100%; height: auto; display: block; }
   font-size: 1.25rem;
   width: 36px;
   height: 36px;
-  display: flex;
   align-items: center;
   justify-content: center;
 }
@@ -356,6 +355,12 @@ img { max-width: 100%; height: auto; display: block; }
   background: var(--bg-card-hover);
   color: var(--danger);
   transform: rotate(90deg);
+}
+
+@media (max-width: 768px) {
+  .close-sidebar {
+    display: flex;
+  }
 }
 
 /* Sidebar Navigation */
@@ -1272,8 +1277,14 @@ body.layout-page .main-content {
 }
 
 .btn-primary:hover {
+  color: white !important;
   transform: translateY(-3px) scale(1.05);
   box-shadow: 0 15px 40px rgba(96, 165, 250, 0.4);
+}
+
+.btn-primary:hover i,
+.btn-primary:hover span {
+  color: white !important;
 }
 
 .btn-secondary {
@@ -1285,8 +1296,14 @@ body.layout-page .main-content {
 .btn-secondary:hover {
   background: rgba(255, 255, 255, 0.1);
   border-color: var(--primary);
+  color: var(--text-primary) !important;
   transform: translateY(-3px);
   box-shadow: 0 10px 30px rgba(96, 165, 250, 0.2);
+}
+
+.btn-secondary:hover i,
+.btn-secondary:hover span {
+  color: var(--text-primary) !important;
 }
 
 .btn-large {
@@ -1328,6 +1345,11 @@ body.layout-page .main-content {
   font-size: 2.5rem;
   margin-bottom: 1.5rem;
   display: block;
+  color: var(--primary);
+}
+
+.feature-icon i {
+  font-size: 2.5rem;
 }
 
 .feature-card h3 {
@@ -1645,6 +1667,10 @@ body.layout-page .main-content {
   .mobile-menu-toggle {
     display: block;
     order: -1;
+  }
+
+  .close-sidebar {
+    display: flex !important;
   }
 
   .site-logo {
