@@ -1,51 +1,62 @@
 # 🎓 CS Prep Hub
 
 > **Master Data Structures, Algorithms, System Design, and more.**  
-> *Your comprehensive guide to software engineering excellence.*
+> *Your comprehensive "0 to 100" guide to software engineering excellence.*
 
 **CS Prep Hub** is a curated resource for computer science students and software engineers preparing for technical interviews and competitive programming. It provides deep dives into essential topics with clean, modern documentation.
 
 ---
 
-## 📚 Features
+## 📚 Comprehensive Learning Paths
 
-### 🔹 **C++ STL Guide (`/stl-guide`)**
-A complete reference for the Standard Template Library.
-- **Containers**: Vector, List, Map, Set, Priority Queue, etc.
-- **Iterators**: Usage and patterns.
-- **Algorithms**: Sorting, searching, and efficient operations.
-- **Code Examples**: Practical snippets for competitive programming.
+### 🔹 **1. Algorithms & Data Structures**
+Master the core of problem-solving.
+-   **[Algorithm Bible](/algos)** (`/algos`):
+    -   **Graph Theory**: BFS, DFS, Dijkstra, Topological Sort, Union-Find.
+    -   **Dynamic Programming**: Knapsack, LCS, LIS, Fibonacci (Memoization vs Tabulation).
+    -   **Advanced Structures**: Tries, Segment Trees.
+-   **[C++ STL Guide](/stl-guide)** (`/stl-guide`): Vectors, Maps, Sets, Priority Queues for competitive programming.
 
-### 🔹 **Algorithm Patterns (`/algos`)**
-Master common problem-solving strategies.
-- **Patterns**: Two Pointers, Sliding Window, DFS/BFS, Dynamic Programming.
-- **Complexity Analysis**: Time and space complexity breakdowns.
-- **Implementations**: Detailed code walkthroughs.
+### 🔹 **2. System Design & Architecture**
+Build scalable, distributed systems.
+-   **[System Design](/system-design)** (`/system-design`): Scalability, Caching, Load Balancing, CAP Theorem. Includes a **Junior Design Cheat Sheet**.
+-   **[API Design](/api-design)** (`/api-design`): RESTful principles, Status Codes, Spotify API Case Study.
+-   **[Database Fundamentals](/database-fundamentals)** (`/database-fundamentals`): SQL vs NoSQL, ACID, Indexing, Normalization.
+-   **[Cloud Native](/cloud-native-guide)** (`/cloud-native-guide`): Serverless, AWS Lambda, S3, Docker containers.
+-   **[GraphQL Guide](/graphql-guide)** (`/graphql-guide`): Queries, Mutations, Apollo Server vs REST.
+-   **[Real-Time Systems](/real-time-guide)** (`/real-time-guide`): WebSockets, Socket.io, Event-Driven Architecture.
 
-### 🔹 **OOP Fundamentals (`/oop-fundamentals`)**
-Solidify your object-oriented programming knowledge.
-- **Core Pillars**: Encapsulation, Abstraction, Inheritance, Polymorphism.
-- **Design Principles**: SOLID, DRY, KISS.
-- **Design Patterns**: Creational, Structural, Behavioral patterns.
+### 🔹 **3. Backend Engineering & DevOps**
+The tools of the trade for modern backend roles.
+-   **[Backend Implementations](/backend-languages)** (`/backend-languages`): **Node.js/Express** vs **Python/FastAPI**.
+-   **[DevOps & CI/CD](/devops)** (`/devops`): Docker, GitHub Actions, Deployment strategies.
+-   **[Auth & Security](/auth-security)** (`/auth-security`): JWT, OAuth 2.0, HTTPS, CORS, Security Checklist.
+-   **[Testing Guide](/testing-guide)** (`/testing-guide`): Unit, Integration, E2E Testing, TDD with Jest/PyTest.
 
-### 🔹 **Database Systems (`/database-fundamentals`)**
-Essential database concepts for system design.
-- **Core Concepts**: ACID properties, Normalization, Indexing.
-- **SQL**: Query optimization and schema design.
-- **NoSQL**: Understanding different database paragigms.
+### 🔹 **4. Programming Fundamentals**
+Strong foundations for any language.
+-   **[OOP Mastery](/oop-fundamentals)** (`/oop-fundamentals`):
+    -   **Core Pillars**: Encapsulation, Inheritance, Polymorphism.
+    -   **Design Patterns**: Singleton, Factory, Observer, Strategy, Adapter (with full code).
+    -   **Advanced Topics**: **Lambda Expressions**, **Multithreading**, **Concurrency**, **Exception Handling**.
+-   **[Frontend Fundamentals](/frontend-fundamentals)** (`/frontend-fundamentals`): **NEW**. Full-stack guide covering DOM, Event Loop, CSS Flexbox/Grid, and React Hooks.
+
+### 🔹 **5. Interview Prep**
+Soft skills to seal the deal.
+-   **[Behavioral Guide](/behavioral-guide)** (`/behavioral-guide`): **NEW**. STAR Method, Common Questions, Resume Tips.
 
 ---
 
 ## 🛠️ Technology Stack
 
 Built with **Jekyll** and hosted on **GitHub Pages**.
-- **Static Site Generator**: Jekyll
-- **Languages**: HTML5, CSS3 (Custom responsive design), JavaScript (ES6+)
-- **Features**: 
-  - 🌙 Responsive Sidebar Navigation
-  - 🔍 Client-side Search (JSON index)
-  - 📱 Mobile-optimized Layout
-  - ⚡ Fast page transitions with Barba.js
+-   **Static Site Generator**: Jekyll
+-   **Languages**: HTML5, CSS3 (Custom responsive design), JavaScript (ES6+)
+-   **Features**:
+    -   🌙 Responsive Sidebar Navigation
+    -   🔍 Client-side Search (JSON index)
+    -   📱 Mobile-optimized Layout
+    -   ⚡ Fast page transitions with Barba.js
 
 ---
 

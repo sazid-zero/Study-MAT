@@ -12,14 +12,14 @@ title: Home
       <a href="{{ '/stl-guide/' | relative_url }}" class="btn-primary btn-large">
         <i class="fas fa-book"></i> Start Learning
       </a>
-      <a href="{{ '/algos/' | relative_url }}" class="btn-secondary btn-large">
+      <a href="#topics" class="btn-secondary btn-large">
         <i class="fas fa-code"></i> Browse Topics
       </a>
     </div>
   </div>
 </div>
 
-<div class="features-section">
+<div class="features-section" id="topics">
   <div class="features-grid">
     <a href="{{ '/stl-guide/' | relative_url }}" class="feature-card">
       <span class="feature-icon"><i class="fas fa-book-open"></i></span>
