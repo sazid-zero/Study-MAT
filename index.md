@@ -44,6 +44,36 @@ title: Home
       <h3>Database Systems</h3>
       <p>Understand DBMS concepts, relational database design, normalization, SQL queries, indexing, and transaction management.</p>
     </a>
+
+    <a href="{{ '/api-design/' | relative_url }}" class="feature-card">
+      <span class="feature-icon"><i class="fas fa-network-wired"></i></span>
+      <h3>API Design</h3>
+      <p>Learn to build scalable APIs from scratch. Includes REST principles, status codes, and a full Spotify-like system case study.</p>
+    </a>
+
+    <a href="{{ '/system-design/' | relative_url }}" class="feature-card">
+      <span class="feature-icon"><i class="fas fa-server"></i></span>
+      <h3>System Design</h3>
+      <p>Master scalability, load balancing, caching strategies, and distributed systems. essential for senior engineering roles.</p>
+    </a>
+
+    <a href="{{ '/backend-languages/' | relative_url }}" class="feature-card">
+      <span class="feature-icon"><i class="fas fa-terminal"></i></span>
+      <h3>Backend Languages</h3>
+      <p>Deep dive into Node.js/Express and Python/FastAPI. Learn setup, routing, and choose the right stack for your project.</p>
+    </a>
+
+    <a href="{{ '/auth-security/' | relative_url }}" class="feature-card">
+      <span class="feature-icon"><i class="fas fa-user-shield"></i></span>
+      <h3>Auth & Security</h3>
+      <p>Secure your apps with JWT, OAuth 2.0, and HTTPS. Learn the critical difference between Authentication and Authorization.</p>
+    </a>
+
+    <a href="{{ '/devops/' | relative_url }}" class="feature-card">
+      <span class="feature-icon"><i class="fas fa-shipping-fast"></i></span>
+      <h3>DevOps Basics</h3>
+      <p>Bridge the gap between code and ops. Dockerize your apps, automate with GitHub Actions, and explore deployment strategies.</p>
+    </a>
     
     <div class="feature-card" style="background: linear-gradient(135deg, rgba(96, 165, 250, 0.1), rgba(167, 139, 250, 0.1)); border-color: var(--primary);">
       <span class="feature-icon"><i class="fas fa-star"></i></span>
