@@ -34,7 +34,24 @@ Master the Standard Template Library for competitive programming and interviews
 
 <div class="guide-card">
 
-### [💡 OOP Fundamentals]({{ '/oop-fundamentals/' | relative_url }})
+### [� Algorithms & Data Structures]({{ '/algorithms/' | relative_url }})
+
+Master standard algorithms, common patterns, and problem-solving techniques.
+
+**Topics Covered:**
+- ✅ Sorting & Searching (sort, binary_search)
+- ✅ Heap Operations (push_heap, pop_heap)
+- ✅ Permutations & Partitions
+- ✅ Functors & Lambdas
+- ✅ Common Algorithmic Patterns
+
+<a href="{{ '/algorithms/' | relative_url }}" class="btn-primary">View Algorithms Guide →</a>
+
+</div>
+
+<div class="guide-card">
+
+### [�💡 OOP Fundamentals]({{ '/oop-fundamentals/' | relative_url }})
 
 Complete guide to Object-Oriented Programming concepts and principles
 
