@@ -57,6 +57,15 @@ document.addEventListener('DOMContentLoaded', () => {
     if (newLayout) {
       document.body.classList.add(`layout-${newLayout}`);
     }
+    
+    // Close sidebar on mobile navigation
+    if (window.innerWidth < 1024) {
+      const sidebar = document.querySelector('.sidebar');
+      const overlay = document.querySelector('.sidebar-overlay');
+      if (sidebar) sidebar.classList.remove('sidebar-open');
+      if (overlay) overlay.classList.remove('active');
+      document.body.style.overflow = '';
+    }
   });
   
   // Re-initialize after page transitions

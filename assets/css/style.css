@@ -592,12 +592,29 @@ body.is-loading {
    LAYOUT VARIANTS
    ======================================== */
 
-/* Home Layout - Never show sidebar, even on desktop */
+/* Home Layout - Never show sidebar on desktop, but allow toggle on mobile */
 body.layout-home .sidebar {
-  transform: translateX(-100%) !important;
   width: 0;
   padding: 0;
   overflow: hidden;
+  border-right: none;
+}
+
+@media (min-width: 1024px) {
+  body.layout-home .sidebar {
+    transform: translateX(-100%) !important;
+  }
+}
+
+@media (max-width: 1023px) {
+  /* Allow mobile sidebar to open */
+  body.layout-home .sidebar.sidebar-open {
+    width: var(--sidebar-width);
+    padding: 2rem 0;
+    overflow-y: auto;
+    border-right: 1px solid var(--border-color);
+    transform: translateX(0);
+  }
 }
 
 body.layout-home .main-content {
@@ -1994,13 +2011,15 @@ body.layout-page .docs-page {
 
 /* Mobile adjustments for tables */
 @media (max-width: 768px) {
-  .docs-content th,
   .docs-content td {
     padding: 0.5rem 0.75rem; /* Reduce padding on mobile */
-    font-size: 0.9rem;
+    font-size: 0.9rem; /* Keep data readable */
   }
   
   .docs-content th {
     white-space: normal; /* Allow headers to wrap on small screens */
+    font-size: 0.75rem; /* Smaller text for headers as requested */
+    text-transform: uppercase; /* Optional: makes small headers look better */
+    letter-spacing: 0.5px;
   }
 }
