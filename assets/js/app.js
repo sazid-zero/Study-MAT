@@ -1,7 +1,32 @@
 document.addEventListener('DOMContentLoaded', () => {
   // Initialize Barba for smooth page transitions
   barba.init({
-    prevent: ({ el }) => el.classList && el.classList.contains('no-barba'),
+    prevent: ({ el, href }) => {
+      // Get href attribute
+      const linkHref = el.getAttribute('href');
+      if (!linkHref) return false;
+      
+      // Prevent Barba from handling pure anchor links
+      if (linkHref.startsWith('#')) {
+        return true;
+      }
+      
+      // Prevent Barba from handling same-page anchor navigation
+      try {
+        const url = new URL(linkHref, window.location.origin);
+        const currentPath = window.location.pathname;
+        
+        // If it's the same page with just a hash change, let normal navigation handle it
+        if (url.pathname === currentPath && url.hash) {
+          return true;
+        }
+      } catch (e) {
+        // If URL parsing fails, just continue
+      }
+      
+      // Prevent Barba for external links or special classes
+      return el.classList && el.classList.contains('no-barba');
+    },
     transitions: [{
       name: 'instant-transition',
       async leave(data) {
@@ -80,9 +105,19 @@ function initSidebar() {
   const sidebar = document.querySelector('.sidebar');
   const overlay = document.querySelector('.sidebar-overlay');
   
+  // Remove any existing event listeners by cloning elements
+  if (closeBtn) {
+    const newCloseBtn = closeBtn.cloneNode(true);
+    closeBtn.parentNode.replaceChild(newCloseBtn, closeBtn);
+  }
+  
   // Close sidebar function
   const closeSidebar = () => {
-    if (sidebar) sidebar.classList.remove('active');
+    console.log('Closing sidebar');
+    if (sidebar) {
+      sidebar.classList.remove('active');
+      console.log('Sidebar active removed');
+    }
     if (overlay) overlay.classList.remove('active');
     document.body.style.overflow = '';
   };
@@ -91,24 +126,30 @@ function initSidebar() {
   if (toggleBtn) {
     toggleBtn.onclick = (e) => {
       e.stopPropagation();
+      console.log('Opening sidebar');
       if (sidebar) sidebar.classList.add('active');
       if (overlay) overlay.classList.add('active');
       document.body.style.overflow = 'hidden';
     };
   }
   
-  // Close sidebar button
-  if (closeBtn) {
-    closeBtn.addEventListener('click', (e) => {
+  // Close sidebar button - use the newly cloned button
+  const newCloseBtn = document.querySelector('.close-sidebar');
+  if (newCloseBtn) {
+    newCloseBtn.onclick = (e) => {
       e.preventDefault();
       e.stopPropagation();
+      console.log('Close button clicked');
       closeSidebar();
-    });
+    };
   }
   
   // Close on overlay click
   if (overlay) {
-    overlay.addEventListener('click', closeSidebar);
+    overlay.onclick = (e) => {
+      e.stopPropagation();
+      closeSidebar();
+    };
   }
   
   // Close sidebar on escape key
@@ -361,6 +402,7 @@ function initScrollSpy() {
 
 // Setup smooth scrolling for all anchor links
 function setupSmoothScroll() {
+  // Handle pure anchor links (#id)
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function(e) {
       const href = this.getAttribute('href');
@@ -382,6 +424,42 @@ function setupSmoothScroll() {
         
         // Update URL
         history.pushState(null, null, href);
+      }
+    });
+  });
+  
+  // Handle links with same page + anchor (e.g., /stl-guide/#section)
+  document.querySelectorAll('a[href*="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+      const href = this.getAttribute('href');
+      if (!href || href === '#') return;
+      
+      const url = new URL(href, window.location.origin);
+      const currentPath = window.location.pathname;
+      
+      // Check if it's the same page
+      if (url.pathname === currentPath && url.hash) {
+        e.preventDefault();
+        const targetId = url.hash.substring(1);
+        const targetElement = document.getElementById(targetId);
+        
+        if (targetElement) {
+          const headerOffset = 100;
+          const elementPosition = targetElement.getBoundingClientRect().top;
+          const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+          
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: 'smooth'
+          });
+          
+          // Update URL
+          history.pushState(null, null, url.hash);
+          
+          // Update active state in sidebar
+          document.querySelectorAll('.nav-subitems a').forEach(link => link.classList.remove('active'));
+          anchor.classList.add('active');
+        }
       }
     });
   });

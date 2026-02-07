@@ -2,22 +2,41 @@ document.addEventListener('DOMContentLoaded', () => {
   const searchInput = document.getElementById('search-input');
   const resultsContainer = document.getElementById('search-results');
   
-  if (!searchInput || !resultsContainer) return;
+  if (!searchInput || !resultsContainer) {
+    console.log('Search elements not found');
+    return;
+  }
 
   let searchIndex = [];
 
   // Fetch search index - use relative path
-  const baseUrl = window.location.hostname === 'localhost' ? '' : '/Study-MAT';
+  const baseUrl = window.location.pathname.includes('/Study-MAT') ? '/Study-MAT' : '';
+  console.log('Base URL:', baseUrl);
+  console.log('Fetching search index from:', `${baseUrl}/search.json`);
+  
   fetch(`${baseUrl}/search.json`)
-    .then(response => response.json())
+    .then(response => {
+      console.log('Search response:', response.status);
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      return response.json();
+    })
     .then(data => {
       searchIndex = data;
-      console.log('Search index loaded:', searchIndex.length, 'items');
+      console.log('Search index loaded successfully:', searchIndex.length, 'items');
+      console.log('Sample item:', searchIndex[0]);
     })
-    .catch(err => console.error('Error fetching search index:', err));
+    .catch(err => {
+      console.error('Error fetching search index:', err);
+      console.error('Tried to fetch from:', `${baseUrl}/search.json`);
+    });
 
   searchInput.addEventListener('input', (e) => {
     const query = e.target.value.toLowerCase().trim();
+    
+    console.log('Search query:', query);
+    console.log('Search index length:', searchIndex.length);
     
     if (query.length < 2) {
       resultsContainer.style.display = 'none';
@@ -25,10 +44,14 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     const results = searchIndex.filter(item => {
-      return item.title.toLowerCase().includes(query) || 
-             (item.content && item.content.toLowerCase().includes(query));
+      const titleMatch = item.title && item.title.toLowerCase().includes(query);
+      const contentMatch = item.content && item.content.toLowerCase().includes(query);
+      return titleMatch || contentMatch;
     }).slice(0, 5); // Limit to 5 results
 
+    console.log('Search results found:', results.length);
+    console.log('Results:', results);
+    
     displayResults(results, query);
   });
 
@@ -38,8 +61,9 @@ document.addEventListener('DOMContentLoaded', () => {
     } else {
       resultsContainer.innerHTML = results.map(item => {
         const excerpt = item.excerpt || item.content?.substring(0, 150) || '';
+        const itemUrl = item.url.startsWith('/') ? `${baseUrl}${item.url}` : item.url;
         return `
-          <a href="${baseUrl}${item.url}" class="search-item">
+          <a href="${itemUrl}" class="search-item">
             <div class="search-item-title">${highlightText(item.title, query)}</div>
             <div class="search-item-preview">${excerpt}...</div>
           </a>

@@ -358,6 +358,9 @@ body.is-loading {
   height: 36px;
   align-items: center;
   justify-content: center;
+  z-index: 10;
+  position: relative;
+  pointer-events: auto;
 }
 
 .close-sidebar:hover {
@@ -368,6 +371,8 @@ body.is-loading {
 
 .close-sidebar:active {
   transform: rotate(90deg) scale(0.95);
+  background: var(--danger);
+  color: white;
 }
 
 /* Sidebar Navigation */
