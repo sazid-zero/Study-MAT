@@ -8,7 +8,7 @@ permalink: /stl-guide/
 
 > A comprehensive guide covering Containers, Iterators, Algorithms, and more!
 
-[⬅️ Back to Home](/)
+[⬅️ Back to Home]({{ '/' | relative_url }})
 
 ---
 

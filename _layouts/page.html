@@ -162,6 +162,7 @@ function toggleSidebar() {
     if (isMobile()) {
         const isActive = sidebar.classList.contains('mobile-active');
         if (!isActive) {
+            sidebar.classList.remove('closed');
             sidebar.classList.add('mobile-active');
             backdrop.classList.add('active');
             toggle.classList.add('active');

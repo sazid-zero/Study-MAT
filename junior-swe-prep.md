@@ -8,7 +8,7 @@ permalink: /junior-swe-prep/
 
 > Complete preparation guide for entry-level software engineering assessments
 
-[⬅️ Back to Home](/)
+[⬅️ Back to Home]({{ '/' | relative_url }})
 
 ---
 

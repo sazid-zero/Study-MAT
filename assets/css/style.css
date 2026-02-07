@@ -628,6 +628,8 @@ body.sidebar-open {
   
   .sidebar.mobile-active {
     transform: translate3d(0, 0, 0) !important;
+    visibility: visible !important;
+    box-shadow: 2px 0 20px rgba(0,0,0,0.5);
   }
   
   .main-content {

@@ -8,7 +8,7 @@ permalink: /algorithms/
 
 > Master standard algorithms, common patterns, and problem-solving techniques.
 
-[⬅️ Back to Home](/)
+[⬅️ Back to Home]({{ '/' | relative_url }})
 
 ---
 
