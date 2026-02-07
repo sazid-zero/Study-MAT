@@ -142,19 +142,17 @@ function toggleSidebar() {
   const backdrop = document.querySelector('.sidebar-backdrop');
   const toggle = document.querySelector('.mobile-menu-toggle');
   const mainContent = document.querySelector('.main-content');
-  const body = document.body;
   
   if (isMobile()) {
-    // Mobile behavior: use overlay
+    // Mobile behavior: simple overlay toggle
     const isActive = sidebar.classList.contains('mobile-active');
     
     if (!isActive) {
-      // Opening sidebar - NO scroll manipulation
+      // Opening sidebar
       sidebar.classList.remove('closed');
       sidebar.classList.add('mobile-active');
       backdrop.classList.add('active');
       toggle.classList.add('active');
-      body.classList.add('sidebar-open');
     } else {
       // Closing sidebar
       closeSidebar();
@@ -183,14 +181,12 @@ function closeSidebar() {
   const sidebar = document.querySelector('.sidebar');
   const backdrop = document.querySelector('.sidebar-backdrop');
   const toggle = document.querySelector('.mobile-menu-toggle');
-  const body = document.body;
   
   if (isMobile()) {
     sidebar.classList.remove('mobile-active');
     backdrop.classList.remove('active');
     toggle.classList.remove('active');
-    body.classList.remove('sidebar-open');
-    // Removed scroll position manipulation
+    // No scroll manipulation - let it behave normally
   }
 }
 
@@ -220,8 +216,7 @@ window.addEventListener('resize', function() {
     } else {
       // Switched to desktop
       sidebar.classList.remove('mobile-active');
-      document.querySelector('.sidebar-backdrop').classList.remove('active');
-      document.body.classList.remove('sidebar-open');
+      backdrop.classList.remove('active');
       
       // Restore saved state
       const savedState = localStorage.getItem('sidebarState');
