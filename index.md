@@ -16,37 +16,55 @@ title: Home
 
 <div class="guide-card">
 
-### [🔧 C++ STL Complete Guide]({{ '/stl-guide/' | relative_url }})
+### [� C++ STL Complete Guide]({{ '/stl-guide/' | relative_url }})
 
-Master the Standard Template Library for competitive programming
+Master the Standard Template Library for competitive programming and interviews
 
 **Topics Covered:**
-- ✅ All containers (Vector, Map, Set, Stack, Queue)
-- ✅ Iterators and their usage
-- ✅ STL algorithms (sort, search, etc.)
-- ✅ Time complexities
-- ✅ Real-world examples & patterns
+- ✅ All STL containers (Vector, Map, Set, Stack, Queue, etc.)
+- ✅ Iterators and their usage patterns
+- ✅ STL algorithms (sort, search, binary_search, etc.)
+- ✅ Time complexities for all operations
+- ✅ Real-world examples & best practices
 - ✅ Quick reference tables
 
-<a href="{{ '/stl-guide/' | relative_url }}" class="btn-primary">Read STL Guide →</a>
+<a href="{{ '/stl-guide/' | relative_url }}" class="btn-primary">View STL Guide →</a>
 
 </div>
 
 <div class="guide-card">
 
-### [💼 Junior SWE Assessment Prep]({{ '/junior-swe-prep/' | relative_url }})
+### [💡 OOP Fundamentals]({{ '/oop-fundamentals/' | relative_url }})
 
-Everything you need for entry-level software engineering assessments
+Complete guide to Object-Oriented Programming concepts and principles
 
 **Topics Covered:**
-- ✅ Core data structures & algorithms
-- ✅ Problem-solving patterns
-- ✅ Time & space complexity analysis
-- ✅ System design basics
-- ✅ Behavioral interview tips
-- ✅ 4-week study plan
+- ✅ Classes, Objects, Constructors
+- ✅ Four Pillars: Encapsulation, Inheritance, Polymorphism, Abstraction
+- ✅ Abstract classes vs Interfaces
+- ✅ SOLID Principles
+- ✅ Design Patterns overview
+- ✅ Interview Q&A with code examples
 
-<a href="{{ '/junior-swe-prep/' | relative_url }}" class="btn-primary">Read SWE Prep →</a>
+<a href="{{ '/oop-fundamentals/' | relative_url }}" class="btn-primary">View OOP Guide →</a>
+
+</div>
+
+<div class="guide-card">
+
+### [🗄️ Database Fundamentals]({{ '/database-fundamentals/' | relative_url }})
+
+Everything you need to know about databases, SQL, and design principles
+
+**Topics Covered:**
+- ✅ DBMS concepts & architecture
+- ✅ SQL basics to advanced queries
+- ✅ Joins, Subqueries, Window Functions
+- ✅ Normalization (1NF to BCNF)
+- ✅ Transactions & ACID properties
+- ✅ Indexing & performance optimization
+
+<a href="{{ '/database-fundamentals/' | relative_url }}" class="btn-primary">View Database Guide →</a>
 
 </div>
 
@@ -59,32 +77,35 @@ Everything you need for entry-level software engineering assessments
 <div class="quick-start-grid">
 
 <div class="start-card">
-<h3>📖 For Beginners</h3>
-<p>Start with fundamentals:</p>
+<h3>� For Competitive Programming</h3>
+<p>Master C++ STL for contests:</p>
 <ol>
-<li>Review <a href="{{ '/stl-guide/' | relative_url }}#-sequence-containers">basic containers</a></li>
-<li>Learn <a href="{{ '/junior-swe-prep/' | relative_url }}#core-data-structures">core data structures</a></li>
-<li>Practice easy problems on LeetCode</li>
+<li>Learn <a href="{{ '/stl-guide/' | relative_url }}#-sequence-containers">STL containers</a></li>
+<li>Practice <a href="{{ '/stl-guide/' | relative_url }}#-3-algorithms">STL algorithms</a></li>
+<li>Understand time complexities</li>
+<li>Solve problems on Codeforces</li>
 </ol>
 </div>
 
 <div class="start-card">
-<h3>⚡ For Interview Prep</h3>
-<p>Focus on patterns:</p>
+<h3>📚 For Interview Preparation</h3>
+<p>Build strong fundamentals:</p>
 <ol>
-<li>Master <a href="{{ '/junior-swe-prep/' | relative_url }}#-problem-solving-patterns">problem patterns</a></li>
-<li>Study <a href="{{ '/junior-swe-prep/' | relative_url }}#time--space-complexity">complexity analysis</a></li>
-<li>Review <a href="{{ '/junior-swe-prep/' | relative_url }}#-common-question-types">common questions</a></li>
+<li>Study <a href="{{ '/oop-fundamentals/' | relative_url }}#%EF%B8%8F-the-four-pillars-of-oop">OOP concepts</a></li>
+<li>Master <a href="{{ '/database-fundamentals/' | relative_url }}#-sql-basics">SQL queries</a></li>
+<li>Learn <a href="{{ '/database-fundamentals/' | relative_url }}#-normalization">database design</a></li>
+<li>Practice coding on LeetCode</li>
 </ol>
 </div>
 
 <div class="start-card">
-<h3>🎯 For Competitive Programming</h3>
-<p>Advanced techniques:</p>
+<h3>🎯 For Beginners</h3>
+<p>Start your journey:</p>
 <ol>
-<li>Deep dive into <a href="{{ '/stl-guide/' | relative_url }}#-associative-containers-sorted">STL containers</a></li>
-<li>Learn <a href="{{ '/stl-guide/' | relative_url }}#-algorithms">STL algorithms</a></li>
-<li>Practice on Codeforces</li>
+<li>Begin with <a href="{{ '/stl-guide/' | relative_url }}#1-vector">Vector basics</a></li>
+<li>Learn <a href="{{ '/oop-fundamentals/' | relative_url }}#-classes-and-objects">Classes & Objects</a></li>
+<li>Practice <a href="{{ '/database-fundamentals/' | relative_url }}#-sql-basics">basic SQL</a></li>
+<li>Build small projects</li>
 </ol>
 </div>
 
@@ -144,12 +165,11 @@ Everything you need for entry-level software engineering assessments
 
 We're constantly expanding! Here's what's in the pipeline:
 
-- 🔄 **Graph Algorithms** - DFS, BFS, Dijkstra, Floyd-Warshall
-- 🔄 **Dynamic Programming** - From basics to advanced patterns
-- 🔄 **System Design** - Scalability and architecture
-- 🔄 **Database Concepts** - SQL, indexing, normalization
-- 🔄 **OOP Design Patterns** - SOLID principles
-- 🔄 **Bit Manipulation** - Tricks and techniques
+- 🔄 **Algorithms & Problem Patterns** - Comprehensive algorithm guide with patterns
+- 🔄 **System Design Basics** - Scalability and architecture fundamentals
+- 🔄 **Operating Systems** - Processes, threads, memory management
+- 🔄 **Computer Networks** - Protocols, TCP/IP, HTTP/HTTPS
+- 🔄 **Git & Version Control** - Best practices and workflows
 
 ---
 
@@ -157,11 +177,12 @@ We're constantly expanding! Here's what's in the pipeline:
 
 ## 🎯 Ready to Start?
 
-Pick a guide and begin your journey to mastering technical interviews!
+Pick a guide and begin your journey to mastering technical concepts!
 
 <div class="cta-buttons">
-<a href="{{ '/stl-guide/' | relative_url }}" class="btn-primary">Explore STL Guide</a>
-<a href="{{ '/junior-swe-prep/' | relative_url }}" class="btn-secondary">Start Interview Prep</a>
+<a href="{{ '/stl-guide/' | relative_url }}" class="btn-primary">C++ STL Guide</a>
+<a href="{{ '/oop-fundamentals/' | relative_url }}" class="btn-secondary">OOP Fundamentals</a>
+<a href="{{ '/database-fundamentals/' | relative_url }}" class="btn-secondary">Database Guide</a>
 </div>
 
 </div>
