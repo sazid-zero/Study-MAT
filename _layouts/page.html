@@ -89,27 +89,70 @@ layout: base
 </div>
 
 <script>
+// Sidebar state management with localStorage persistence
 let scrollPosition = 0;
+const isMobile = () => window.innerWidth <= 768;
+
+// Initialize sidebar state from localStorage on page load
+function initializeSidebar() {
+  const sidebar = document.querySelector('.sidebar');
+  const mainContent = document.querySelector('.main-content');
+  const toggle = document.querySelector('.mobile-menu-toggle');
+  
+  // Get saved state (default: open on desktop, closed on mobile)
+  const savedState = localStorage.getItem('sidebarState');
+  const shouldBeOpen = savedState === 'open' || (savedState === null && !isMobile());
+  
+  if (!shouldBeOpen) {
+    sidebar.classList.add('closed');
+    mainContent.classList.add('sidebar-closed');
+  }
+  
+  // Ensure toggle is not marked as active on page load
+  toggle.classList.remove('active');
+}
 
 function toggleSidebar() {
   const sidebar = document.querySelector('.sidebar');
   const backdrop = document.querySelector('.sidebar-backdrop');
   const toggle = document.querySelector('.mobile-menu-toggle');
+  const mainContent = document.querySelector('.main-content');
   const body = document.body;
   
-  const isActive = sidebar.classList.contains('mobile-active');
-  
-  if (!isActive) {
-    // Opening sidebar
-    scrollPosition = window.pageYOffset;
-    sidebar.classList.add('mobile-active');
-    backdrop.classList.add('active');
-    toggle.classList.add('active');
-    body.classList.add('sidebar-open');
-    body.style.top = `-${scrollPosition}px`;
+  if (isMobile()) {
+    // Mobile behavior: use overlay
+    const isActive = sidebar.classList.contains('mobile-active');
+    
+    if (!isActive) {
+      // Opening sidebar
+      scrollPosition = window.pageYOffset;
+      sidebar.classList.remove('closed');
+      sidebar.classList.add('mobile-active');
+      backdrop.classList.add('active');
+      toggle.classList.add('active');
+      body.classList.add('sidebar-open');
+      body.style.top = `-${scrollPosition}px`;
+    } else {
+      // Closing sidebar
+      closeSidebar();
+    }
   } else {
-    // Closing sidebar
-    closeSidebar();
+    // Desktop behavior: slide sidebar and adjust content
+    const isClosed = sidebar.classList.contains('closed');
+    
+    if (isClosed) {
+      // Opening sidebar
+      sidebar.classList.remove('closed');
+      mainContent.classList.remove('sidebar-closed');
+      toggle.classList.remove('active');
+      localStorage.setItem('sidebarState', 'open');
+    } else {
+      // Closing sidebar
+      sidebar.classList.add('closed');
+      mainContent.classList.add('sidebar-closed');
+      toggle.classList.add('active');
+      localStorage.setItem('sidebarState', 'closed');
+    }
   }
 }
 
@@ -119,30 +162,53 @@ function closeSidebar() {
   const toggle = document.querySelector('.mobile-menu-toggle');
   const body = document.body;
   
-  sidebar.classList.remove('mobile-active');
-  backdrop.classList.remove('active');
-  toggle.classList.remove('active');
-  body.classList.remove('sidebar-open');
-  body.style.top = '';
-  window.scrollTo(0, scrollPosition);
+  if (isMobile()) {
+    sidebar.classList.remove('mobile-active');
+    backdrop.classList.remove('active');
+    toggle.classList.remove('active');
+    body.classList.remove('sidebar-open');
+    body.style.top = '';
+    window.scrollTo(0, scrollPosition);
+  }
 }
 
-// Close sidebar when clicking on a link (mobile)
-if (window.innerWidth <= 768) {
-  document.querySelectorAll('.sidebar a').forEach(link => {
-    link.addEventListener('click', function() {
+// Close sidebar when clicking on a link (mobile only)
+document.querySelectorAll('.sidebar a').forEach(link => {
+  link.addEventListener('click', function() {
+    if (isMobile()) {
       setTimeout(closeSidebar, 300);
-    });
+    }
   });
-}
+});
 
 // Handle window resize
 let resizeTimer;
 window.addEventListener('resize', function() {
   clearTimeout(resizeTimer);
   resizeTimer = setTimeout(function() {
-    if (window.innerWidth > 768) {
+    const sidebar = document.querySelector('.sidebar');
+    const mainContent = document.querySelector('.main-content');
+    const toggle = document.querySelector('.mobile-menu-toggle');
+    
+    if (isMobile()) {
+      // Switched to mobile
       closeSidebar();
+      sidebar.classList.remove('closed');
+      mainContent.classList.remove('sidebar-closed');
+    } else {
+      // Switched to desktop
+      sidebar.classList.remove('mobile-active');
+      document.querySelector('.sidebar-backdrop').classList.remove('active');
+      document.body.classList.remove('sidebar-open');
+      document.body.style.top = '';
+      
+      // Restore saved state
+      const savedState = localStorage.getItem('sidebarState');
+      if (savedState === 'closed') {
+        sidebar.classList.add('closed');
+        mainContent.classList.add('sidebar-closed');
+        toggle.classList.add('active');
+      }
     }
   }, 250);
 });
@@ -157,4 +223,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     }
   });
 });
+
+// Initialize on page load
+initializeSidebar();
 </script>
