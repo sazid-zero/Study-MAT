@@ -251,10 +251,12 @@ ms.erase(1);                     // {} (removes all 1s)
 **Header:** `#include <map>`
 
 **Syntax:**
+{% raw %}
 ```cpp
 map<K, V> m;                                     // empty
 map<int, string> m = {{1, "a"}, {2, "b"}};      // initializer list
 ```
+{% endraw %}
 
 **Key Operations:**
 
@@ -583,10 +585,12 @@ sort(v.begin(), v.end(), [](int a, int b) {
 ```
 
 #### **stable_sort** - O(N log N), preserves order
+{% raw %}
 ```cpp
 vector<pair<int,int>> v = {{1,2}, {1,1}, {1,3}};
 stable_sort(v.begin(), v.end());             // maintains relative order
 ```
+{% endraw %}
 
 ---
 
@@ -711,6 +715,7 @@ Custom behaviors for algorithms (e.g., for `sort` or `priority_queue`).
 Struct/class with `operator()`.
 
 ### Example: Custom Comparator for Sorting
+{% raw %}
 ```cpp
 struct Comparator {
     bool operator()(pair<int,int> a, pair<int,int> b) {
@@ -727,6 +732,7 @@ vector<pair<int,int>> v = {{1,3}, {2,3}, {1,2}};
 sort(v.begin(), v.end(), Comparator());
 // Result: {(1,3), (2,3), (1,2)}
 ```
+{% endraw %}
 
 ### Example: Custom Comparator for Priority Queue
 ```cpp
