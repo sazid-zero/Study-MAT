@@ -40,6 +40,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initScrollSpy();
   highlightCurrentPage();
   setupSmoothScroll();
+  wrapTables();
   
   // Update layout BEFORE transition starts (prevents lag)
   barba.hooks.beforeEnter((data) => {
@@ -83,6 +84,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initScrollSpy();
     highlightCurrentPage();
     setupSmoothScroll();
+    wrapTables();
   });
 });
 
@@ -480,5 +482,18 @@ function setupSmoothScroll() {
         console.log('URL parse error:', err);
       }
     }, true); // Use capture phase
+  });
+}
+// Responsive Table Wrapper
+function wrapTables() {
+  const tables = document.querySelectorAll('table');
+  tables.forEach(table => {
+    // Skip if already wrapped
+    if (table.parentElement.classList.contains('table-wrapper')) return;
+    
+    const wrapper = document.createElement('div');
+    wrapper.className = 'table-wrapper';
+    table.parentNode.insertBefore(wrapper, table);
+    wrapper.appendChild(table);
   });
 }

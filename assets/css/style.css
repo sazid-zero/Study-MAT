@@ -1938,3 +1938,69 @@ body.layout-page .docs-page {
     page-break-inside: avoid;
   }
 }
+
+/* ========================================
+   RESPONSIVE TABLES
+   ======================================== */
+
+.table-wrapper {
+  width: 100%;
+  overflow-x: auto; /* Fallback for extreme cases */
+  margin-bottom: 1.5rem;
+  /* Removed bg/border to fix "double background" issue */
+}
+
+/* Ensure tables take full width and look good */
+.docs-content table {
+  width: 100%;
+  border-collapse: collapse;
+  background: rgba(255, 255, 255, 0.03); /* Lighter than page bg */
+  border-radius: 8px; /* Rounded corners for the table itself */
+  overflow: hidden; /* Clip inner content to corners */
+  table-layout: auto; /* Allow columns to size based on content */
+}
+
+.docs-content th,
+.docs-content td {
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--border-color);
+  text-align: left;
+  vertical-align: top; /* Align content to top when wrapping */
+  white-space: normal; /* Allow text to wrap */
+  word-break: break-word; /* Prevent overflow from long words */
+}
+
+.docs-content th {
+  background: rgba(255, 255, 255, 0.05); /* Slightly lighter header */
+  font-weight: 600;
+  color: var(--primary-light);
+  white-space: nowrap; /* Keep headers on one line if possible, or allow wrap if needed */
+}
+
+/* Allow code blocks in tables to wrap */
+.docs-content td code {
+  white-space: pre-wrap;
+  word-break: break-all;
+  display: inline-block;
+}
+
+.docs-content tr:last-child td {
+  border-bottom: none;
+}
+
+.docs-content tr:hover td {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+/* Mobile adjustments for tables */
+@media (max-width: 768px) {
+  .docs-content th,
+  .docs-content td {
+    padding: 0.5rem 0.75rem; /* Reduce padding on mobile */
+    font-size: 0.9rem;
+  }
+  
+  .docs-content th {
+    white-space: normal; /* Allow headers to wrap on small screens */
+  }
+}
