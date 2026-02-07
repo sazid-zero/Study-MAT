@@ -179,6 +179,14 @@ body.is-loading {
   transition: var(--transition-fast);
 }
 
+/* Hide menu button on desktop - sidebar is always visible */
+@media (min-width: 1024px) {
+  body.layout-docs .mobile-menu-toggle,
+  body.layout-page .mobile-menu-toggle {
+    display: none;
+  }
+}
+
 .mobile-menu-toggle:hover {
   color: var(--primary);
   transform: scale(1.1);
@@ -325,8 +333,8 @@ body.is-loading {
   box-shadow: var(--shadow-lg);
 }
 
-/* Default behavior - closed on mobile, open on desktop */
-@media (max-width: 768px) {
+/* Mobile/Tablet: Hidden by default, show when toggled */
+@media (max-width: 1023px) {
   .sidebar {
     transform: translateX(-100%);
   }
@@ -336,12 +344,19 @@ body.is-loading {
   }
 }
 
-@media (min-width: 769px) {
-  .sidebar {
+/* Desktop: Always visible on docs/pages, not toggleable */
+@media (min-width: 1024px) {
+  body.layout-docs .sidebar,
+  body.layout-page .sidebar {
+    transform: translateX(0) !important;
+  }
+  
+  /* Other layouts (home) can still be toggled */
+  body:not(.layout-docs):not(.layout-page) .sidebar {
     transform: translateX(0);
   }
   
-  .sidebar:not(.sidebar-open) {
+  body:not(.layout-docs):not(.layout-page) .sidebar:not(.sidebar-open) {
     transform: translateX(-100%);
   }
 }
@@ -366,7 +381,7 @@ body.is-loading {
 }
 
 .close-sidebar {
-  display: none;
+  display: none; /* Close button not needed - hamburger menu handles toggle */
   background: var(--bg-card);
   border: none;
   color: var(--text-primary);
@@ -382,13 +397,6 @@ body.is-loading {
   z-index: 10;
   position: relative;
   pointer-events: auto;
-}
-
-/* Show close button on mobile */
-@media (max-width: 768px) {
-  .close-sidebar {
-    display: flex;
-  }
 }
 
 .close-sidebar:hover {
@@ -553,6 +561,14 @@ body.is-loading {
   position: relative;
 }
 
+/* On desktop, content starts after sidebar */
+@media (min-width: 1024px) {
+  .main-content {
+    margin-left: var(--sidebar-width);
+    width: calc(100% - var(--sidebar-width));
+  }
+}
+
 /* Prevent flash on page load */
 [data-barba="container"] {
   opacity: 1 !important;
@@ -566,19 +582,12 @@ body.is-loading {
    LAYOUT VARIANTS
    ======================================== */
 
-/* Home Layout - Full Width, No Sidebar by default */
+/* Home Layout - Never show sidebar, even on desktop */
 body.layout-home .sidebar {
-  transform: translateX(-100%);
+  transform: translateX(-100%) !important;
   width: 0;
   padding: 0;
   overflow: hidden;
-}
-
-/* BUT allow sidebar to open when explicitly toggled on home layout */
-body.layout-home .sidebar.sidebar-open {
-  transform: translateX(0);
-  width: var(--sidebar-width);
-  padding: 2rem 0;
 }
 
 body.layout-home .main-content {
@@ -586,18 +595,8 @@ body.layout-home .main-content {
   width: 100%;
 }
 
-/* Docs & Page Layout - With Sidebar */
-body.layout-docs .sidebar,
-body.layout-page .sidebar {
-  transform: translateX(0);
-  width: var(--sidebar-width);
-}
-
-body.layout-docs .main-content,
-body.layout-page .main-content {
-  margin-left: var(--sidebar-width);
-  width: calc(100% - var(--sidebar-width));
-}
+/* Docs & Page Layout - Content spacing only */
+/* Sidebar toggling is handled by base responsive rules above */
 
 /* Prevent content jump - ensure docs layout is applied correctly */
 body.layout-docs .docs-page,

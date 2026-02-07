@@ -69,11 +69,21 @@ function initSidebar() {
   
   if (!sidebar) return; // Exit if sidebar not found
   
-  // Initialize sidebar state: open on desktop, closed on mobile
-  if (window.innerWidth > 768) {
-    sidebar.classList.add('sidebar-open');
-  } else {
-    sidebar.classList.remove('sidebar-open');
+  // Initialize sidebar state based on screen size and layout
+  // Desktop docs/pages (≥1024px): CSS handles it (always visible via !important)
+  // Desktop home: Closed by default, toggleable
+  // Mobile/Tablet (<1024px): Closed by default, toggleable
+  const isDesktop = window.innerWidth >= 1024;
+  const isDocsOrPage = document.body.classList.contains('layout-docs') || 
+                       document.body.classList.contains('layout-page');
+  
+  // Only manage class on mobile or non-docs layouts
+  if (!isDesktop || !isDocsOrPage) {
+    if (isDesktop) {
+      sidebar.classList.add('sidebar-open');
+    } else {
+      sidebar.classList.remove('sidebar-open');
+    }
   }
   
   // Close sidebar function
@@ -112,7 +122,7 @@ function initSidebar() {
     } else {
       console.log('Opening sidebar');
       sidebar.classList.add('sidebar-open');
-      if (overlay && window.innerWidth <= 768) {
+      if (overlay && window.innerWidth < 1024) {
         overlay.classList.add('active');
         document.body.style.overflow = 'hidden';
       }
@@ -426,7 +436,7 @@ function setupSmoothScroll() {
               this.classList.add('active');
               
               // Close sidebar on mobile after navigation
-              if (window.innerWidth <= 768 && typeof window.closeSidebar === 'function') {
+              if (window.innerWidth < 1024 && typeof window.closeSidebar === 'function') {
                 setTimeout(() => window.closeSidebar(), 100);
               }
             }
