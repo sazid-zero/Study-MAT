@@ -55,6 +55,7 @@
 html {
   scroll-behavior: smooth;
   font-size: 16px;
+  overflow-x: hidden; /* Moved from body */
 }
 
 body {
@@ -63,7 +64,9 @@ body {
   color: var(--text-primary);
   line-height: 1.7;
   font-size: var(--font-size-base);
-  overflow-x: hidden;
+  /* overflow-x: hidden; Removed to prevent fixed position issues on mobile */
+  position: relative;
+  min-height: 100vh;
 }
 
 /* ===================================
@@ -311,10 +314,10 @@ body {
 
 .mobile-menu-toggle {
   display: flex;
-  position: fixed !important;
-  top: 20px !important;
-  left: 20px !important;
-  z-index: 2000; /* High z-index to stay above everything */
+  position: fixed !important; /* Force fixed positioning */
+  top: 15px !important;
+  left: 15px !important;
+  z-index: 99999 !important; /* Max z-index */
   width: 44px;
   height: 44px;
   background: var(--secondary-bg);
@@ -325,10 +328,10 @@ body {
   justify-content: center;
   align-items: center;
   gap: 5px;
-  box-shadow: var(--shadow-md);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.5); /* Stronger shadow */
   transition: background 0.3s ease;
   -webkit-tap-highlight-color: transparent;
-  transform: none !important; /* Prevent scroll-away */
+  transform: translateZ(0); /* Promotes to own layer without creating containing block for descendants (it has none) */
 }
 
 .mobile-menu-toggle span {
@@ -602,7 +605,7 @@ hr {
   right: 0;
   bottom: 0;
   background: rgba(0, 0, 0, 0.7);
-  z-index: 1998; /* Below sidebar */
+  z-index: 99997; /* Below sidebar (99998) */
   opacity: 0;
   transition: opacity 0.3s ease;
   -webkit-tap-highlight-color: transparent;
@@ -624,16 +627,21 @@ body.sidebar-open {
 
 @media (max-width: 768px) {
   .sidebar {
+    position: fixed; /* Re-affirm fixed position */
+    top: 0;
+    left: 0;
+    bottom: 0;
     transform: translate3d(-100%, 0, 0);
     width: var(--sidebar-width);
-    height: 100dvh; /* Mobile viewport height fix */
-    z-index: 1999; /* Below toggle but above backdrop */
+    height: 100dvh; 
+    z-index: 99998 !important; /* Below toggle (99999) */
+    background: var(--primary-bg); /* Ensure opaque background */
   }
   
   .sidebar.mobile-active {
     transform: translate3d(0, 0, 0) !important;
     visibility: visible !important;
-    box-shadow: 2px 0 20px rgba(0,0,0,0.5);
+    box-shadow: 5px 0 25px rgba(0,0,0,0.8);
   }
   
   .main-content {

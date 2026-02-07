@@ -163,15 +163,21 @@ function toggleSidebar() {
     if (isMobile()) {
         const isActive = sidebar.classList.contains('mobile-active');
         if (!isActive) {
-            sidebar.classList.remove('closed');
+            // OPEN Sidebar
+            sidebar.style.visibility = 'visible'; // Force visibility
+            sidebar.classList.remove('closed');   // Just in case
             sidebar.classList.add('mobile-active');
+            
             backdrop.classList.add('active');
             toggle.classList.add('active');
+            
+            // Prevent body scroll
+            document.body.style.overflow = 'hidden';
         } else {
             closeSidebar();
         }
     } else {
-        // Desktop
+        // Desktop Toggle
         sidebar.classList.toggle('closed');
         mainContent.classList.toggle('sidebar-closed');
         toggle.classList.toggle('active');
@@ -184,9 +190,20 @@ function toggleSidebar() {
 function closeSidebar() {
     // Only applied on mobile
     if (isMobile()) {
-        document.querySelector('.sidebar').classList.remove('mobile-active');
+        const sidebar = document.querySelector('.sidebar');
+        sidebar.classList.remove('mobile-active');
         document.querySelector('.sidebar-backdrop').classList.remove('active');
         document.querySelector('.mobile-menu-toggle').classList.remove('active');
+        
+        // Restore body scroll
+        document.body.style.overflow = '';
+        
+        // Delay resetting visibility to allow transition
+        setTimeout(() => {
+            if(!sidebar.classList.contains('mobile-active')) {
+                // sidebar.style.visibility = ''; // Optional cleanup
+            }
+        }, 300);
     }
 }
 
