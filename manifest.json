@@ -1,0 +1,21 @@
+{
+  "name": "CS Prep Hub",
+  "short_name": "CS Prep",
+  "start_url": "/Study-MAT/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#000000",
+  "description": "Master C++ STL, Algorithms, OOP, Databases and more for technical interviews and competitive programming",
+  "icons": [
+    {
+      "src": "/Study-MAT/assets/graduation.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/Study-MAT/assets/graduation.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

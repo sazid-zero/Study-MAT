@@ -95,7 +95,22 @@ document.addEventListener('DOMContentLoaded', () => {
     setupSmoothScroll();
     wrapTables();
   });
+
+  registerServiceWorker();
 });
+
+function registerServiceWorker() {
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('/Study-MAT/sw.js')
+        .then((registration) => {
+          console.log('ServiceWorker registration successful with scope: ', registration.scope);
+        }, (err) => {
+          console.log('ServiceWorker registration failed: ', err);
+        });
+    });
+  }
+}
 
 // Store event handlers globally to prevent duplicates
 let sidebarHandlers = {
