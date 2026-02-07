@@ -108,6 +108,15 @@ img { max-width: 100%; height: auto; display: block; }
   padding-top: var(--nav-height);
 }
 
+/* Ensure smooth initial load */
+body {
+  opacity: 1;
+}
+
+body.is-loading {
+  opacity: 0;
+}
+
 /* ========================================
    HEADER / NAVIGATION
    ======================================== */
@@ -336,7 +345,7 @@ img { max-width: 100%; height: auto; display: block; }
 }
 
 .close-sidebar {
-  display: none;
+  display: flex;
   background: var(--bg-card);
   border: none;
   color: var(--text-primary);
@@ -357,10 +366,8 @@ img { max-width: 100%; height: auto; display: block; }
   transform: rotate(90deg);
 }
 
-@media (max-width: 768px) {
-  .close-sidebar {
-    display: flex;
-  }
+.close-sidebar:active {
+  transform: rotate(90deg) scale(0.95);
 }
 
 /* Sidebar Navigation */
@@ -510,6 +517,12 @@ img { max-width: 100%; height: auto; display: block; }
   width: 100%;
   min-height: calc(100vh - var(--nav-height));
   transition: margin-left var(--transition-smooth);
+  position: relative;
+}
+
+/* Prevent flash on page load */
+[data-barba="container"] {
+  opacity: 1;
 }
 
 /* ========================================
@@ -540,6 +553,12 @@ body.layout-docs .main-content,
 body.layout-page .main-content {
   margin-left: var(--sidebar-width);
   width: calc(100% - var(--sidebar-width));
+}
+
+/* Prevent content jump - ensure docs layout is applied correctly */
+body.layout-docs .docs-page,
+body.layout-page .docs-page {
+  opacity: 1;
 }
 
 /* ========================================
@@ -1667,10 +1686,6 @@ body.layout-page .main-content {
   .mobile-menu-toggle {
     display: block;
     order: -1;
-  }
-
-  .close-sidebar {
-    display: flex !important;
   }
 
   .site-logo {

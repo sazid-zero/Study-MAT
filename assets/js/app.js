@@ -1,24 +1,29 @@
 document.addEventListener('DOMContentLoaded', () => {
   // Initialize Barba for smooth page transitions
   barba.init({
+    prevent: ({ el }) => el.classList && el.classList.contains('no-barba'),
     transitions: [{
-      name: 'fade-transition',
-      leave(data) {
-        return gsap.to(data.current.container, {
+      name: 'instant-transition',
+      async leave(data) {
+        // Quick fade out
+        await gsap.to(data.current.container, {
           opacity: 0,
-          y: -20,
-          duration: 0.3,
-          ease: 'power2.in'
+          duration: 0.15,
+          ease: 'power1.inOut'
         });
       },
-      enter(data) {
+      async enter(data) {
+        // Scroll to top immediately
         window.scrollTo(0, 0);
-        return gsap.from(data.next.container, {
-          opacity: 0,
-          y: 20,
-          duration: 0.3,
-          ease: 'power2.out'
-        });
+        // Quick fade in
+        gsap.fromTo(data.next.container, 
+          { opacity: 0 },
+          { opacity: 1, duration: 0.15, ease: 'power1.inOut' }
+        );
+      },
+      async once(data) {
+        // Initial page load - no animation
+        gsap.set(data.next.container, { opacity: 1 });
       }
     }],
     views: [{
@@ -44,6 +49,10 @@ document.addEventListener('DOMContentLoaded', () => {
     document.body.classList.remove('layout-home', 'layout-docs', 'layout-page');
     document.body.classList.add(`layout-${layout}`);
   }
+  
+  // Set initial body class based on current page
+  const initialLayout = document.querySelector('[data-barba="container"]')?.dataset?.barbaNamespace || 'page';
+  updateBodyClass(initialLayout);
   
   // Initialize components
   initSidebar();
@@ -71,29 +80,35 @@ function initSidebar() {
   const sidebar = document.querySelector('.sidebar');
   const overlay = document.querySelector('.sidebar-overlay');
   
+  // Close sidebar function
+  const closeSidebar = () => {
+    if (sidebar) sidebar.classList.remove('active');
+    if (overlay) overlay.classList.remove('active');
+    document.body.style.overflow = '';
+  };
+  
   // Open sidebar
   if (toggleBtn) {
     toggleBtn.onclick = (e) => {
       e.stopPropagation();
-      sidebar?.classList.add('active');
-      overlay?.classList.add('active');
-      document.body.style.overflow = 'hidden'; // Prevent background scroll
+      if (sidebar) sidebar.classList.add('active');
+      if (overlay) overlay.classList.add('active');
+      document.body.style.overflow = 'hidden';
     };
   }
   
-  // Close sidebar
-  const closeSidebar = () => {
-    sidebar?.classList.remove('active');
-    overlay?.classList.remove('active');
-    document.body.style.overflow = ''; // Restore scroll
-  };
-  
+  // Close sidebar button
   if (closeBtn) {
-    closeBtn.onclick = closeSidebar;
+    closeBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      closeSidebar();
+    });
   }
   
+  // Close on overlay click
   if (overlay) {
-    overlay.onclick = closeSidebar;
+    overlay.addEventListener('click', closeSidebar);
   }
   
   // Close sidebar on escape key

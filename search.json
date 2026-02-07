@@ -3,13 +3,15 @@ layout: null
 ---
 [
   {% for page in site.pages %}
-    {% if page.title and page.url contains ".html" %}
+    {% if page.title %}
+      {% unless page.url contains "404" or page.url contains "base.html" %}
       {
         "title": "{{ page.title | escape }}",
         "url": "{{ page.url | relative_url }}",
+        "content": "{{ page.content | strip_html | strip_newlines | truncatewords: 50 | escape }}",
         "excerpt": "{{ page.content | strip_html | truncatewords: 20 | escape }}"
-      }
-      {% unless forloop.last %},{% endunless %}
+      }{% unless forloop.last %},{% endunless %}
+      {% endunless %}
     {% endif %}
   {% endfor %}
 ]

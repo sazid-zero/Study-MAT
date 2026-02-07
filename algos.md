@@ -1,7 +1,7 @@
 ---
-layout: page
-title: Algorithms & Data Structures
-permalink: /algorithms/
+layout: docs
+title: Common Algorithms
+permalink: /algos/
 ---
 
 # Algorithms & Data Structures
