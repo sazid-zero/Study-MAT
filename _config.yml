@@ -1,8 +1,8 @@
 # GitHub Pages Configuration
-title: CS Interview Prep
-description: Comprehensive guides for competitive programming and technical interviews
-author: Your Name
-email: your.email@example.com
+title: CSE Interview Prep
+description: Comprehensive guides for competitive programming and technical interviews in software engineering.
+author: Sharif Mahmud Sazid
+email: sharif.sazid.3@gmail.com
 
 # Theme
 theme: minima
