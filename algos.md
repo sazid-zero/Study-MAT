@@ -4,7 +4,7 @@ title: Algorithms & Data Structures
 permalink: /algorithms/
 ---
 
-# 🚀 Algorithms & Data Structures
+# Algorithms & Data Structures
 
 > Master standard algorithms, common patterns, and problem-solving techniques.
 
@@ -12,13 +12,13 @@ permalink: /algorithms/
 
 ---
 
-## ⚡ Standard Algorithms
+## Standard Algorithms
 
 The standard library (STL) provides optimized implementations of efficient algorithms that work on iterators.
 
 **Header:** `#include <algorithm>`
 
-### 🔢 Sorting
+### Sorting
 
 Sorting is fundamental to many algorithms.
 
@@ -52,7 +52,7 @@ stable_sort(v.begin(), v.end());             // maintains relative order
 
 ---
 
-### 🔍 Searching
+### Searching
 
 #### **find** - O(N)
 Linear search. Returns iterator to first occurrence or `end()`.
@@ -86,7 +86,7 @@ auto it = upper_bound(v.begin(), v.end(), 4);      // points to 5
 
 ---
 
-### 📊 Min/Max Operations
+### Min/Max Operations
 
 ```cpp
 vector<int> v = {3, 1, 4, 1, 5};
@@ -103,7 +103,7 @@ auto [min_it, max_it] = minmax_element(v.begin(), v.end());
 
 ---
 
-### 🛠️ Other Essential Algorithms
+### Other Essential Algorithms
 
 #### **reverse** - O(N)
 Reverses the order of elements.
@@ -158,7 +158,7 @@ do {
 
 ---
 
-## 🎯 Functors (Function Objects)
+## Functors (Function Objects)
 
 Custom behaviors for algorithms (e.g., for `sort` or `priority_queue`).
 
@@ -184,7 +184,7 @@ sort(v.begin(), v.end(), cmp);
 
 ---
 
-## 🧩 Common Algorithmic Patterns
+## Common Algorithmic Patterns
 
 ### Two Pointers
 Used for searching pairs in sorted arrays or merging.
@@ -219,4 +219,4 @@ for(int i = 0; i < n; i++) prefix[i + 1] = prefix[i] + arr[i];
 
 ---
 
-[⬆️ Back to Top](#-algorithms--data-structures) | [🏠 Home](/)
+[Back to Top](#algorithms--data-structures) | [Home](/)

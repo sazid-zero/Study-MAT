@@ -4,7 +4,7 @@ title: C++ STL Complete Guide
 permalink: /stl-guide/
 ---
 
-# 📚 Complete C++ STL Guide for Competitive Programming
+# Complete C++ STL Guide for Competitive Programming
 
 > A comprehensive guide covering Containers, Iterators, Algorithms, and more!
 
@@ -12,7 +12,7 @@ permalink: /stl-guide/
 
 ---
 
-## 📦 1. Containers
+## 1. Containers
 
 Containers are divided into:
 
@@ -23,7 +23,7 @@ Containers are divided into:
 
 ---
 
-### 🔹 Sequence Containers
+### Sequence Containers
 
 #### **Vector** (Dynamic array: Resizable, contiguous memory)
 
@@ -188,7 +188,7 @@ fl.insert_after(fl.begin(), 3);  // {1, 3, 2}
 
 ---
 
-### 🔹 Associative Containers (Sorted)
+### Associative Containers (Sorted)
 
 #### **Set** (Unique elements, sorted, typically red-black tree)
 
@@ -308,7 +308,7 @@ mm.insert({1, "b"});             // allowed
 
 ---
 
-### 🔹 Unordered Associative Containers (Hash-based, average O(1))
+### Unordered Associative Containers (Hash-based, average O(1))
 
 #### **Unordered Set** (Unique elements, unsorted)
 
@@ -378,7 +378,7 @@ Similar to `unordered_map`, allows duplicate keys.
 
 ---
 
-### 🔹 Container Adapters (Wrappers)
+### Container Adapters (Wrappers)
 
 #### **Stack** (LIFO: Last In First Out)
 
@@ -490,7 +490,7 @@ priority_queue<pair<int,int>, vector<pair<int,int>>, decltype(cmp)> custom_pq(cm
 
 ---
 
-## 🔄 2. Iterators
+## 2. Iterators
 
 Iterators traverse containers like pointers.
 
@@ -558,7 +558,7 @@ for(auto it = v.begin(); it != v.end(); ) {
 
 ---
 
-## 🏗️ 3. Data Structures Operations (Beyond STL)
+## 3. Data Structures Operations (Beyond STL)
 
 STL covers most, but here are additional structures:
 
@@ -629,7 +629,7 @@ public:
 
 ---
 
-## 💡 Tips for Coding Problems
+## Tips for Coding Problems
 
 ### 1. **Choose Based on Operations**
 - **Vector** for access
@@ -673,7 +673,7 @@ cout << *it;                                           // 3
 
 ---
 
-## 📊 Quick Reference Table
+## Quick Reference Table
 
 | Container | Ordered | Unique | Access | Insert | Search | Use Case |
 |-----------|---------|--------|--------|--------|--------|----------|
@@ -693,7 +693,7 @@ cout << *it;                                           // 3
 
 ---
 
-## 🚀 Common Patterns
+## Common Patterns
 
 ### Pattern 1: Frequency Counter
 ```cpp
@@ -740,7 +740,7 @@ for(int i = 0; i < n; i++) {
 
 ---
 
-## 📝 Complete Example: Multiple Patterns
+## Complete Example: Multiple Patterns
 
 ```cpp
 #include <iostream>

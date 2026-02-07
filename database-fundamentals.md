@@ -4,13 +4,13 @@ title: "Database Fundamentals"
 permalink: /database-fundamentals/
 ---
 
-# 🗄️ Database Fundamentals
+# Database Fundamentals
 
 A comprehensive guide to database concepts, SQL, and design principles essential for software engineering roles.
 
 ---
 
-## 📋 Table of Contents
+## Table of Contents
 
 - [Introduction to Databases](#introduction-to-databases)
 - [DBMS Concepts](#dbms-concepts)
@@ -25,7 +25,7 @@ A comprehensive guide to database concepts, SQL, and design principles essential
 
 ---
 
-## 🎯 Introduction to Databases
+## Introduction to Databases
 
 ### What is a Database?
 
@@ -57,7 +57,7 @@ A **database** is an organized collection of structured data stored electronical
 
 ---
 
-## 🏗️ DBMS Concepts
+## DBMS Concepts
 
 ### What is a DBMS?
 
@@ -111,7 +111,7 @@ A **database** is an organized collection of structured data stored electronical
 
 ---
 
-## 📊 Relational Database Design
+## Relational Database Design
 
 ### Key Concepts
 
@@ -257,7 +257,7 @@ CREATE TABLE Enrollments (
 
 ---
 
-## 💾 SQL Basics
+## SQL Basics
 
 ### Data Definition Language (DDL)
 
@@ -389,7 +389,7 @@ WHERE NOT (salary < 40000);
 
 ---
 
-## 🔥 Advanced SQL
+## Advanced SQL
 
 ### Aggregate Functions
 
@@ -579,7 +579,7 @@ FROM Employees;
 
 ---
 
-## 📐 Normalization
+## Normalization
 
 Process of organizing data to reduce redundancy and improve integrity.
 
@@ -682,7 +682,7 @@ Intentionally adding redundancy for performance:
 
 ---
 
-## 🔒 Transactions & ACID
+## Transactions & ACID
 
 ### Transaction
 
@@ -751,7 +751,7 @@ ROLLBACK TO sp1;
 
 ---
 
-## 🚀 Indexing
+## Indexing
 
 ### What is an Index?
 

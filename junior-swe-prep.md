@@ -4,7 +4,7 @@ title: Junior Software Engineer Assessment Prep
 permalink: /junior-swe-prep/
 ---
 
-# 💼 Junior Software Engineer Written Assessment Prep
+# Junior Software Engineer Written Assessment Prep
 
 > Complete preparation guide for entry-level software engineering assessments
 
@@ -12,7 +12,7 @@ permalink: /junior-swe-prep/
 
 ---
 
-## 📋 Table of Contents
+## Table of Contents
 
 1. [Assessment Overview](#assessment-overview)
 2. [Core Data Structures](#core-data-structures)
@@ -27,7 +27,7 @@ permalink: /junior-swe-prep/
 
 ---
 
-## 🎯 Assessment Overview
+## Assessment Overview
 
 ### What to Expect
 
@@ -64,7 +64,7 @@ Typical junior SWE assessments include:
 
 ---
 
-## 🗂️ Core Data Structures
+## Core Data Structures
 
 ### 1. Arrays & Strings
 
@@ -410,7 +410,7 @@ vector<int> topKFrequent(vector<int>& nums, int k) {
 
 ---
 
-## ⚙️ Essential Algorithms
+## Essential Algorithms
 
 ### 1. Searching
 
@@ -630,7 +630,7 @@ int coinChange(vector<int>& coins, int amount) {
 
 ---
 
-## 🎯 Problem-Solving Patterns
+## Problem-Solving Patterns
 
 ### 1. Two Pointers
 **When to use:** Sorted arrays, palindromes, pair finding
@@ -755,7 +755,7 @@ vector<vector<int>> subsets(vector<int>& nums) {
 
 ---
 
-## ⏱️ Time & Space Complexity
+## Time & Space Complexity
 
 ### Big O Notation
 

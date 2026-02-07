@@ -4,13 +4,13 @@ title: "OOP Fundamentals"
 permalink: /oop-fundamentals/
 ---
 
-# 💡 Object-Oriented Programming Fundamentals
+# Object-Oriented Programming Fundamentals
 
 A comprehensive guide to OOP concepts essential for software engineering interviews and development.
 
 ---
 
-## 📋 Table of Contents
+## Table of Contents
 
 - [Introduction to OOP](#introduction-to-oop)
 - [Classes and Objects](#classes-and-objects)
@@ -26,7 +26,7 @@ A comprehensive guide to OOP concepts essential for software engineering intervi
 
 ---
 
-## 🎯 Introduction to OOP
+## Introduction to OOP
 
 **Object-Oriented Programming** is a programming paradigm based on the concept of "objects" which contain data (attributes) and code (methods).
 
@@ -50,7 +50,7 @@ A comprehensive guide to OOP concepts essential for software engineering intervi
 
 ---
 
-## 📦 Classes and Objects
+## Classes and Objects
 
 ### Class
 
@@ -144,7 +144,7 @@ public class Person {
 
 ---
 
-## 🏛️ The Four Pillars of OOP
+## The Four Pillars of OOP
 
 ### 1. Encapsulation
 
@@ -560,7 +560,7 @@ public class ColoredCircle implements Drawable, Colorable {
 
 ---
 
-## 🔧 Advanced Concepts
+## Advanced Concepts
 
 ### Static Members
 
@@ -695,7 +695,7 @@ public class Student {
 
 ---
 
-## 🎨 SOLID Principles
+## SOLID Principles
 
 Design principles for writing maintainable and scalable OOP code.
 
