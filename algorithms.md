@@ -46,7 +46,9 @@ sort(v.begin(), v.end(), [](int a, int b) {
 #### **stable_sort** - O(N log N)
 Preserves the relative order of equal elements.
 ```cpp
+{% raw %}
 vector<pair<int,int>> v = {{1,2}, {1,1}, {1,3}};
+{% endraw %}
 stable_sort(v.begin(), v.end());             // maintains relative order
 ```
 
@@ -171,7 +173,9 @@ struct Comparator {
     }
 };
 
+{% raw %}
 vector<pair<int,int>> v = {{1,3}, {2,3}, {1,2}};
+{% endraw %}
 sort(v.begin(), v.end(), Comparator());
 ```
 
