@@ -18,18 +18,27 @@ document.addEventListener('DOMContentLoaded', () => {
     }],
     views: [{
       namespace: 'home',
-      beforeEnter() {
-        document.body.classList.add('layout-home');
-        document.body.classList.remove('layout-docs');
+      beforeEnter(data) {
+        updateBodyClass('home');
       }
     }, {
       namespace: 'docs',
-      beforeEnter() {
-        document.body.classList.add('layout-docs');
-        document.body.classList.remove('layout-home');
+      beforeEnter(data) {
+        updateBodyClass('docs');
+      }
+    }, {
+      namespace: 'page',
+      beforeEnter(data) {
+        updateBodyClass('page');
       }
     }]
   });
+  
+  // Helper to manage body classes
+  function updateBodyClass(layout) {
+    document.body.classList.remove('layout-home', 'layout-docs', 'layout-page');
+    document.body.classList.add(`layout-${layout}`);
+  }
   
   // Initial Sidebar & TOC Logic
   initSidebar();
