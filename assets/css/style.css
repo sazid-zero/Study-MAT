@@ -314,7 +314,7 @@ body {
   position: fixed !important;
   top: 20px !important;
   left: 20px !important;
-  z-index: 1002;
+  z-index: 2000; /* High z-index to stay above everything */
   width: 44px;
   height: 44px;
   background: var(--secondary-bg);
@@ -328,7 +328,7 @@ body {
   box-shadow: var(--shadow-md);
   transition: background 0.3s ease;
   -webkit-tap-highlight-color: transparent;
-  transform: none !important;
+  transform: none !important; /* Prevent scroll-away */
 }
 
 .mobile-menu-toggle span {
@@ -358,7 +358,9 @@ body {
 
 /* Desktop: show toggle when sidebar is closed */
 @media (min-width: 769px) {
-  .sidebar.closed ~ .main-content .mobile-menu-toggle {
+  /* Updated selector since toggle moved to body root */
+  body:has(.sidebar.closed) .mobile-menu-toggle,
+  html:has(.sidebar.closed) body .mobile-menu-toggle {
     background: var(--accent);
   }
 }
@@ -600,7 +602,7 @@ hr {
   right: 0;
   bottom: 0;
   background: rgba(0, 0, 0, 0.7);
-  z-index: 999;
+  z-index: 1998; /* Below sidebar */
   opacity: 0;
   transition: opacity 0.3s ease;
   -webkit-tap-highlight-color: transparent;
@@ -624,6 +626,8 @@ body.sidebar-open {
   .sidebar {
     transform: translate3d(-100%, 0, 0);
     width: var(--sidebar-width);
+    height: 100dvh; /* Mobile viewport height fix */
+    z-index: 1999; /* Below toggle but above backdrop */
   }
   
   .sidebar.mobile-active {

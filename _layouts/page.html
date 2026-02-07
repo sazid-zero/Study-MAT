@@ -2,6 +2,15 @@
 layout: base
 ---
 
+<!-- Mobile Menu Toggle & Backdrop - Moved to root for better positioning context -->
+<button class="mobile-menu-toggle" onclick="toggleSidebar()" aria-label="Toggle Menu">
+  <span></span>
+  <span></span>
+  <span></span>
+</button>
+
+<div class="sidebar-backdrop" onclick="closeSidebar()"></div>
+
 <div class="page-container">
   <aside class="sidebar">
     <div class="sidebar-header">
@@ -90,15 +99,7 @@ layout: base
     </div>
   </aside>
 
-  <!-- Mobile backdrop overlay -->
-  <div class="sidebar-backdrop" onclick="closeSidebar()"></div>
-
   <main class="main-content">
-    <button class="mobile-menu-toggle" onclick="toggleSidebar()" aria-label="Toggle Menu">
-      <span></span>
-      <span></span>
-      <span></span>
-    </button>
     
     <div class="content-wrapper">
       {{ content }}
