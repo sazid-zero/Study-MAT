@@ -3,37 +3,58 @@ layout: home
 title: Home
 ---
 
-<div class="hero-section minimal-hero">
+<div class="hero-section">
   <div class="hero-content">
     <h1>CS Prep Hub</h1>
-    <p class="hero-subtitle">Master Data Structures, Algorithms, and System Design.</p>
+    <p class="hero-subtitle">Master Data Structures, Algorithms, System Design, and more. Your comprehensive guide to software engineering excellence.</p>
     
     <div class="hero-actions">
       <a href="{{ '/junior-swe-prep/' | relative_url }}" class="btn-primary btn-large">
-        <i class="fas fa-play"></i> Start Learning
+        <i class="fas fa-rocket"></i> Start Learning
+      </a>
+      <a href="{{ '/stl-guide/' | relative_url }}" class="btn-secondary btn-large">
+        <i class="fas fa-book"></i> Browse Topics
       </a>
     </div>
   </div>
 </div>
 
-<style>
-/* Local override for minimal home if needed, though main CSS handles most */
-.minimal-hero {
-  height: 80vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: transparent;
-}
-.hero-content {
-  text-align: center;
-  max-width: 800px;
-}
-.btn-large {
-  font-size: 1.25rem;
-  padding: 1rem 3rem;
-  border-radius: 50px;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-}
-</style>
+<div class="features-section">
+  <div class="features-grid">
+    <a href="{{ '/junior-swe-prep/' | relative_url }}" class="feature-card">
+      <span class="feature-icon">💼</span>
+      <h3>Interview Preparation</h3>
+      <p>Comprehensive guide covering core data structures, algorithms, problem-solving patterns, and system design fundamentals for technical interviews.</p>
+    </a>
+    
+    <a href="{{ '/stl-guide/' | relative_url }}" class="feature-card">
+      <span class="feature-icon">📚</span>
+      <h3>C++ STL Guide</h3>
+      <p>Deep dive into the Standard Template Library with detailed explanations of containers, iterators, and algorithms with practical examples.</p>
+    </a>
+    
+    <a href="{{ '/algos/' | relative_url }}" class="feature-card">
+      <span class="feature-icon">⚡</span>
+      <h3>Algorithm Patterns</h3>
+      <p>Learn common algorithmic patterns including sorting, searching, dynamic programming, and graph algorithms with implementation details.</p>
+    </a>
+    
+    <a href="{{ '/oop-fundamentals/' | relative_url }}" class="feature-card">
+      <span class="feature-icon">🎯</span>
+      <h3>OOP Fundamentals</h3>
+      <p>Master object-oriented programming concepts, the four pillars of OOP, design patterns, and SOLID principles for better software design.</p>
+    </a>
+    
+    <a href="{{ '/database-fundamentals/' | relative_url }}" class="feature-card">
+      <span class="feature-icon">🗄️</span>
+      <h3>Database Systems</h3>
+      <p>Understand DBMS concepts, relational database design, normalization, SQL queries, indexing, and transaction management.</p>
+    </a>
+    
+    <div class="feature-card" style="background: linear-gradient(135deg, rgba(96, 165, 250, 0.1), rgba(167, 139, 250, 0.1)); border-color: var(--primary);">
+      <span class="feature-icon">✨</span>
+      <h3>More Coming Soon</h3>
+      <p>We're continuously adding new topics and resources to help you excel in your software engineering journey. Stay tuned!</p>
+    </div>
+  </div>
+</div>

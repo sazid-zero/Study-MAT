@@ -1,18 +1,23 @@
 document.addEventListener('DOMContentLoaded', () => {
-  // Initialize Barba
+  // Initialize Barba for smooth page transitions
   barba.init({
     transitions: [{
-      name: 'opacity-transition',
+      name: 'fade-transition',
       leave(data) {
         return gsap.to(data.current.container, {
           opacity: 0,
-          duration: 0.3
+          y: -20,
+          duration: 0.3,
+          ease: 'power2.in'
         });
       },
       enter(data) {
+        window.scrollTo(0, 0);
         return gsap.from(data.next.container, {
           opacity: 0,
-          duration: 0.3
+          y: 20,
+          duration: 0.3,
+          ease: 'power2.out'
         });
       }
     }],
@@ -40,46 +45,103 @@ document.addEventListener('DOMContentLoaded', () => {
     document.body.classList.add(`layout-${layout}`);
   }
   
-  // Initial Sidebar & TOC Logic
+  // Initialize components
   initSidebar();
+  enhanceCodeBlocks();
   generateTOC();
+  initScrollSpy();
+  highlightCurrentPage();
+  setupSmoothScroll();
   
-  // Re-init components after transition
+  // Re-initialize components after page transition
   barba.hooks.after(() => {
     initSidebar();
+    enhanceCodeBlocks();
     generateTOC();
-    // Re-highlight code if needed, etc.
+    initScrollSpy();
+    highlightCurrentPage();
+    setupSmoothScroll();
   });
 });
 
+// Sidebar Mobile Toggle
 function initSidebar() {
   const toggleBtn = document.querySelector('.mobile-menu-toggle');
   const closeBtn = document.querySelector('.close-sidebar');
   const sidebar = document.querySelector('.sidebar');
   const overlay = document.querySelector('.sidebar-overlay');
   
+  // Open sidebar
   if (toggleBtn) {
-    toggleBtn.onclick = () => {
-      sidebar.classList.add('active');
-      overlay.classList.add('active');
+    toggleBtn.onclick = (e) => {
+      e.stopPropagation();
+      sidebar?.classList.add('active');
+      overlay?.classList.add('active');
+      document.body.style.overflow = 'hidden'; // Prevent background scroll
     };
   }
   
+  // Close sidebar
+  const closeSidebar = () => {
+    sidebar?.classList.remove('active');
+    overlay?.classList.remove('active');
+    document.body.style.overflow = ''; // Restore scroll
+  };
+  
   if (closeBtn) {
-    closeBtn.onclick = () => {
-      sidebar.classList.remove('active');
-      overlay.classList.remove('active');
-    };
+    closeBtn.onclick = closeSidebar;
   }
   
   if (overlay) {
-    overlay.onclick = () => {
-      sidebar.classList.remove('active');
-      overlay.classList.remove('active');
-    };
+    overlay.onclick = closeSidebar;
   }
+  
+  // Close sidebar on escape key
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && sidebar?.classList.contains('active')) {
+      closeSidebar();
+    }
+  });
+  
+  // Close sidebar when clicking a link on mobile
+  const sidebarLinks = document.querySelectorAll('.sidebar a');
+  sidebarLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      if (window.innerWidth <= 768) {
+        closeSidebar();
+      }
+    });
+  });
 }
 
+// Highlight current page and section in sidebar
+function highlightCurrentPage() {
+  const currentPath = window.location.pathname;
+  const currentHash = window.location.hash;
+  const sidebarLinks = document.querySelectorAll('.sidebar a');
+  
+  sidebarLinks.forEach(link => {
+    link.classList.remove('active');
+    
+    const linkPath = new URL(link.href).pathname;
+    const linkHash = new URL(link.href).hash;
+    
+    // Exact match for current page + hash
+    if (currentPath === linkPath && currentHash === linkHash && linkHash !== '') {
+      link.classList.add('active');
+    }
+    // Match current page for main links (no hash)
+    else if (currentPath === linkPath && !linkHash && !currentHash) {
+      link.classList.add('active');
+    }
+    // Partial match for current page (useful for main nav items)
+    else if (currentPath.startsWith(linkPath) && linkPath !== '/' && link.classList.contains('main-link')) {
+      link.classList.add('active');
+    }
+  });
+}
+
+// Generate Table of Contents
 function generateTOC() {
   const tocNav = document.getElementById('toc-nav');
   const content = document.querySelector('.docs-content');
@@ -94,8 +156,13 @@ function generateTOC() {
   const ul = document.createElement('ul');
   
   headings.forEach(heading => {
+    // Generate ID if missing
     if (!heading.id) {
-      heading.id = heading.textContent.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+      heading.id = heading.textContent
+        .toLowerCase()
+        .trim()
+        .replace(/[^a-z0-9]+/g, '-')
+        .replace(/^-+|-+$/g, '');
     }
     
     const li = document.createElement('li');
@@ -105,12 +172,24 @@ function generateTOC() {
     a.href = `#${heading.id}`;
     a.textContent = heading.textContent;
     
-    // Smooth scroll (Barba handles links, need to prevent full reload for anchors)
+    // Smooth scroll with offset
     a.addEventListener('click', (e) => {
       e.preventDefault();
-      heading.scrollIntoView({ behavior: 'smooth' });
-      // Update history
+      const headerOffset = 100; // Account for fixed header
+      const elementPosition = heading.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+      
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
+      
+      // Update URL
       history.pushState(null, null, `#${heading.id}`);
+      
+      // Update TOC active state
+      document.querySelectorAll('#toc-nav a').forEach(link => link.classList.remove('active'));
+      a.classList.add('active');
     });
     
     li.appendChild(a);
@@ -118,4 +197,177 @@ function generateTOC() {
   });
   
   tocNav.appendChild(ul);
+}
+
+// Enhanced Code Block Styling
+function enhanceCodeBlocks() {
+  const codeBlocks = document.querySelectorAll('pre.highlight, figure.highlight, pre > code, .highlighter-rouge');
+  
+  codeBlocks.forEach(block => {
+    // Skip if already enhanced
+    if (block.closest('.code-window')) return;
+    
+    // Find the actual pre element
+    let preElement = block.tagName === 'PRE' ? block : block.querySelector('pre');
+    if (!preElement && block.parentElement?.tagName === 'PRE') {
+      preElement = block.parentElement;
+    }
+    if (!preElement) return;
+    
+    // Detect language
+    let lang = 'code';
+    const codeElement = preElement.querySelector('code');
+    
+    // Try various methods to detect language
+    if (codeElement) {
+      // Check data-lang attribute
+      if (codeElement.dataset.lang) {
+        lang = codeElement.dataset.lang;
+      }
+      // Check class names
+      else {
+        const classes = Array.from(codeElement.classList);
+        const langClass = classes.find(cls => 
+          cls.startsWith('language-') || 
+          cls.startsWith('lang-')
+        );
+        if (langClass) {
+          lang = langClass.replace(/^(language-|lang-)/, '');
+        }
+      }
+    }
+    
+    // Check parent classes
+    if (lang === 'code') {
+      const parentClasses = Array.from(preElement.classList);
+      const langClass = parentClasses.find(cls => 
+        cls.startsWith('language-') || 
+        cls.startsWith('lang-') ||
+        cls.match(/^(cpp|python|javascript|java|c|bash|sql|html|css)$/)
+      );
+      if (langClass) {
+        lang = langClass.replace(/^(language-|lang-)/, '');
+      }
+    }
+    
+    // Create Window Wrapper
+    const windowWrapper = document.createElement('div');
+    windowWrapper.className = 'code-window';
+    
+    // Create Header with Mac-style Controls
+    const header = document.createElement('div');
+    header.className = 'window-header';
+    header.innerHTML = `
+      <div class="window-controls">
+        <span class="control red"></span>
+        <span class="control yellow"></span>
+        <span class="control green"></span>
+      </div>
+      <div class="window-title">${lang}</div>
+    `;
+    
+    // Wrap the code block
+    preElement.parentNode.insertBefore(windowWrapper, preElement);
+    const contentDiv = document.createElement('div');
+    contentDiv.className = 'code-window-content';
+    contentDiv.appendChild(preElement);
+    
+    windowWrapper.appendChild(header);
+    windowWrapper.appendChild(contentDiv);
+  });
+}
+
+// Scroll Spy for Sidebar Navigation
+function initScrollSpy() {
+  const sections = document.querySelectorAll('.docs-content h2[id], .docs-content h3[id]');
+  const sidebarLinks = document.querySelectorAll('.nav-subitems a');
+  
+  if (sections.length === 0 || sidebarLinks.length === 0) return;
+
+  const observerOptions = {
+    root: null,
+    rootMargin: '-100px 0px -60% 0px',
+    threshold: [0, 0.25, 0.5, 0.75, 1]
+  };
+
+  let activeSection = null;
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting && entry.intersectionRatio > 0) {
+        activeSection = entry.target;
+        updateActiveLink(entry.target.id);
+      }
+    });
+  }, observerOptions);
+
+  function updateActiveLink(sectionId) {
+    // Remove active from all sidebar sub-links
+    sidebarLinks.forEach(link => link.classList.remove('active'));
+    
+    // Add active to matching link
+    if (sectionId) {
+      const activeLink = document.querySelector(
+        `.nav-subitems a[href*="#${sectionId}"], .nav-subitems a[href$="#${sectionId}"]`
+      );
+      if (activeLink) {
+        activeLink.classList.add('active');
+        
+        // Scroll sidebar to show active link
+        const sidebar = document.querySelector('.sidebar');
+        if (sidebar && activeLink) {
+          const linkRect = activeLink.getBoundingClientRect();
+          const sidebarRect = sidebar.getBoundingClientRect();
+          
+          if (linkRect.top < sidebarRect.top || linkRect.bottom > sidebarRect.bottom) {
+            activeLink.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+          }
+        }
+      }
+    }
+  }
+
+  sections.forEach(section => observer.observe(section));
+  
+  // Also update on hash change
+  window.addEventListener('hashchange', () => {
+    const hash = window.location.hash.substring(1);
+    if (hash) {
+      updateActiveLink(hash);
+    }
+  });
+  
+  // Initial highlight based on current hash
+  if (window.location.hash) {
+    const initialHash = window.location.hash.substring(1);
+    updateActiveLink(initialHash);
+  }
+}
+
+// Setup smooth scrolling for all anchor links
+function setupSmoothScroll() {
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+      const href = this.getAttribute('href');
+      if (href === '#') return;
+      
+      e.preventDefault();
+      const targetId = href.substring(1);
+      const targetElement = document.getElementById(targetId);
+      
+      if (targetElement) {
+        const headerOffset = 100;
+        const elementPosition = targetElement.getBoundingClientRect().top;
+        const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+        
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: 'smooth'
+        });
+        
+        // Update URL
+        history.pushState(null, null, href);
+      }
+    });
+  });
 }
