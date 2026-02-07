@@ -55,7 +55,7 @@
 html {
   scroll-behavior: smooth;
   font-size: 16px;
-  overflow-x: hidden; /* Moved from body */
+  /* overflow-x: hidden; REMOVED to prevent mobile scroll context issues */
 }
 
 body {
@@ -64,9 +64,9 @@ body {
   color: var(--text-primary);
   line-height: 1.7;
   font-size: var(--font-size-base);
-  /* overflow-x: hidden; Removed to prevent fixed position issues on mobile */
   position: relative;
   min-height: 100vh;
+  /* overflow-x: hidden; REMOVED */
 }
 
 /* ===================================
@@ -335,7 +335,8 @@ body {
   box-shadow: 0 4px 12px rgba(0,0,0,0.5); /* Stronger shadow */
   transition: background 0.3s ease;
   -webkit-tap-highlight-color: transparent;
-  transform: translateZ(0); /* Promotes to own layer without creating containing block for descendants (it has none) */
+  /* transform: translateZ(0); REMOVED - potential conflict with fixed pos */
+  will-change: transform; /* Hint without forcing new context */
 }
 
 .mobile-menu-toggle span {
