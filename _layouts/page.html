@@ -11,7 +11,7 @@ layout: base
     
     <nav class="sidebar-nav">
       <div class="nav-section">
-        <h3>� C++ STL Tutorial</h3>
+        <h3 onclick="toggleSection(this)">📚 C++ STL Tutorial <span class="arrow">▼</span></h3>
         <ul>
           <li><a href="{{ '/stl-guide/' | relative_url }}">📖 Overview</a></li>
           <li><a href="{{ '/stl-guide/' | relative_url }}#-sequence-containers">Sequence Containers</a></li>
@@ -24,7 +24,7 @@ layout: base
       </div>
       
       <div class="nav-section">
-        <h3>💡 OOP Fundamentals</h3>
+        <h3 onclick="toggleSection(this)">💡 OOP Fundamentals <span class="arrow">▼</span></h3>
         <ul>
           <li><a href="{{ '/oop-fundamentals/' | relative_url }}">📖 Overview</a></li>
           <li><a href="{{ '/oop-fundamentals/' | relative_url }}#-classes-and-objects">Classes & Objects</a></li>
@@ -39,7 +39,7 @@ layout: base
       </div>
       
       <div class="nav-section">
-        <h3>🗄️ Database Fundamentals</h3>
+        <h3 onclick="toggleSection(this)">🗄️ Database Fundamentals <span class="arrow">▼</span></h3>
         <ul>
           <li><a href="{{ '/database-fundamentals/' | relative_url }}">📖 Overview</a></li>
           <li><a href="{{ '/database-fundamentals/' | relative_url }}#%EF%B8%8F-dbms-concepts">DBMS Concepts</a></li>
@@ -53,7 +53,7 @@ layout: base
       </div>
       
       <div class="nav-section">
-        <h3>🔗 Practice Sites</h3>
+        <h3 onclick="toggleSection(this)">🔗 Practice Sites <span class="arrow">▼</span></h3>
         <ul class="external-links">
           <li><a href="https://leetcode.com" target="_blank" rel="noopener">LeetCode ↗</a></li>
           <li><a href="https://codeforces.com" target="_blank" rel="noopener">Codeforces ↗</a></li>
@@ -89,8 +89,21 @@ layout: base
 </div>
 
 <script>
+// Accordion toggle for sidebar sections
+function toggleSection(header) {
+  const ul = header.nextElementSibling;
+  const arrow = header.querySelector('.arrow');
+  
+  header.classList.toggle('collapsed');
+  ul.classList.toggle('collapsed');
+  
+  // Save state in localStorage
+  const sectionName = header.textContent.trim().replace(/\s+/g, '-');
+  const isCollapsed = header.classList.contains('collapsed');
+  localStorage.setItem(`section-${sectionName}`, isCollapsed ? 'collapsed' : 'open');
+}
+
 // Sidebar state management with localStorage persistence
-let scrollPosition = 0;
 const isMobile = () => window.innerWidth <= 768;
 
 // Initialize sidebar state from localStorage on page load
@@ -99,7 +112,19 @@ function initializeSidebar() {
   const mainContent = document.querySelector('.main-content');
   const toggle = document.querySelector('.mobile-menu-toggle');
   
-  // Get saved state (default: open on desktop, closed on mobile)
+  // Initialize accordion sections
+  document.querySelectorAll('.nav-section h3').forEach(header => {
+    const sectionName = header.textContent.trim().replace(/\s+/g, '-');
+    const savedState = localStorage.getItem(`section-${sectionName}`);
+    
+    // Default: all sections open, unless saved as collapsed
+    if (savedState === 'collapsed') {
+      header.classList.add('collapsed');
+      header.nextElementSibling.classList.add('collapsed');
+    }
+  });
+  
+  // Get saved sidebar state (default: open on desktop, closed on mobile)
   const savedState = localStorage.getItem('sidebarState');
   const shouldBeOpen = savedState === 'open' || (savedState === null && !isMobile());
   
@@ -124,14 +149,12 @@ function toggleSidebar() {
     const isActive = sidebar.classList.contains('mobile-active');
     
     if (!isActive) {
-      // Opening sidebar
-      scrollPosition = window.pageYOffset;
+      // Opening sidebar - NO scroll manipulation
       sidebar.classList.remove('closed');
       sidebar.classList.add('mobile-active');
       backdrop.classList.add('active');
       toggle.classList.add('active');
       body.classList.add('sidebar-open');
-      body.style.top = `-${scrollPosition}px`;
     } else {
       // Closing sidebar
       closeSidebar();
@@ -167,8 +190,7 @@ function closeSidebar() {
     backdrop.classList.remove('active');
     toggle.classList.remove('active');
     body.classList.remove('sidebar-open');
-    body.style.top = '';
-    window.scrollTo(0, scrollPosition);
+    // Removed scroll position manipulation
   }
 }
 
@@ -176,7 +198,7 @@ function closeSidebar() {
 document.querySelectorAll('.sidebar a').forEach(link => {
   link.addEventListener('click', function() {
     if (isMobile()) {
-      setTimeout(closeSidebar, 300);
+      setTimeout(closeSidebar, 200);
     }
   });
 });
@@ -200,7 +222,6 @@ window.addEventListener('resize', function() {
       sidebar.classList.remove('mobile-active');
       document.querySelector('.sidebar-backdrop').classList.remove('active');
       document.body.classList.remove('sidebar-open');
-      document.body.style.top = '';
       
       // Restore saved state
       const savedState = localStorage.getItem('sidebarState');
