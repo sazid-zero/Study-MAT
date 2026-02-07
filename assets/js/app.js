@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
   // Initialize Barba for smooth page transitions
-  barba.init({prevent: ({ el }) => {
+  barba.init({
+    prevent: ({ el }) => {
       const href = el.getAttribute('href');
       if (!href) return false;
       
@@ -58,42 +59,39 @@ function initSidebar() {
   const sidebar = document.querySelector('.sidebar');
   const overlay = document.querySelector('.sidebar-overlay');
   
-  // Remove any existing event listeners by cloning elements
-  if (closeBtn) {
-    const newCloseBtn = closeBtn.cloneNode(true);
-    closeBtn.parentNode.replaceChild(newCloseBtn, closeBtn);
+  if (!sidebar) return; // Exit if sidebar not found
+  
+  // Initialize sidebar state: open on desktop, closed on mobile
+  if (window.innerWidth > 768) {
+    sidebar.classList.add('sidebar-open');
+  } else {
+    sidebar.classList.remove('sidebar-open');
   }
   
   // Close sidebar function
   const closeSidebar = () => {
-    console.log('Closing sidebar');
-    if (sidebar) {
-      sidebar.classList.remove('active');
-      console.log('Sidebar active removed');
-    }
+    sidebar.classList.remove('sidebar-open');
     if (overlay) overlay.classList.remove('active');
     document.body.style.overflow = '';
   };
   
-  // Open sidebar
+  // Toggle sidebar (open/close)
   if (toggleBtn) {
     toggleBtn.onclick = (e) => {
       e.stopPropagation();
-      console.log('Opening sidebar');
-      if (sidebar) sidebar.classList.add('active');
-      if (overlay) overlay.classList.add('active');
-      document.body.style.overflow = 'hidden';
-    };
-  }
-  
-  // Close sidebar button - use the newly cloned button
-  const newCloseBtn = document.querySelector('.close-sidebar');
-  if (newCloseBtn) {
-    newCloseBtn.onclick = (e) => {
-      e.preventDefault();
-      e.stopPropagation();
-      console.log('Close button clicked');
-      closeSidebar();
+      const isOpen = sidebar.classList.contains('sidebar-open');
+      
+      if (isOpen) {
+        console.log('Closing sidebar');
+        closeSidebar();
+      } else {
+        console.log('Opening sidebar');
+        sidebar.classList.add('sidebar-open');
+        if (overlay && window.innerWidth <= 768) {
+          overlay.classList.add('active');
+          document.body.style.overflow = 'hidden';
+        }
+      }
     };
   }
   
@@ -105,54 +103,18 @@ function initSidebar() {
     };
   }
   
-  // Close sidebar on escape key
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && sidebar?.classList.contains('active')) {
+  // Close sidebar on escape key (remove old listener first)
+  document.removeEventListener('keydown', handleEscape);
+  document.addEventListener('keydown', handleEscape);
+  
+  function handleEscape(e) {
+    if (e.key === 'Escape' && sidebar?.classList.contains('sidebar-open')) {
       closeSidebar();
     }
-  });
+  }
   
-  // Handle sidebar sub-links specially for smooth scrolling
-  const sidebarLinks = document.querySelectorAll('.sidebar a');
-  sidebarLinks.forEach(link => {
-    // Close sidebar on mobile when clicking any link
-    link.addEventListener('click', (e) => {
-      if (window.innerWidth <= 768) {
-        setTimeout(() => closeSidebar(), 100);
-      }
-      
-      // Handle hash links for smooth scrolling
-      const href = link.getAttribute('href');
-      if (href && href.includes('#')) {
-        const url = new URL(href, window.location.origin);
-        const currentPath = window.location.pathname;
-        
-        // If same page, handle smooth scroll
-        if (url.pathname === currentPath && url.hash) {
-          e.preventDefault();
-          const targetId = url.hash.substring(1);
-          const targetElement = document.getElementById(targetId);
-          
-          if (targetElement) {
-            const headerOffset = 100;
-            const elementPosition = targetElement.getBoundingClientRect().top;
-            const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-            
-            window.scrollTo({
-              top: offsetPosition,
-              behavior: 'smooth'
-            });
-            
-            history.pushState(null, null, url.hash);
-            
-            // Update active state
-            document.querySelectorAll('.nav-subitems a').forEach(l => l.classList.remove('active'));
-            link.classList.add('active');
-          }
-        }
-      }
-    });
-  });
+  // Store closeSidebar function globally so setupSmoothScroll can use it
+  window.closeSidebar = closeSidebar;
 }
 
 // Highlight current page and section in sidebar
@@ -426,6 +388,11 @@ function setupSmoothScroll() {
               // Update active state
               document.querySelectorAll('.nav-subitems a').forEach(link => link.classList.remove('active'));
               this.classList.add('active');
+              
+              // Close sidebar on mobile after navigation
+              if (window.innerWidth <= 768 && typeof window.closeSidebar === 'function') {
+                setTimeout(() => window.closeSidebar(), 100);
+              }
             }
           }
         }
