@@ -16,7 +16,7 @@ title: Home
 
 <div class="guide-card">
 
-### [🔧 C++ STL Complete Guide](/stl-guide/)
+### [🔧 C++ STL Complete Guide]({{ '/stl-guide/' | relative_url }})
 
 Master the Standard Template Library for competitive programming
 
@@ -28,13 +28,13 @@ Master the Standard Template Library for competitive programming
 - ✅ Real-world examples & patterns
 - ✅ Quick reference tables
 
-<a href="/stl-guide/" class="btn-primary">Read STL Guide →</a>
+<a href="{{ '/stl-guide/' | relative_url }}" class="btn-primary">Read STL Guide →</a>
 
 </div>
 
 <div class="guide-card">
 
-### [💼 Junior SWE Assessment Prep](/junior-swe-prep/)
+### [💼 Junior SWE Assessment Prep]({{ '/junior-swe-prep/' | relative_url }})
 
 Everything you need for entry-level software engineering assessments
 
@@ -46,7 +46,7 @@ Everything you need for entry-level software engineering assessments
 - ✅ Behavioral interview tips
 - ✅ 4-week study plan
 
-<a href="/junior-swe-prep/" class="btn-primary">Read SWE Prep →</a>
+<a href="{{ '/junior-swe-prep/' | relative_url }}" class="btn-primary">Read SWE Prep →</a>
 
 </div>
 
@@ -62,8 +62,8 @@ Everything you need for entry-level software engineering assessments
 <h3>📖 For Beginners</h3>
 <p>Start with fundamentals:</p>
 <ol>
-<li>Review <a href="/stl-guide/#-sequence-containers">basic containers</a></li>
-<li>Learn <a href="/junior-swe-prep/#core-data-structures">core data structures</a></li>
+<li>Review <a href="{{ '/stl-guide/' | relative_url }}#-sequence-containers">basic containers</a></li>
+<li>Learn <a href="{{ '/junior-swe-prep/' | relative_url }}#core-data-structures">core data structures</a></li>
 <li>Practice easy problems on LeetCode</li>
 </ol>
 </div>
@@ -72,9 +72,9 @@ Everything you need for entry-level software engineering assessments
 <h3>⚡ For Interview Prep</h3>
 <p>Focus on patterns:</p>
 <ol>
-<li>Master <a href="/junior-swe-prep/#-problem-solving-patterns">problem patterns</a></li>
-<li>Study <a href="/junior-swe-prep/#time--space-complexity">complexity analysis</a></li>
-<li>Review <a href="/junior-swe-prep/#-common-question-types">common questions</a></li>
+<li>Master <a href="{{ '/junior-swe-prep/' | relative_url }}#-problem-solving-patterns">problem patterns</a></li>
+<li>Study <a href="{{ '/junior-swe-prep/' | relative_url }}#time--space-complexity">complexity analysis</a></li>
+<li>Review <a href="{{ '/junior-swe-prep/' | relative_url }}#-common-question-types">common questions</a></li>
 </ol>
 </div>
 
@@ -82,8 +82,8 @@ Everything you need for entry-level software engineering assessments
 <h3>🎯 For Competitive Programming</h3>
 <p>Advanced techniques:</p>
 <ol>
-<li>Deep dive into <a href="/stl-guide/#-associative-containers-sorted">STL containers</a></li>
-<li>Learn <a href="/stl-guide/#-algorithms">STL algorithms</a></li>
+<li>Deep dive into <a href="{{ '/stl-guide/' | relative_url }}#-associative-containers-sorted">STL containers</a></li>
+<li>Learn <a href="{{ '/stl-guide/' | relative_url }}#-algorithms">STL algorithms</a></li>
 <li>Practice on Codeforces</li>
 </ol>
 </div>
@@ -160,8 +160,8 @@ We're constantly expanding! Here's what's in the pipeline:
 Pick a guide and begin your journey to mastering technical interviews!
 
 <div class="cta-buttons">
-<a href="/stl-guide/" class="btn-primary">Explore STL Guide</a>
-<a href="/junior-swe-prep/" class="btn-secondary">Start Interview Prep</a>
+<a href="{{ '/stl-guide/' | relative_url }}" class="btn-primary">Explore STL Guide</a>
+<a href="{{ '/junior-swe-prep/' | relative_url }}" class="btn-secondary">Start Interview Prep</a>
 </div>
 
 </div>

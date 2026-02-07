@@ -5,6 +5,10 @@ author: Sharif Mahmud Sazid
 email: sharif.sazid.3@gmail.com
 github_username: sazid-zero
 
+# URL settings - IMPORTANT for GitHub Pages project sites
+baseurl: "/Study-MAT" # the subpath of your site, e.g. /blog
+url: "https://sazid-zero.github.io" # the base hostname & protocol
+
 # Theme - Disabled to use custom layout
 # theme: minima
 
