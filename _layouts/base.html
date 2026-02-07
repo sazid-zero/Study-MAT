@@ -5,96 +5,34 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{% if page.title %}{{ page.title }} - {% endif %}{{ site.title }}</title>
   <meta name="description" content="{{ site.description }}">
-  <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
   
-  <style>
-    /* Critical Mobile Styles */
-    @media (max-width: 768px) {
-      .mobile-menu-toggle {
-        display: flex !important;
-        position: fixed !important;
-        top: 15px !important;
-        left: 15px !important;
-        z-index: 2147483647 !important; /* Max integer value */
-      }
-      
-      .sidebar-backdrop {
-        z-index: 2147483646 !important;
-      }
-      
-      .sidebar.mobile-active {
-        z-index: 2147483647 !important;
-      }
-    }
-  </style>
-
-  <script>
-    // Define toggle function immediately to ensure it exists before any content loads
-    window.toggleSidebar = function() {
-      const sidebar = document.querySelector('.sidebar');
-      const backdrop = document.querySelector('.sidebar-backdrop');
-      const toggle = document.querySelector('.mobile-menu-toggle');
-      
-      if (!sidebar || !backdrop || !toggle) {
-        console.error('Sidebar elements not found');
-        return;
-      }
-      
-      // Check if mobile
-      if (window.innerWidth <= 768) {
-        const isActive = sidebar.classList.contains('mobile-active');
-        
-        if (!isActive) {
-          // Open
-          sidebar.classList.add('mobile-active');
-          sidebar.style.display = 'flex'; // Ensure display
-          backdrop.classList.add('active');
-          toggle.classList.add('active');
-          document.body.style.overflow = 'hidden'; // Lock scroll
-        } else {
-          // Close
-          sidebar.classList.remove('mobile-active');
-          backdrop.classList.remove('active');
-          toggle.classList.remove('active');
-          document.body.style.overflow = ''; // Unlock scroll
-        }
-      } else {
-        // Desktop toggle logic
-        sidebar.classList.toggle('closed');
-        document.querySelector('.main-content').classList.toggle('sidebar-closed');
-        const isClosed = sidebar.classList.contains('closed');
-        localStorage.setItem('sidebarState', isClosed ? 'closed' : 'open');
-      }
-    };
-    
-    window.closeSidebar = function() {
-       if (window.innerWidth <= 768) {
-          const sidebar = document.querySelector('.sidebar');
-          if (sidebar) sidebar.classList.remove('mobile-active');
-          const backdrop = document.querySelector('.sidebar-backdrop');
-          if (backdrop) backdrop.classList.remove('active');
-          const toggle = document.querySelector('.mobile-menu-toggle');
-          if (toggle) toggle.classList.remove('active');
-          document.body.style.overflow = '';
-       }
-    };
-  </script>
-</head>
-<body>
+  <!-- Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   
-  <!-- Mobile Menu Toggle & Backdrop - Injected at Root Level -->
-  <button class="mobile-menu-toggle" onclick="toggleSidebar()" aria-label="Toggle Menu" style="position: fixed; top: 15px; left: 15px; z-index: 2147483647;">
-    <span></span>
-    <span></span>
-    <span></span>
-  </button>
-  <div class="sidebar-backdrop" onclick="closeSidebar()" style="position: fixed; top: 0; bottom: 0; left: 0; right: 0; z-index: 2147483646;"></div>
+  <!-- Styles -->
+  <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
+</head>
+<body class="layout-{{ page.layout }}" data-barba="wrapper">
+  
+  {% include header.html %}
 
-  {{ content }}
+  <div class="app-container">
+    {% include sidebar.html %}
+    
+    <main class="main-content" data-barba="container" data-barba-namespace="{{ page.layout }}">
+      {{ content }}
+    </main>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://unpkg.com/@barba/core"></script>
+  <script src="https://unpkg.com/gsap@latest/dist/gsap.min.js"></script>
+  <script src="{{ '/assets/js/app.js' | relative_url }}"></script>
+  <script src="{{ '/assets/js/search.js' | relative_url }}"></script>
 </body>
 </html>

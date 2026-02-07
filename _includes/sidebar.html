@@ -1,0 +1,40 @@
+<aside class="sidebar">
+  <div class="sidebar-header">
+    <div class="sidebar-title">Menu</div>
+    <button class="close-sidebar" aria-label="Close Sidebar">
+      <i class="fas fa-times"></i>
+    </button>
+  </div>
+  
+  <nav class="sidebar-nav">
+    <div class="nav-section">
+      <h3>📚 Tutorials</h3>
+      <ul>
+        <li><a href="{{ '/junior-swe-prep/' | relative_url }}" class="nav-link">Junior SWE Prep</a></li>
+        <li><a href="{{ '/stl-guide/' | relative_url }}" class="nav-link">C++ STL Guide</a></li>
+        <li><a href="{{ '/oop-fundamentals/' | relative_url }}" class="nav-link">OOP Fundamentals</a></li>
+        <li><a href="{{ '/database-fundamentals/' | relative_url }}" class="nav-link">Database Systems</a></li>
+      </ul>
+    </div>
+    
+    <div class="nav-section">
+      <h3>🔧 Algorithms</h3>
+      <ul>
+        <li><a href="{{ '/algos/' | relative_url }}" class="nav-link">Common Algorithms</a></li>
+      </ul>
+    </div>
+
+    <div class="nav-section">
+      <h3>📌 Meta</h3>
+      <ul>
+        <li><a href="{{ '/' | relative_url }}" class="nav-link">Home</a></li>
+        <li><a href="{{ '/about/' | relative_url }}" class="nav-link">About</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="sidebar-footer">
+    <p>© {{ site.time | date: '%Y' }} {{ site.title }}</p>
+  </div>
+</aside>
+<div class="sidebar-overlay"></div>

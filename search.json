@@ -1,0 +1,15 @@
+---
+layout: null
+---
+[
+  {% for page in site.pages %}
+    {% if page.title and page.url contains ".html" %}
+      {
+        "title": "{{ page.title | escape }}",
+        "url": "{{ page.url | relative_url }}",
+        "excerpt": "{{ page.content | strip_html | truncatewords: 20 | escape }}"
+      }
+      {% unless forloop.last %},{% endunless %}
+    {% endif %}
+  {% endfor %}
+]
