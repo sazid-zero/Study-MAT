@@ -459,6 +459,8 @@ pre {
   overflow-x: auto;
   margin: var(--spacing-lg) 0;
   box-shadow: var(--shadow-sm);
+  max-width: 100%; /* Force constraint */
+  white-space: pre; /* Maintain scroll */
 }
 
 pre code {
@@ -485,12 +487,26 @@ pre code {
 
 table {
   width: 100%;
+  display: block; /* Makes the table scrollable */
+  overflow-x: auto; /* Adds horizontal scroll if needed */
   border-collapse: collapse;
   margin: var(--spacing-lg) 0;
   background: rgba(19, 47, 76, 0.5);
   border-radius: 8px;
-  overflow: hidden;
   box-shadow: var(--shadow-sm);
+  -webkit-overflow-scrolling: touch; /* smooth scroll on iOS */
+}
+
+/* Ensure table doesn't force parent width */
+table th, table td {
+  white-space: nowrap; /* Prevent wrapping for better reading, force scroll */
+}
+
+@media (max-width: 768px) {
+  /* On mobile, allow wrapping if it helps, or keep scroll */
+  table th, table td {
+    min-width: 120px; /* Ensure columns have readable width */
+  }
 }
 
 thead {
