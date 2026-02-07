@@ -1,36 +1,18 @@
 document.addEventListener('DOMContentLoaded', () => {
   // Initialize Barba for smooth page transitions
-  barba.init({
-    prevent: ({ el, href }) => {
-      // Get href attribute
-      const linkHref = el.getAttribute('href');
-      if (!linkHref) return false;
+  barba.init({prevent: ({ el }) => {
+      const href = el.getAttribute('href');
+      if (!href) return false;
       
-      // Prevent Barba from handling pure anchor links
-      if (linkHref.startsWith('#')) {
-        return true;
-      }
+      // Let anchor links work normally
+      if (href.includes('#')) return true;
       
-      // Prevent Barba from handling same-page anchor navigation
-      try {
-        const url = new URL(linkHref, window.location.origin);
-        const currentPath = window.location.pathname;
-        
-        // If it's the same page with just a hash change, let normal navigation handle it
-        if (url.pathname === currentPath && url.hash) {
-          return true;
-        }
-      } catch (e) {
-        // If URL parsing fails, just continue
-      }
-      
-      // Prevent Barba for external links or special classes
+      // Prevent for external links
       return el.classList && el.classList.contains('no-barba');
     },
     transitions: [{
       name: 'instant-transition',
       async leave(data) {
-        // Quick fade out
         await gsap.to(data.current.container, {
           opacity: 0,
           duration: 0.15,
@@ -38,46 +20,17 @@ document.addEventListener('DOMContentLoaded', () => {
         });
       },
       async enter(data) {
-        // Scroll to top immediately
         window.scrollTo(0, 0);
-        // Quick fade in
         gsap.fromTo(data.next.container, 
           { opacity: 0 },
           { opacity: 1, duration: 0.15, ease: 'power1.inOut' }
         );
       },
       async once(data) {
-        // Initial page load - no animation
         gsap.set(data.next.container, { opacity: 1 });
-      }
-    }],
-    views: [{
-      namespace: 'home',
-      beforeEnter(data) {
-        updateBodyClass('home');
-      }
-    }, {
-      namespace: 'docs',
-      beforeEnter(data) {
-        updateBodyClass('docs');
-      }
-    }, {
-      namespace: 'page',
-      beforeEnter(data) {
-        updateBodyClass('page');
       }
     }]
   });
-  
-  // Helper to manage body classes
-  function updateBodyClass(layout) {
-    document.body.classList.remove('layout-home', 'layout-docs', 'layout-page');
-    document.body.classList.add(`layout-${layout}`);
-  }
-  
-  // Set initial body class based on current page
-  const initialLayout = document.querySelector('[data-barba="container"]')?.dataset?.barbaNamespace || 'page';
-  updateBodyClass(initialLayout);
   
   // Initialize components
   initSidebar();
@@ -87,7 +40,7 @@ document.addEventListener('DOMContentLoaded', () => {
   highlightCurrentPage();
   setupSmoothScroll();
   
-  // Re-initialize components after page transition
+  // Re-initialize after page transitions
   barba.hooks.after(() => {
     initSidebar();
     enhanceCodeBlocks();
@@ -159,12 +112,44 @@ function initSidebar() {
     }
   });
   
-  // Close sidebar when clicking a link on mobile
+  // Handle sidebar sub-links specially for smooth scrolling
   const sidebarLinks = document.querySelectorAll('.sidebar a');
   sidebarLinks.forEach(link => {
-    link.addEventListener('click', () => {
+    // Close sidebar on mobile when clicking any link
+    link.addEventListener('click', (e) => {
       if (window.innerWidth <= 768) {
-        closeSidebar();
+        setTimeout(() => closeSidebar(), 100);
+      }
+      
+      // Handle hash links for smooth scrolling
+      const href = link.getAttribute('href');
+      if (href && href.includes('#')) {
+        const url = new URL(href, window.location.origin);
+        const currentPath = window.location.pathname;
+        
+        // If same page, handle smooth scroll
+        if (url.pathname === currentPath && url.hash) {
+          e.preventDefault();
+          const targetId = url.hash.substring(1);
+          const targetElement = document.getElementById(targetId);
+          
+          if (targetElement) {
+            const headerOffset = 100;
+            const elementPosition = targetElement.getBoundingClientRect().top;
+            const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+            
+            window.scrollTo({
+              top: offsetPosition,
+              behavior: 'smooth'
+            });
+            
+            history.pushState(null, null, url.hash);
+            
+            // Update active state
+            document.querySelectorAll('.nav-subitems a').forEach(l => l.classList.remove('active'));
+            link.classList.add('active');
+          }
+        }
       }
     });
   });
@@ -402,65 +387,51 @@ function initScrollSpy() {
 
 // Setup smooth scrolling for all anchor links
 function setupSmoothScroll() {
-  // Handle pure anchor links (#id)
-  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function(e) {
-      const href = this.getAttribute('href');
-      if (href === '#') return;
-      
-      e.preventDefault();
-      const targetId = href.substring(1);
-      const targetElement = document.getElementById(targetId);
-      
-      if (targetElement) {
-        const headerOffset = 100;
-        const elementPosition = targetElement.getBoundingClientRect().top;
-        const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-        
-        window.scrollTo({
-          top: offsetPosition,
-          behavior: 'smooth'
-        });
-        
-        // Update URL
-        history.pushState(null, null, href);
-      }
-    });
-  });
-  
-  // Handle links with same page + anchor (e.g., /stl-guide/#section)
+  // Remove old listeners by cloning
   document.querySelectorAll('a[href*="#"]').forEach(anchor => {
+    const href = anchor.getAttribute('href');
+    if (!href || href === '#') return;
+    
+    // Create a new click handler
     anchor.addEventListener('click', function(e) {
-      const href = this.getAttribute('href');
-      if (!href || href === '#') return;
+      const linkHref = this.getAttribute('href');
       
-      const url = new URL(href, window.location.origin);
-      const currentPath = window.location.pathname;
-      
-      // Check if it's the same page
-      if (url.pathname === currentPath && url.hash) {
-        e.preventDefault();
-        const targetId = url.hash.substring(1);
-        const targetElement = document.getElementById(targetId);
+      try {
+        // Parse the URL
+        const url = new URL(linkHref, window.location.origin);
+        const currentPath = window.location.pathname;
         
-        if (targetElement) {
-          const headerOffset = 100;
-          const elementPosition = targetElement.getBoundingClientRect().top;
-          const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-          
-          window.scrollTo({
-            top: offsetPosition,
-            behavior: 'smooth'
-          });
-          
-          // Update URL
-          history.pushState(null, null, url.hash);
-          
-          // Update active state in sidebar
-          document.querySelectorAll('.nav-subitems a').forEach(link => link.classList.remove('active'));
-          anchor.classList.add('active');
+        // Only handle if it's the same page or just a hash
+        if (linkHref.startsWith('#') || url.pathname === currentPath) {
+          if (url.hash) {
+            e.preventDefault();
+            e.stopPropagation();
+            
+            const targetId = url.hash.substring(1);
+            const targetElement = document.getElementById(targetId);
+            
+            if (targetElement) {
+              const headerOffset = 100;
+              const elementPosition = targetElement.getBoundingClientRect().top;
+              const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+              
+              window.scrollTo({
+                top: offsetPosition,
+                behavior: 'smooth'
+              });
+              
+              // Update URL without page reload
+              history.pushState(null, null, url.hash);
+              
+              // Update active state
+              document.querySelectorAll('.nav-subitems a').forEach(link => link.classList.remove('active'));
+              this.classList.add('active');
+            }
+          }
         }
+      } catch (err) {
+        console.log('URL parse error:', err);
       }
-    });
+    }, true); // Use capture phase
   });
 }
