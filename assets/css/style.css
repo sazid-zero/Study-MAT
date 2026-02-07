@@ -325,18 +325,7 @@ body.is-loading {
   box-shadow: var(--shadow-lg);
 }
 
-/* Sidebar starts open by default on desktop */
-@media (min-width: 769px) {
-  .sidebar {
-    transform: translateX(0);
-  }
-  
-  .sidebar:not(.sidebar-open) {
-    transform: translateX(-100%);
-  }
-}
-
-/* Sidebar starts closed by default on mobile */
+/* Default behavior - closed on mobile, open on desktop */
 @media (max-width: 768px) {
   .sidebar {
     transform: translateX(-100%);
@@ -344,6 +333,16 @@ body.is-loading {
   
   .sidebar.sidebar-open {
     transform: translateX(0);
+  }
+}
+
+@media (min-width: 769px) {
+  .sidebar {
+    transform: translateX(0);
+  }
+  
+  .sidebar:not(.sidebar-open) {
+    transform: translateX(-100%);
   }
 }
 
@@ -383,6 +382,13 @@ body.is-loading {
   z-index: 10;
   position: relative;
   pointer-events: auto;
+}
+
+/* Show close button on mobile */
+@media (max-width: 768px) {
+  .close-sidebar {
+    display: flex;
+  }
 }
 
 .close-sidebar:hover {
@@ -560,12 +566,19 @@ body.is-loading {
    LAYOUT VARIANTS
    ======================================== */
 
-/* Home Layout - Full Width, No Sidebar */
+/* Home Layout - Full Width, No Sidebar by default */
 body.layout-home .sidebar {
   transform: translateX(-100%);
   width: 0;
   padding: 0;
   overflow: hidden;
+}
+
+/* BUT allow sidebar to open when explicitly toggled on home layout */
+body.layout-home .sidebar.sidebar-open {
+  transform: translateX(0);
+  width: var(--sidebar-width);
+  padding: 2rem 0;
 }
 
 body.layout-home .main-content {

@@ -52,6 +52,14 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 
+// Store event handlers globally to prevent duplicates
+let sidebarHandlers = {
+  toggleHandler: null,
+  closeHandler: null,
+  overlayHandler: null,
+  escapeHandler: null
+};
+
 // Sidebar Mobile Toggle
 function initSidebar() {
   const toggleBtn = document.querySelector('.mobile-menu-toggle');
@@ -75,46 +83,74 @@ function initSidebar() {
     document.body.style.overflow = '';
   };
   
-  // Toggle sidebar (open/close)
-  if (toggleBtn) {
-    toggleBtn.onclick = (e) => {
-      e.stopPropagation();
-      const isOpen = sidebar.classList.contains('sidebar-open');
-      
-      if (isOpen) {
-        console.log('Closing sidebar');
-        closeSidebar();
-      } else {
-        console.log('Opening sidebar');
-        sidebar.classList.add('sidebar-open');
-        if (overlay && window.innerWidth <= 768) {
-          overlay.classList.add('active');
-          document.body.style.overflow = 'hidden';
-        }
-      }
-    };
+  // Store closeSidebar function globally
+  window.closeSidebar = closeSidebar;
+  
+  // Remove old event listeners before adding new ones
+  if (toggleBtn && sidebarHandlers.toggleHandler) {
+    toggleBtn.removeEventListener('click', sidebarHandlers.toggleHandler);
+  }
+  if (closeBtn && sidebarHandlers.closeHandler) {
+    closeBtn.removeEventListener('click', sidebarHandlers.closeHandler);
+  }
+  if (overlay && sidebarHandlers.overlayHandler) {
+    overlay.removeEventListener('click', sidebarHandlers.overlayHandler);
+  }
+  if (sidebarHandlers.escapeHandler) {
+    document.removeEventListener('keydown', sidebarHandlers.escapeHandler);
   }
   
-  // Close on overlay click
-  if (overlay) {
-    overlay.onclick = (e) => {
-      e.stopPropagation();
+  // Create new toggle handler
+  sidebarHandlers.toggleHandler = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    const isOpen = sidebar.classList.contains('sidebar-open');
+    
+    if (isOpen) {
+      console.log('Closing sidebar');
       closeSidebar();
-    };
-  }
+    } else {
+      console.log('Opening sidebar');
+      sidebar.classList.add('sidebar-open');
+      if (overlay && window.innerWidth <= 768) {
+        overlay.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      }
+    }
+  };
   
-  // Close sidebar on escape key (remove old listener first)
-  document.removeEventListener('keydown', handleEscape);
-  document.addEventListener('keydown', handleEscape);
+  // Create close button handler
+  sidebarHandlers.closeHandler = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    closeSidebar();
+  };
   
-  function handleEscape(e) {
+  // Create overlay handler
+  sidebarHandlers.overlayHandler = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    closeSidebar();
+  };
+  
+  // Create escape key handler
+  sidebarHandlers.escapeHandler = (e) => {
     if (e.key === 'Escape' && sidebar?.classList.contains('sidebar-open')) {
       closeSidebar();
     }
-  }
+  };
   
-  // Store closeSidebar function globally so setupSmoothScroll can use it
-  window.closeSidebar = closeSidebar;
+  // Attach new event listeners
+  if (toggleBtn) {
+    toggleBtn.addEventListener('click', sidebarHandlers.toggleHandler);
+  }
+  if (closeBtn) {
+    closeBtn.addEventListener('click', sidebarHandlers.closeHandler);
+  }
+  if (overlay) {
+    overlay.addEventListener('click', sidebarHandlers.overlayHandler);
+  }
+  document.addEventListener('keydown', sidebarHandlers.escapeHandler);
 }
 
 // Highlight current page and section in sidebar
