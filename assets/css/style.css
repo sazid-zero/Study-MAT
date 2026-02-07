@@ -239,9 +239,18 @@ ul { list-style: none; }
 body.layout-home .sidebar { transform: translateX(-100%); width: 0; padding: 0; overflow: hidden; }
 body.layout-home .main-content { margin-left: 0; width: 100%; }
 
-/* Docs Layout - Sidebar Visible */
-body.layout-docs .sidebar { transform: translateX(0); width: var(--sidebar-width); }
-body.layout-docs .main-content { margin-left: var(--sidebar-width); width: calc(100% - var(--sidebar-width)); }
+/* Docs & Page Layout - Sidebar Visible */
+body.layout-docs .sidebar,
+body.layout-page .sidebar { 
+  transform: translateX(0); 
+  width: var(--sidebar-width); 
+}
+
+body.layout-docs .main-content,
+body.layout-page .main-content { 
+  margin-left: var(--sidebar-width); 
+  width: calc(100% - var(--sidebar-width)); 
+}
 
 /* Docs Page Styling */
 .docs-page {
@@ -321,7 +330,8 @@ body.layout-docs .main-content { margin-left: var(--sidebar-width); width: calc(
 }
 
 @media (max-width: 768px) {
-  body.layout-docs .main-content { 
+  body.layout-docs .main-content,
+  body.layout-page .main-content { 
     margin-left: 0; 
     width: 100%;
     padding: 1rem;
