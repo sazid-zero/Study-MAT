@@ -86,6 +86,15 @@
   </script>
 </head>
 <body>
+  
+  <!-- Mobile Menu Toggle & Backdrop - Injected at Root Level -->
+  <button class="mobile-menu-toggle" onclick="toggleSidebar()" aria-label="Toggle Menu" style="position: fixed; top: 15px; left: 15px; z-index: 2147483647;">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+  <div class="sidebar-backdrop" onclick="closeSidebar()" style="position: fixed; top: 0; bottom: 0; left: 0; right: 0; z-index: 2147483646;"></div>
+
   {{ content }}
 </body>
 </html>
