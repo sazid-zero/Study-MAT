@@ -1,6 +1,7 @@
 ---
 layout: page
 title: "OOP Fundamentals"
+permalink: /oop-fundamentals/
 ---
 
 # 💡 Object-Oriented Programming Fundamentals

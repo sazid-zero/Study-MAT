@@ -1,6 +1,7 @@
 ---
 layout: page
 title: "Database Fundamentals"
+permalink: /database-fundamentals/
 ---
 
 # 🗄️ Database Fundamentals
