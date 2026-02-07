@@ -2,12 +2,13 @@
 layout: base
 ---
 
-<div class="page-container">
-  <aside class="sidebar">
-    <div class="sidebar-header">
-      <h2><i class="fas fa-code"></i> CS Interview Prep</h2>
-      <p class="tagline">Master the fundamentals</p>
-    </div>
+<aside class="sidebar">
+  <div class="sidebar-header">
+    <h2><i class="fas fa-code"></i> CS Interview Prep</h2>
+    <p class="tagline">Master the fundamentals</p>
+  </div>
+  
+
     
     <nav class="sidebar-nav">
       <!-- C++ STL -->
@@ -85,22 +86,22 @@ layout: base
       </div>
     </nav>
     
-    <div class="sidebar-footer">
-      <p class="copyright">Built with <i class="fas fa-heart" style="color: #e74c3c;"></i></p>
-    </div>
-  </aside>
+  <div class="sidebar-footer">
+    <p class="copyright">Built with <i class="fas fa-heart" style="color: #e74c3c;"></i></p>
+  </div>
+</aside>
 
-  <main class="main-content">
-    
-    <div class="content-wrapper">
-      {{ content }}
-    </div>
-    
-    <footer class="page-footer">
-      <p>Last updated: {{ site.time | date: "%B %d, %Y" }}</p>
-    </footer>
-  </main>
-</div>
+<main class="main-content">
+  
+  <div class="content-wrapper">
+    {{ content }}
+  </div>
+  
+  <footer class="page-footer">
+    <p>Last updated: {{ site.time | date: "%B %d, %Y" }}</p>
+  </footer>
+</main>
+<!-- Removed page-container wrapper to prevent layout issues -->
 
 <script>
 // Accordion toggle with local storage persistence

@@ -73,14 +73,18 @@ body {
    Layout Structure
    =================================== */
 
+/* Removed .page-container to use body directly */
+/* 
 .page-container {
   display: flex;
   min-height: 100vh;
 }
+*/
 
 /* ===================================
    Sidebar
    =================================== */
+
 
 .sidebar {
   position: fixed;
