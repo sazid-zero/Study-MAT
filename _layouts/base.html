@@ -11,6 +11,79 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+  
+  <style>
+    /* Critical Mobile Styles */
+    @media (max-width: 768px) {
+      .mobile-menu-toggle {
+        display: flex !important;
+        position: fixed !important;
+        top: 15px !important;
+        left: 15px !important;
+        z-index: 2147483647 !important; /* Max integer value */
+      }
+      
+      .sidebar-backdrop {
+        z-index: 2147483646 !important;
+      }
+      
+      .sidebar.mobile-active {
+        z-index: 2147483647 !important;
+      }
+    }
+  </style>
+
+  <script>
+    // Define toggle function immediately to ensure it exists before any content loads
+    window.toggleSidebar = function() {
+      const sidebar = document.querySelector('.sidebar');
+      const backdrop = document.querySelector('.sidebar-backdrop');
+      const toggle = document.querySelector('.mobile-menu-toggle');
+      
+      if (!sidebar || !backdrop || !toggle) {
+        console.error('Sidebar elements not found');
+        return;
+      }
+      
+      // Check if mobile
+      if (window.innerWidth <= 768) {
+        const isActive = sidebar.classList.contains('mobile-active');
+        
+        if (!isActive) {
+          // Open
+          sidebar.classList.add('mobile-active');
+          sidebar.style.display = 'flex'; // Ensure display
+          backdrop.classList.add('active');
+          toggle.classList.add('active');
+          document.body.style.overflow = 'hidden'; // Lock scroll
+        } else {
+          // Close
+          sidebar.classList.remove('mobile-active');
+          backdrop.classList.remove('active');
+          toggle.classList.remove('active');
+          document.body.style.overflow = ''; // Unlock scroll
+        }
+      } else {
+        // Desktop toggle logic
+        sidebar.classList.toggle('closed');
+        document.querySelector('.main-content').classList.toggle('sidebar-closed');
+        const isClosed = sidebar.classList.contains('closed');
+        localStorage.setItem('sidebarState', isClosed ? 'closed' : 'open');
+      }
+    };
+    
+    window.closeSidebar = function() {
+       if (window.innerWidth <= 768) {
+          const sidebar = document.querySelector('.sidebar');
+          if (sidebar) sidebar.classList.remove('mobile-active');
+          const backdrop = document.querySelector('.sidebar-backdrop');
+          if (backdrop) backdrop.classList.remove('active');
+          const toggle = document.querySelector('.mobile-menu-toggle');
+          if (toggle) toggle.classList.remove('active');
+          document.body.style.overflow = '';
+       }
+    };
+  </script>
 </head>
 <body>
   {{ content }}
