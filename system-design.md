@@ -130,3 +130,63 @@ How to generate `xyz`?
 ---
 
 [Back to Top](#system-design-the-complete-guide) | [Home](/)
+
+---
+
+## Junior System Design Cheat Sheet
+
+### Key Concepts
+
+1.  **Client-Server Architecture**
+    -   **Request/Response**: Browser sends HTTP Request, Server processes and sends HTTP Response.
+    -   **State**: HTTP is stateless. Use Cookies/Sessions/Tokens (JWT) to maintain state.
+
+2.  **Databases (SQL vs NoSQL)**
+    -   **SQL (Relational)**: Structured, tables, ACID (Atomicity, Consistency, Isolation, Durability). Good for financial data.
+    -   **NoSQL (Non-Relational)**: Flexible, JSON-like, BASE (Basically Available, Soft state, Eventual consistency). Good for big data, real-time analytics.
+
+3.  **Caching (Speed Layer)**
+    -   **Why?**: Database calls are slow (disk I/O). Memory is fast.
+    -   **Where?**: Browser Cache, CDN (Content Delivery Network), Server Cache (Redis/Memcached).
+    -   **Invalidation**: Hard problem. TTL (Time To Live), Write-Through, Write-Back.
+
+4.  **Load Balancing**
+    -   Distributes traffic across multiple servers.
+    -   **Algorithms**: Round Robin, Least Connections, IP Hash.
+    -   **Health Checks**: Removes dead servers from rotation.
+
+### Sample Question: Design a URL Shortener (TinyURL)
+
+**1. Requirements**
+-   **Functional**: Given a long URL, return a unique short URL. Clicking short URL redirects to long URL.
+-   **Non-Functional**: High availability, low latency, scalable.
+
+**2. API Design**
+-   `POST /api/v1/urls`
+    -   Request: `{ "longUrl": "https://google.com" }`
+    -   Response: `{ "shortUrl": "http://tiny.url/abc12" }`
+-   `GET /{shortCode}`
+    -   Redirect (301 Permanent or 302 Temporary) to original URL.
+
+**3. Database Schema**
+-   Table `Urls`:
+    -   `id`: Primary Key (Auto-increment)
+    -   `shortCode`: String (Unique Index)
+    -   `longUrl`: String
+    -   `createdAt`: Timestamp
+
+**4. Algorithm (Generating Short Code)**
+-   **Base62 Encoding**: Use characters [a-z, A-Z, 0-9] (26+26+10 = 62).
+-   Map the database ID to Base62.
+    -   ID `125` -> `cb`
+    -   ID `1000000000` -> `15FTGg`
+-   **Collision**: Guaranteed unique because ID is unique.
+
+**5. Scale**
+-   **Cache**: Store popular `shortCode -> longUrl` mappings in Redis.
+-   **Load Balancer**: Distribute requests.
+-   **Database Sharding**: Split by ID range or hash of shortCode.
+
+---
+
+[Back to Top](#system-design-the-complete-guide) | [Home](/)

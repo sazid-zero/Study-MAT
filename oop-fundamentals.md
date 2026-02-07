@@ -878,52 +878,541 @@ NotificationManager smsNotifier = new NotificationManager(new SMSService());
 
 ---
 
-## 🎯 Design Patterns Overview
+## 🎯 Design Patterns: The Complete Guide
 
-### Creational Patterns
+> "Design patterns are solutions to recurring problems in software design." — Gang of Four
 
-**Singleton** - Ensure only one instance exists
+### 1. Creational Patterns (Object Creation)
+
+#### **Singleton**
+Ensures a class has only one instance and provides a global point of access.
+**Analogy**: A country can have only one President.
+**When to use**:
+-   Logging (One log file).
+-   Driver Objects (One printer spooler).
+-   Caching (One cache instance).
+
 ```java
-public class Singleton {
-    private static Singleton instance;
+public class Database {
+    private static Database instance;
+    private Database() { /* private constructor */ }
     
-    private Singleton() { }
-    
-    public static Singleton getInstance() {
+    public static synchronized Database getInstance() {
         if (instance == null) {
-            instance = new Singleton();
+            instance = new Database();
         }
         return instance;
     }
-}
-```
-
-**Factory** - Create objects without specifying exact class
-```java
-interface Shape {
-    void draw();
-}
-
-class ShapeFactory {
-    public static Shape createShape(String type) {
-        if (type.equals("circle")) return new Circle();
-        if (type.equals("square")) return new Square();
-        return null;
+    
+    public void query(String sql) {
+        System.out.println("Executing: " + sql);
     }
 }
 ```
 
-### Structural Patterns
+#### **Factory Method**
+Creates objects without specifying the exact class to create.
+**Analogy**: Hiring a logistics company. You say "Deliver this", you don't care if they use a Truck, Ship, or Plane.
+**When to use**:
+-   When you don't know ahead of time what class of objects you need.
+-   When you want to decouple object creation from usage.
 
-**Adapter** - Make incompatible interfaces work together
-**Decorator** - Add new functionality to objects dynamically
-**Facade** - Provide simple interface to complex system
+```java
+interface Notification {
+    void notifyUser();
+}
 
-### Behavioral Patterns
+class SMSNotification implements Notification {
+    public void notifyUser() { System.out.println("Sending SMS..."); }
+}
 
-**Observer** - Define one-to-many dependency between objects
-**Strategy** - Define family of algorithms, make them interchangeable
-**Template Method** - Define skeleton of algorithm, let subclasses override steps
+class EmailNotification implements Notification {
+    public void notifyUser() { System.out.println("Sending Email..."); }
+}
+
+class NotificationFactory {
+    public Notification createNotification(String channel) {
+        if (channel == null || channel.isEmpty()) return null;
+        switch (channel) {
+            case "SMS": return new SMSNotification();
+            case "EMAIL": return new EmailNotification();
+            default: throw new IllegalArgumentException("Unknown channel " + channel);
+        }
+    }
+}
+```
+
+#### **Builder**
+Separates the construction of a complex object from its representation.
+**Analogy**: Sub-way sandwich. You choose Bread -> Cheese -> Veggies -> Sauce stepwise.
+**When to use**:
+-   When an object has too many parameters (Constructor Explosion).
+-   When some parameters are optional.
+
+```java
+class User {
+    private final String firstName; // required
+    private final String lastName;  // required
+    private final int age;          // optional
+    private final String phone;     // optional
+
+    private User(UserBuilder builder) {
+        this.firstName = builder.firstName;
+        this.lastName = builder.lastName;
+        this.age = builder.age;
+        this.phone = builder.phone;
+    }
+
+    public static class UserBuilder {
+        private final String firstName;
+        private final String lastName;
+        private int age;
+        private String phone;
+
+        public UserBuilder(String firstName, String lastName) {
+            this.firstName = firstName;
+            this.lastName = lastName;
+        }
+        public UserBuilder age(int age) { this.age = age; return this; }
+        public UserBuilder phone(String phone) { this.phone = phone; return this; }
+        public User build() { return new User(this); }
+    }
+}
+
+// Usage:
+// User user = new User.UserBuilder("John", "Doe").age(30).build();
+```
+
+---
+
+### 2. Structural Patterns (Class Composition)
+
+#### **Adapter**
+Allows incompatible interfaces to work together.
+**Analogy**: A universal travel power plug adapter.
+**When to use**:
+-   Integrating a legacy component with a new system.
+-   Using a 3rd party library that doesn't match your interface.
+
+```java
+// Target interface
+interface Bird {
+    void makeSound();
+}
+
+class Sparrow implements Bird {
+    public void makeSound() { System.out.println("Chirp Chirp"); }
+}
+
+// Adaptee interface
+interface ToyDuck {
+    void squeak();
+}
+
+class PlasticToyDuck implements ToyDuck {
+    public void squeak() { System.out.println("Squeak"); }
+}
+
+// Adapter
+class BirdAdapter implements ToyDuck {
+    Bird bird;
+    public BirdAdapter(Bird bird) { this.bird = bird; }
+    
+    public void squeak() {
+        bird.makeSound(); // Translates squeak() to makeSound()
+    }
+}
+```
+
+#### **Decorator**
+Adds behavior to an object dynamically without affecting other objects.
+**Analogy**: Wearing layers of clothes. You are still YOU, but now you have a jacket (Warmth) and a raincoat (Dry).
+**When to use**:
+-   Adding responsibilities to objects dynamically (e.g., UI Borders, Scrollbars).
+-   Java I/O Streams (`new BufferedReader(new FileReader(...))`).
+
+```java
+interface Coffee {
+    String getDescription();
+    double getCost();
+}
+
+class SimpleCoffee implements Coffee {
+    public String getDescription() { return "Simple Coffee"; }
+    public double getCost() { return 1.0; }
+}
+
+abstract class CoffeeDecorator implements Coffee {
+    protected Coffee decoratedCoffee;
+    public CoffeeDecorator(Coffee c) { this.decoratedCoffee = c; }
+    public String getDescription() { return decoratedCoffee.getDescription(); }
+    public double getCost() { return decoratedCoffee.getCost(); }
+}
+
+class Milk extends CoffeeDecorator {
+    public Milk(Coffee c) { super(c); }
+    public String getDescription() { return decoratedCoffee.getDescription() + ", Milk"; }
+    public double getCost() { return decoratedCoffee.getCost() + 0.5; }
+}
+
+// Usage: Coffee c = new Milk(new SimpleCoffee());
+```
+
+#### **Facade**
+Provides a simplified interface to a library, a framework, or any other complex set of classes.
+**Analogy**: Starting a car with a key (or button) without knowing about fuel injection, pistons, or battery.
+**When to use**:
+-   To provide a simple interface to a complex subsystem.
+-   To decouple clients from implementation details.
+
+```java
+class ComputerFacade {
+    private CPU cpu;
+    private Memory memory;
+    private HardDrive hardDrive;
+
+    public ComputerFacade() {
+        this.cpu = new CPU();
+        this.memory = new Memory();
+        this.hardDrive = new HardDrive();
+    }
+
+    public void start() {
+        cpu.freeze();
+        memory.load(BOOT_ADDRESS, hardDrive.read(BOOT_SECTOR, SECTOR_SIZE));
+        cpu.jump(BOOT_ADDRESS);
+        cpu.execute();
+    }
+}
+```
+
+---
+
+### 3. Behavioral Patterns (Object Communication)
+
+#### **Observer**
+Defines a one-to-many dependency between objects so that when one object changes state, all its dependents are notified.
+**Analogy**: YouTube Subscription. When a creator uploads, all subscribers get a notification. You don't have to refresh checking for new videos.
+**When to use**:
+-   Event handling systems (DOM Events).
+-   Pub-Sub systems (Messaging).
+
+```java
+interface Observer {
+    void update(String message);
+}
+
+class Subscriber implements Observer {
+    private String name;
+    public Subscriber(String name) { this.name = name; }
+    public void update(String message) {
+        System.out.println(name + " received: " + message);
+    }
+}
+
+class Channel {
+    private List<Observer> observers = new ArrayList<>();
+    
+    public void subscribe(Observer o) { observers.add(o); }
+    public void unsubscribe(Observer o) { observers.remove(o); }
+    
+    public void notifyOrbs(String message) {
+        for (Observer o : observers) o.update(message);
+    }
+}
+```
+
+#### **Strategy**
+Defines a family of algorithms, encapsulates each one, and makes them interchangeable.
+**Use Case:** Payment processing (CreditCard, PayPal, Bitcoin), Sorting algorithms.
+
+```java
+interface PaymentStrategy {
+    void pay(int amount);
+}
+
+class CreditCardStrategy implements PaymentStrategy {
+    public void pay(int amount) { System.out.println("Paid " + amount + " with Card"); }
+}
+
+class PayPalStrategy implements PaymentStrategy {
+    public void pay(int amount) { System.out.println("Paid " + amount + " with PayPal"); }
+}
+
+class ShoppingCart {
+    public void checkout(int amount, PaymentStrategy strategy) {
+        strategy.pay(amount);
+    }
+}
+
+// Usage: cart.checkout(100, new PayPalStrategy());
+```
+
+---
+
+## 🚀 Modern OOP & Concurrency
+
+### 1. Lambda Expressions (Functional OOP)
+Introduced in Java 8 / C++11, Lambdas allow you to treat functionality as a method argument, or code as data. They simplify the **Strategy Pattern** and **Event Handling**.
+
+**Syntax**: `(parameters) -> { body }`
+
+**Why use them?**
+-   **Conciseness**: Reduces boilerplate code (no need for anonymous inner classes).
+-   **Readability**: Focuses on *what* to do, not *how* to construct the object.
+-   **Parallelism**: Enables easy parallel processing with the Stream API.
+
+**Example: Sorting without Lambdas vs With Lambdas**
+```java
+// Old Way (Anonymous Class)
+Collections.sort(names, new Comparator<String>() {
+    @Override
+    public int compare(String s1, String s2) {
+        return s1.compareTo(s2);
+    }
+});
+
+// New Way (Lambda)
+Collections.sort(names, (s1, s2) -> s1.compareTo(s2));
+```
+
+**Stream API (The Power of Lambdas)**
+Process collections declaratively (Functional Style).
+```java
+List<String> names = Arrays.asList("Alice", "Bob", "Charlie", "David");
+
+// Filter names starting with 'A', convert to UpperCase, and print
+names.stream()
+     .filter(name -> name.startsWith("A"))
+     .map(String::toUpperCase)
+     .forEach(System.out::println);
+```
+
+### 2. Multithreading Basics (The Foundation)
+
+**Thread vs Process**
+-   **Process**: An executing program (e.g., Discord.exe). Has its own memory space. Heavyweight.
+-   **Thread**: A unit of execution *within* a process. Shares memory (Heap) with other threads. Lightweight.
+
+**Thread Lifecycle**
+1.  **New**: Created but not started.
+2.  **Runnable**: Ready to run, waiting for CPU time.
+3.  **Running**: Currently executing.
+4.  **Blocked/Waiting**: Waiting for a resource (I/O, Lock) or another thread.
+5.  **Terminated**: Finished execution.
+
+**Creating a Thread**
+```java
+// Method 1: Implement Runnable (Preferred)
+Runnable task = () -> {
+    System.out.println("Running in: " + Thread.currentThread().getName());
+};
+Thread t1 = new Thread(task);
+t1.start();
+```
+
+---
+
+### 3. Concurrency Deep Dive (The Hard Stuff)
+
+Concurrent programming is about dealing with multiple things happening at once. It's notorious for bugs that are hard to reproduce.
+
+#### **1. The Core Problem: Shared Mutable State**
+When two threads read/write the same variable at the same time, **Race Conditions** occur.
+
+**Example**:
+```java
+class Counter {
+    int count = 0;
+    void increment() { count++; } // Not Atomic! (Read -> Modify -> Write)
+}
+// If T1 and T2 run increment() same time, count might be 1 instead of 2.
+```
+
+#### **2. Synchronization (The Lock)**
+The `synchronized` keyword ensures only one thread can execute a block of code at a time. It uses an **Intrinsic Lock (Monitor)**.
+
+**Method Level:**
+```java
+public synchronized void increment() {
+    count++;
+}
+```
+**Block Level (Better Performance):**
+```java
+public void increment() {
+    // Only lock this specific object, not the whole method
+    synchronized(this) {
+        count++;
+    }
+}
+```
+
+#### **3. Volatile Keyword (Visibility)**
+Threads often cache variables in CPU registers. If T1 changes a flag, T2 might not see it immediately.
+`volatile` guarantees that the variable is read from **Main Memory**, not CPU cache.
+```java
+private volatile boolean running = true;
+
+public void stop() { running = false; } // Immediate visibility to other threads
+```
+*Note: Volatile does NOT guarantee atomicity (don't use it for counters).*
+
+#### **4. Inter-Thread Communication (Wait/Notify)**
+Classic **Producer-Consumer** pattern. How do threads talk?
+-   `wait()`: "I'll go to sleep and release the lock until someone wakes me."
+-   `notify()`: "Wake up one sleeping thread."
+-   `notifyAll()`: "Wake up everyone."
+
+```java
+class SharedBuffer {
+    private Queue<Integer> queue = new LinkedList<>();
+    private int capacity = 5;
+
+    public synchronized void produce(int item) throws InterruptedException {
+        while (queue.size() == capacity) {
+            wait(); // Wait if full
+        }
+        queue.add(item);
+        System.out.println("Produced: " + item);
+        notifyAll(); // Wake up consumer
+    }
+
+    public synchronized int consume() throws InterruptedException {
+        while (queue.isEmpty()) {
+            wait(); // Wait if empty
+        }
+        int item = queue.remove();
+        System.out.println("Consumed: " + item);
+        notifyAll(); // Wake up producer
+        return item;
+    }
+}
+```
+
+#### **5. Advanced Locks (ReentrantLock)**
+More flexible than `synchronized`.
+-   **TryLock**: Attempt to get lock, but give up if busy (avoids waiting forever).
+-   **Fairness**: Can ensure longest-waiting thread gets lock first.
+
+```java
+Lock lock = new ReentrantLock();
+
+void accessResource() {
+    lock.lock();
+    try {
+        // Critical Section
+    } finally {
+        lock.unlock(); // Always unlock in finally!
+    }
+}
+```
+
+#### **6. Atomic Variables**
+Lock-free thread-safe variables. Faster than synchronization for simple counters.
+```java
+AtomicInteger count = new AtomicInteger(0);
+count.incrementAndGet(); // Atomic increment
+```
+
+#### **7. Deadlock**
+Situation where T1 holds Key A and waits for Key B, while T2 holds Key B and waits for Key A. They wait forever.
+**Prevention**:
+-   Acquire locks in a consistent order.
+-   Use `tryLock()` with timeout.
+-   Minimize lock scope.
+
+---
+
+### 4. Exception Handling Mastery
+
+Robust software must handle errors gracefully.
+
+#### **1. The Hierarchy**
+Everything inherits from **`Throwable`**.
+-   **`Error`**: Serious system problems (e.g., `StackOverflowError`, `OutOfMemoryError`). Application **cannot** catch or recover from these.
+-   **`Exception`**: Problems the application **can** recover from.
+    -   **Checked Exceptions**: Compile-time check. Must be handled (`try-catch`) or declared (`throws`). Example: `IOException`.
+    -   **Unchecked Exceptions (`RuntimeException`)**: Runtime check. Usually programming errors. Example: `NullPointerException`, `IndexOutOfBoundsException`.
+
+#### **2. Keywords Deep Dive**
+-   **`try`**: Block of code that might throw an exception.
+-   **`catch`**: Block that handles the exception.
+-   **`finally`**: Block that **always** executes (cleanup code like closing files).
+-   **`throw`**: Used to *explicitly* throw an exception instance.
+-   **`throws`**: Used in method signature to *declare* that method might throw an exception.
+
+```java
+// throw vs throws
+public void readFile(String path) throws IOException { // DECLARE
+    if (path == null) {
+        throw new IllegalArgumentException("Path cannot be null"); // THROW
+    }
+    // ... read file logic
+}
+```
+
+#### **3. Custom Exceptions**
+Create domain-specific exceptions to make error handling meaningful.
+
+**Unchecked (extends RuntimeException) - Preferred for logic errors:**
+```java
+class InvalidAgeException extends RuntimeException {
+    public InvalidAgeException(String message) {
+        super(message);
+    }
+}
+
+void registerUser(int age) {
+    if (age < 18) {
+        throw new InvalidAgeException("User must be 18+");
+    }
+}
+```
+
+**Checked (extends Exception) - Preferred for recoverable system errors:**
+```java
+class InsufficientFundsException extends Exception {
+    public InsufficientFundsException(String message) {
+        super(message);
+    }
+}
+
+void withdraw(double amount) throws InsufficientFundsException {
+    if (amount > balance) {
+        throw new InsufficientFundsException("Balance too low");
+    }
+}
+```
+
+#### **4. Try-With-Resources (Java 7+)**
+Automatically closes resources that implement `AutoCloseable`. No need for `finally` block!
+
+```java
+// Old Way
+BufferedReader br = null;
+try {
+    br = new BufferedReader(new FileReader("test.txt"));
+    // use br
+} catch (IOException e) {
+    e.printStackTrace();
+} finally {
+    if (br != null) try { br.close(); } catch (IOException e) { }
+}
+
+// New Way (Best Practice)
+try (BufferedReader br = new BufferedReader(new FileReader("test.txt"))) {
+    // use br
+} catch (IOException e) {
+    e.printStackTrace();
+} // br is automatically closed here
+```
+
+#### **5. Best Practices**
+1.  **Fail Fast**: Validate inputs early (start of method).
+2.  **Catch Specific**: Catch `FileNotFoundException` before `IOException`.
+3.  **Don't Swallow**: Never leave a `catch` block empty! At least log it.
+4.  **Don't Catch `Throwable`**: It catches `Error` too (bad idea).
 
 ---
 
