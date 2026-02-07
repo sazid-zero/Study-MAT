@@ -1,0 +1,79 @@
+---
+layout: default
+---
+
+<div class="sidebar">
+  <div class="sidebar-header">
+    <h2>📚 {{ site.title }}</h2>
+    <p>{{ site.description }}</p>
+  </div>
+  
+  <nav class="sidebar-nav">
+    <div class="nav-section">
+      <h3>🔧 Data Structures</h3>
+      <ul>
+        <li><a href="/stl-guide/#vector">Vector</a></li>
+        <li><a href="/stl-guide/#list">List & Deque</a></li>
+        <li><a href="/stl-guide/#set">Set & Map</a></li>
+        <li><a href="/stl-guide/#stack">Stack & Queue</a></li>
+        <li><a href="/stl-guide/#priority-queue">Priority Queue</a></li>
+      </ul>
+    </div>
+    
+    <div class="nav-section">
+      <h3>⚙️ Algorithms</h3>
+      <ul>
+        <li><a href="/stl-guide/#sorting">Sorting</a></li>
+        <li><a href="/stl-guide/#searching">Searching</a></li>
+        <li><a href="/stl-guide/#algorithms">STL Algorithms</a></li>
+      </ul>
+    </div>
+    
+    <div class="nav-section">
+      <h3>💼 Interview Prep</h3>
+      <ul>
+        <li><a href="/junior-swe-prep/#assessment-overview">Assessment Overview</a></li>
+        <li><a href="/junior-swe-prep/#core-data-structures">Core DS</a></li>
+        <li><a href="/junior-swe-prep/#essential-algorithms">Essential Algorithms</a></li>
+        <li><a href="/junior-swe-prep/#problem-solving-patterns">Problem Patterns</a></li>
+        <li><a href="/junior-swe-prep/#time--space-complexity">Complexity Analysis</a></li>
+        <li><a href="/junior-swe-prep/#system-design-basics">System Design</a></li>
+      </ul>
+    </div>
+    
+    <div class="nav-section">
+      <h3>🎯 Quick Links</h3>
+      <ul>
+        <li><a href="/">🏠 Home</a></li>
+        <li><a href="/stl-guide/">📚 STL Guide</a></li>
+        <li><a href="/junior-swe-prep/">💼 SWE Prep</a></li>
+      </ul>
+    </div>
+  </nav>
+  
+  <div class="sidebar-footer">
+    <p>Built with ❤️ for programmers</p>
+    <div class="social-links">
+      <a href="https://github.com/{{ site.github_username }}" target="_blank">GitHub</a>
+      <a href="https://leetcode.com" target="_blank">LeetCode</a>
+    </div>
+  </div>
+</div>
+
+<div class="main-content">
+  <button class="mobile-menu-toggle" onclick="toggleSidebar()">☰ Menu</button>
+  {{ content }}
+</div>
+
+<script>
+function toggleSidebar() {
+  document.querySelector('.sidebar').classList.toggle('active');
+}
+
+// Close sidebar on mobile when clicking outside
+document.querySelector('.main-content').addEventListener('click', function() {
+  if (window.innerWidth <= 768) {
+    document.querySelector('.sidebar').classList.remove('active');
+  }
+});
+</script>

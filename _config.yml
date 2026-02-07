@@ -1,12 +1,12 @@
 # GitHub Pages Configuration
-title: CSE Interview Prep
-description: Comprehensive guides for competitive programming and technical interviews in software engineering.
+title: CS Interview Prep
+description: Comprehensive guides for competitive programming and technical interviews
 author: Sharif Mahmud Sazid
 email: sharif.sazid.3@gmail.com
+github_username: sazid-zero
 
-# Theme
-theme: minima
-# For GitHub Pages, you can also use: jekyll-theme-cayman, jekyll-theme-minimal, etc.
+# Theme - Disabled to use custom layout
+# theme: minima
 
 # Build settings
 markdown: kramdown
