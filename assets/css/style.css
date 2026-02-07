@@ -179,10 +179,9 @@ body.is-loading {
   transition: var(--transition-fast);
 }
 
-/* Hide menu button on desktop - sidebar is always visible */
+/* Hide menu button on desktop - sidebar is always visible on docs/pages, never on home */
 @media (min-width: 1024px) {
-  body.layout-docs .mobile-menu-toggle,
-  body.layout-page .mobile-menu-toggle {
+  .mobile-menu-toggle {
     display: none;
   }
 }
@@ -344,20 +343,15 @@ body.is-loading {
   }
 }
 
-/* Desktop: Always visible on docs/pages, not toggleable */
+/* Desktop: No transition (instant), CSS controls visibility */
 @media (min-width: 1024px) {
+  .sidebar {
+    transition: none; /* No lag - instant visibility changes */
+  }
+  
   body.layout-docs .sidebar,
   body.layout-page .sidebar {
     transform: translateX(0) !important;
-  }
-  
-  /* Other layouts (home) can still be toggled */
-  body:not(.layout-docs):not(.layout-page) .sidebar {
-    transform: translateX(0);
-  }
-  
-  body:not(.layout-docs):not(.layout-page) .sidebar:not(.sidebar-open) {
-    transform: translateX(-100%);
   }
 }
 

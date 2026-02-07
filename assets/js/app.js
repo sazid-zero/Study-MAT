@@ -41,8 +41,42 @@ document.addEventListener('DOMContentLoaded', () => {
   highlightCurrentPage();
   setupSmoothScroll();
   
+  // Update layout BEFORE transition starts (prevents lag)
+  barba.hooks.beforeEnter((data) => {
+    // CRITICAL: Update body class BEFORE content renders
+    const newLayout = data.next.namespace;
+    
+    // Remove old layout classes
+    document.body.className = document.body.className
+      .split(' ')
+      .filter(cls => !cls.startsWith('layout-'))
+      .join(' ');
+    
+    // Add new layout class
+    if (newLayout) {
+      document.body.classList.add(`layout-${newLayout}`);
+    }
+  });
+  
   // Re-initialize after page transitions
-  barba.hooks.after(() => {
+  barba.hooks.after((data) => {
+    const newLayout = data.next.namespace;
+    
+    // Update menu button visibility based on layout
+    const toggleBtn = document.querySelector('.mobile-menu-toggle');
+    const isDesktop = window.innerWidth >= 1024;
+    const isDocsOrPage = newLayout === 'docs' || newLayout === 'page';
+    
+    if (toggleBtn) {
+      // Hide on desktop docs/pages, show everywhere else
+      if (isDesktop && isDocsOrPage) {
+        toggleBtn.style.display = 'none';
+      } else {
+        toggleBtn.style.display = '';  // Reset to CSS default
+      }
+    }
+    
+    // Re-initialize components with correct layout
     initSidebar();
     enhanceCodeBlocks();
     generateTOC();
