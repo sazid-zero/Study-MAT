@@ -1,6 +1,6 @@
 # GitHub Pages Configuration
-title: CS Interview Prep
-description: Master C++ STL, OOP, Databases and more for technical interviews and competitive programming
+title: CS Prep Hub
+description: Master C++ STL, Algorithms, OOP, Databases and more for technical interviews and competitive programming
 author: Sharif Mahmud Sazid
 email: sharif.sazid.3@gmail.com
 github_username: sazid-zero
@@ -28,7 +28,9 @@ plugins:
 # Navigation
 header_pages:
   - stl-guide.md
-  - junior-swe-prep.md
+  - algos.md
+  - oop-fundamentals.md
+  - database-fundamentals.md
 
 # Exclude from processing
 exclude:

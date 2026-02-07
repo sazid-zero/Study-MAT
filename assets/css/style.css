@@ -822,8 +822,215 @@ body.layout-page .main-content {
   font-family: var(--font-mono);
   font-size: 0.925rem;
   line-height: 1.7;
-  color: #a9b1d6;
+  color: #c9d1d9;
   display: block;
+}
+
+/* ========================================
+   SYNTAX HIGHLIGHTING - Cool Dark Theme
+   ======================================== */
+
+/* Base text color - soft white */
+.highlight, .highlighter-rouge {
+  color: #d4d4d4;
+}
+
+/* Keywords (if, else, for, while, class, def, return, etc.) - soft purple/blue */
+.highlight .k,
+.highlight .kc,
+.highlight .kd,
+.highlight .kn,
+.highlight .kp,
+.highlight .kr,
+.highlight .kt {
+  color: #569cd6 !important;
+  font-weight: 500;
+}
+
+/* Keyword operators (and, or, not, in, is) - soft blue */
+.highlight .kv,
+.highlight .ow {
+  color: #569cd6 !important;
+}
+
+/* Function/Method names - muted yellow */
+.highlight .nf,
+.highlight .fm {
+  color: #dcdcaa !important;
+  font-weight: normal;
+}
+
+/* Class names - soft teal/cyan */
+.highlight .nc,
+.highlight .nn {
+  color: #4ec9b0 !important;
+  font-weight: 500;
+}
+
+/* Strings - soft orange/peach */
+.highlight .s,
+.highlight .s1,
+.highlight .s2,
+.highlight .sb,
+.highlight .sc,
+.highlight .sd,
+.highlight .se,
+.highlight .sh,
+.highlight .si,
+.highlight .sx {
+  color: #ce9178 !important;
+}
+
+/* String interpolation - soft cyan */
+.highlight .sr,
+.highlight .ss {
+  color: #4ec9b0 !important;
+}
+
+/* Numbers - soft green */
+.highlight .m,
+.highlight .mb,
+.highlight .mf,
+.highlight .mh,
+.highlight .mi,
+.highlight .mo,
+.highlight .il {
+  color: #b5cea8 !important;
+}
+
+/* Comments - muted green */
+.highlight .c,
+.highlight .c1,
+.highlight .ch,
+.highlight .cm,
+.highlight .cp,
+.highlight .cpf,
+.highlight .cs {
+  color: #6a9955 !important;
+  font-style: italic;
+}
+
+/* Variables - light blue */
+.highlight .n,
+.highlight .na,
+.highlight .nb,
+.highlight .nd,
+.highlight .ni,
+.highlight .ne,
+.highlight .nl,
+.highlight .no,
+.highlight .nv,
+.highlight .nx {
+  color: #9cdcfe !important;
+}
+
+/* Built-in functions/constants (print, len, True, False, None) - soft yellow */
+.highlight .nb,
+.highlight .bp {
+  color: #dcdcaa !important;
+}
+
+/* Self, this - soft purple */
+.highlight .vc,
+.highlight .vg,
+.highlight .vi {
+  color: #c586c0 !important;
+}
+
+/* Operators (+, -, *, /, =, ==, etc.) - soft white */
+.highlight .o,
+.highlight .ow {
+  color: #d4d4d4 !important;
+}
+
+/* Punctuation (, ; : ( ) { } [ ]) - soft gray */
+.highlight .p,
+.highlight .punctuation {
+  color: #d4d4d4 !important;
+}
+
+/* Decorators (@property, @staticmethod) - muted yellow */
+.highlight .nd,
+.highlight .decorator {
+  color: #dcdcaa !important;
+}
+
+/* Error - muted red */
+.highlight .err {
+  color: #f48771 !important;
+  background: rgba(244, 135, 113, 0.1);
+  border-radius: 3px;
+  padding: 0 2px;
+}
+
+/* Generic types - soft teal */
+.highlight .nt,
+.highlight .tag {
+  color: #4ec9b0 !important;
+}
+
+/* Attributes in HTML/XML - light blue */
+.highlight .na {
+  color: #9cdcfe !important;
+}
+
+/* HTML/XML attribute values - soft orange */
+.highlight .s {
+  color: #ce9178 !important;
+}
+
+/* Deleted/Inserted in diffs */
+.highlight .gd {
+  color: #f48771 !important;
+  background: rgba(244, 135, 113, 0.15);
+}
+
+.highlight .gi {
+  color: #b5cea8 !important;
+  background: rgba(181, 206, 168, 0.15);
+}
+
+/* C++ specific */
+.highlight .cp {
+  color: #6a9955 !important;
+}
+
+/* Preprocessor directives (#include, #define) - soft purple */
+.highlight .cp {
+  color: #c586c0 !important;
+}
+
+/* Types (int, float, string, void, etc.) - soft teal */
+.highlight .kt {
+  color: #4ec9b0 !important;
+  font-weight: 500;
+}
+
+/* Python specific - function parameters - light blue */
+.highlight .nv {
+  color: #9cdcfe !important;
+}
+
+/* SQL Keywords - soft blue */
+.highlight .k {
+  color: #569cd6 !important;
+}
+
+/* Make keywords subtle */
+.highlight .kd,
+.highlight .kn,
+.highlight .kp {
+  font-weight: 500;
+}
+
+/* Constants/macros - light purple */
+.highlight .no {
+  color: #c586c0 !important;
+}
+
+/* Namespace/module - soft teal */
+.highlight .nn {
+  color: #4ec9b0 !important;
 }
 
 /* Scrollbar for Code Blocks */
@@ -860,7 +1067,15 @@ body.layout-page .main-content {
   font-family: var(--font-mono);
   font-size: 0.925rem;
   line-height: 1.7;
-  color: #a9b1d6;
+  color: #c9d1d9;
+}
+
+/* Ensure syntax highlighting works in all code blocks */
+.docs-content .highlight,
+.docs-content .highlighter-rouge,
+.code-window .highlight,
+.code-window .highlighter-rouge {
+  background: transparent !important;
 }
 
 /* ========================================

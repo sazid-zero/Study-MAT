@@ -5,15 +5,15 @@ title: Home
 
 <div class="hero-section">
   <div class="hero-content">
-    <h1>CS Prep Hub</h1>
+    <h1>🎓 CS Prep Hub</h1>
     <p class="hero-subtitle">Master Data Structures, Algorithms, System Design, and more. Your comprehensive guide to software engineering excellence.</p>
     
     <div class="hero-actions">
-      <a href="{{ '/junior-swe-prep/' | relative_url }}" class="btn-primary btn-large">
-        <i class="fas fa-rocket"></i> Start Learning
+      <a href="{{ '/stl-guide/' | relative_url }}" class="btn-primary btn-large">
+        <i class="fas fa-book"></i> Start Learning
       </a>
-      <a href="{{ '/stl-guide/' | relative_url }}" class="btn-secondary btn-large">
-        <i class="fas fa-book"></i> Browse Topics
+      <a href="{{ '/algos/' | relative_url }}" class="btn-secondary btn-large">
+        <i class="fas fa-code"></i> Browse Topics
       </a>
     </div>
   </div>
@@ -21,12 +21,6 @@ title: Home
 
 <div class="features-section">
   <div class="features-grid">
-    <a href="{{ '/junior-swe-prep/' | relative_url }}" class="feature-card">
-      <span class="feature-icon">💼</span>
-      <h3>Interview Preparation</h3>
-      <p>Comprehensive guide covering core data structures, algorithms, problem-solving patterns, and system design fundamentals for technical interviews.</p>
-    </a>
-    
     <a href="{{ '/stl-guide/' | relative_url }}" class="feature-card">
       <span class="feature-icon">📚</span>
       <h3>C++ STL Guide</h3>
