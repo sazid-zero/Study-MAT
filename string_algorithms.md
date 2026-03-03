@@ -7,6 +7,7 @@ permalink: /string-algorithms/
 [⬅️ Back to Home]({{ '/' | relative_url }})
 
 ---
+{% raw %}
 # String Algorithms
 
 ## At a Glance
@@ -22,6 +23,7 @@ permalink: /string-algorithms/
 | String Hashing | Fast substring equality/comparison | O(n) preprocess, O(1) query | O(n) |
 
 ---
+
 
 ## Table of Contents
 
@@ -781,3 +783,5 @@ vector<string> allRotations(const string& s) {
 | Suffix Array | O(n log n) — build SA | O(m log n) — with SA | O(n) |
 | LCP (Kasai's) | O(n) — given SA | O(log n) — RMQ on LCP | O(n) |
 | Hash preprocessed | O(n) | O(1) per query | O(n) |
+
+{% endraw %}

@@ -7,6 +7,7 @@ permalink: /greedy/
 [⬅️ Back to Home]({{ '/' | relative_url }})
 
 ---
+{% raw %}
 # Greedy Algorithms — Complete Problem Set
 
 A **greedy algorithm** makes the locally optimal choice at each step, hoping to reach the globally optimal solution. It never reconsiders past decisions. The key skill in exams is **recognizing when greedy is safe** (provably optimal) vs when it fails and DP is needed.
@@ -16,6 +17,7 @@ A **greedy algorithm** makes the locally optimal choice at each step, hoping to 
 - The problem has **optimal substructure**: the optimal solution contains optimal solutions to subproblems.
 
 ---
+
 
 ## Table of Contents
 
@@ -1355,3 +1357,5 @@ This is the most important concept for exams — knowing which problems need gre
 | Boats to Save People | O(n log n) | O(1) |
 | Partition Labels | O(n) | O(1) |
 | Two City Scheduling | O(n log n) | O(1) |
+
+{% endraw %}

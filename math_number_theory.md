@@ -7,6 +7,7 @@ permalink: /math-number-theory/
 [⬅️ Back to Home]({{ '/' | relative_url }})
 
 ---
+{% raw %}
 # Math & Number Theory
 
 ## At a Glance
@@ -24,6 +25,7 @@ permalink: /math-number-theory/
 | nCr mod p | Combinatorics | O(n) preprocess |
 
 ---
+
 
 ## Table of Contents
 
@@ -851,3 +853,5 @@ int main() {
 | Trial division primality | O(√n) | O(1) |
 | Miller-Rabin | O(k log² n) | O(1) |
 | Pollard's Rho | O(n^(1/4) polylog) | O(1) |
+
+{% endraw %}

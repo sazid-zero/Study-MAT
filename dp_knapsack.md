@@ -7,6 +7,7 @@ permalink: /dp-knapsack/
 [⬅️ Back to Home]({{ '/' | relative_url }})
 
 ---
+{% raw %}
 # Dynamic Programming — Knapsack Problems
 
 The knapsack family is one of the most-tested DP topics. Every variant follows the same **item × capacity** table structure but differs in how many times each item can be used.
@@ -21,6 +22,7 @@ The knapsack family is one of the most-tested DP topics. Every variant follows t
 | **Fractional Knapsack** | Fractions allowed | **Greedy** (not DP) — sort by value/weight |
 
 ---
+
 
 ## Table of Contents
 
@@ -750,3 +752,5 @@ int main() {
 | Rod Cutting | O(n²) | O(n) |
 | Bounded Knapsack | O(n × W × log k) | O(W) |
 | 2-Constraint Knapsack | O(n × W × V) | O(W × V) |
+
+{% endraw %}

@@ -7,6 +7,7 @@ permalink: /graph-traversal/
 [⬅️ Back to Home]({{ '/' | relative_url }})
 
 ---
+{% raw %}
 # Graph Algorithms — Traversal: BFS & DFS
 
 ## Graph Representations
@@ -39,6 +40,7 @@ void buildAdj(int n, vector<Edge>& edges, bool directed = false) {
 ```
 
 ---
+
 
 ## Table of Contents
 
@@ -1057,3 +1059,5 @@ int main() {
 | Kosaraju SCC | O(V+E) | O(V) | 2 DFS passes |
 | Tarjan SCC | O(V+E) | O(V) | 1 DFS pass |
 | Word Ladder BFS | O(N × L²) | O(N × L) | N=words, L=word length |
+
+{% endraw %}

@@ -7,6 +7,7 @@ permalink: /backtracking/
 [⬅️ Back to Home]({{ '/' | relative_url }})
 
 ---
+{% raw %}
 # Backtracking
 
 ## Core Concept
@@ -25,6 +26,7 @@ void backtrack(state) {
 ```
 
 ---
+
 
 ## Table of Contents
 
@@ -852,3 +854,5 @@ vector<string> restoreIpAddresses(string s) {
 | N-Queens (n) | O(n!) | O(n) |
 | Sudoku | O(9^81) worst | O(1) extra |
 | N-Queens (bitmask) | O(n!) but ~3× faster | O(n) |
+
+{% endraw %}

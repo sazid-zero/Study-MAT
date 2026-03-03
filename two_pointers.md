@@ -7,11 +7,13 @@ permalink: /two-pointers/
 [⬅️ Back to Home]({{ '/' | relative_url }})
 
 ---
+{% raw %}
 # Two-Pointer Technique — Problem Set
 
 The **two-pointer** technique uses two indices to traverse a data structure (array, string, or two arrays simultaneously). Instead of a nested loop O(n²), you move the pointers intelligently to achieve **O(n)** time complexity.
 
 ---
+
 
 ## Table of Contents
 
@@ -1080,3 +1082,5 @@ int main() {
 | Longest Substring No Repeat | O(n) | O(n) |
 | Minimum Window Substring | O(n+m) | O(n+m) |
 | Intersection of Sorted Arrays | O(n+m) | O(1) |
+
+{% endraw %}

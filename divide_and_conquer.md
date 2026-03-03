@@ -7,6 +7,7 @@ permalink: /divide-and-conquer/
 [⬅️ Back to Home]({{ '/' | relative_url }})
 
 ---
+{% raw %}
 # Divide & Conquer — Complete Problem Set
 
 **Divide & Conquer** splits a problem into smaller subproblems, solves each recursively, then combines the results. The three steps are always: **Divide → Conquer → Combine**.
@@ -17,6 +18,7 @@ permalink: /divide-and-conquer/
 - If f(n) = Ω(n^c) where c > log_b(a) → T(n) = Θ(f(n))
 
 ---
+
 
 ## Table of Contents
 
@@ -1472,3 +1474,5 @@ int main() {
 | Boyer-Moore Majority | O(n) | O(1) |
 | Quickselect | O(n) avg | O(log n) |
 | Skyline Problem | O(n log n) | O(n) |
+
+{% endraw %}

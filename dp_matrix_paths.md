@@ -7,6 +7,7 @@ permalink: /dp-matrix-paths/
 [⬅️ Back to Home]({{ '/' | relative_url }})
 
 ---
+{% raw %}
 # Dynamic Programming — Matrix & Grid Path Problems
 
 Most grid DP problems have the structure: `dp[i][j]` = optimal value (min cost, max value, count of paths, etc.) to reach or process cell `(i, j)`.
@@ -17,6 +18,7 @@ Most grid DP problems have the structure: `dp[i][j]` = optimal value (min cost, 
 - From any edge: expand from borders inward
 
 ---
+
 
 ## Table of Contents
 
@@ -882,3 +884,5 @@ int main() {
 | Gold Mine | O(mn) | O(mn) |
 | Path Maximum Gold | O(mn × 3^path) | O(mn) |
 | Bomb Enemy | O(mn) | O(n) |
+
+{% endraw %}

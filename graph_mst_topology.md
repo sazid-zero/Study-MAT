@@ -7,9 +7,11 @@ permalink: /graph-mst-topology/
 [⬅️ Back to Home]({{ '/' | relative_url }})
 
 ---
+{% raw %}
 # Graph Algorithms — MST, Topological Sort & Union-Find
 
 ---
+
 
 ## Table of Contents
 
@@ -1185,3 +1187,5 @@ int main() {
 | Course Schedule | O(V+E) | O(V+E) | Kahn's + cycle check |
 | Alien Dictionary | O(C) C=total chars | O(1) only 26 chars | Topo on characters |
 | Bridges/Articulation | O(V+E) | O(V) | Tarjan low-link |
+
+{% endraw %}

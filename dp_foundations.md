@@ -7,6 +7,7 @@ permalink: /dp-foundations/
 [⬅️ Back to Home]({{ '/' | relative_url }})
 
 ---
+{% raw %}
 # Dynamic Programming — Foundations & Classic Problems
 
 **Dynamic Programming (DP)** solves problems by breaking them into overlapping subproblems, storing results to avoid recomputation. Two required properties:
@@ -23,6 +24,7 @@ permalink: /dp-foundations/
 **Space optimization:** Many DP tables can be reduced from O(n²) → O(n) → O(1) by keeping only the previous row/values.
 
 ---
+
 
 ## Table of Contents
 
@@ -801,3 +803,5 @@ Does the problem ask for:
 | Perfect Squares | O(n√n) | O(n) | — |
 | Word Break | O(n²) | O(n) | — |
 | Unique BSTs | O(n²) | O(n) | — |
+
+{% endraw %}

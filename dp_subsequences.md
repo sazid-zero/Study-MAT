@@ -7,6 +7,7 @@ permalink: /dp-subsequences/
 [⬅️ Back to Home]({{ '/' | relative_url }})
 
 ---
+{% raw %}
 # Dynamic Programming — Subsequences (LCS, LIS & Variants)
 
 A **subsequence** maintains relative order but may skip elements. A **substring/subarray** must be contiguous. Know this distinction — it changes the recurrence completely.
@@ -18,6 +19,7 @@ A **subsequence** maintains relative order but may skip elements. A **substring/
 | Subarray (nums) | Yes | `[2,3,4]` from `[1,2,3,4,5]` |
 
 ---
+
 
 ## Table of Contents
 
@@ -1044,3 +1046,5 @@ int main() {
 | Min Deletions → Palindrome | O(n²) | O(n²) |
 | Longest Alternating Subseq | O(n) | O(1) |
 | Max Repeated Subarray | O(mn) | O(mn) |
+
+{% endraw %}

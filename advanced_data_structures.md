@@ -7,6 +7,7 @@ permalink: /advanced-data-structures/
 [⬅️ Back to Home]({{ '/' | relative_url }})
 
 ---
+{% raw %}
 # Advanced Data Structures
 
 ## At a Glance
@@ -23,6 +24,7 @@ permalink: /advanced-data-structures/
 | DSU with rollback | O(log n) | O(log n) rollback | O(log n) | O(n) |
 
 ---
+
 
 ## Table of Contents
 
@@ -985,3 +987,5 @@ public:
 | DSU (rollback) | O(log n) | O(log n) rollback | O(log n) | O(n) |
 | LRU Cache | O(1) | O(1) | O(1) | — |
 | LFU Cache | O(1) | O(1) | O(1) | — |
+
+{% endraw %}

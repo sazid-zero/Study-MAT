@@ -7,11 +7,13 @@ permalink: /sorting/
 [⬅️ Back to Home]({{ '/' | relative_url }})
 
 ---
+{% raw %}
 # Sorting Algorithms — Complete Problem Set
 
 Sorting is the backbone of computer science. A large portion of job exam questions either test sorting directly or use it as a prerequisite step. This file covers every algorithm you need — from the classic comparison sorts to non-comparison linear sorts, plus the critical skill of custom comparator sorting that appears constantly in real interview problems.
 
 ---
+
 
 ## Table of Contents
 
@@ -1477,3 +1479,5 @@ sort(v.begin(), v.end(), [](const T& a, const T& b) {
 | Sort linked list | Merge Sort (linked list version) | O(n log n) |
 | K-sorted array | Min-heap of size k+1 | O(n log k) |
 | Wiggle sort (any valid output) | Greedy single pass | O(n) |
+
+{% endraw %}

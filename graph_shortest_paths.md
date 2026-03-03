@@ -7,6 +7,7 @@ permalink: /graph-shortest-paths/
 [⬅️ Back to Home]({{ '/' | relative_url }})
 
 ---
+{% raw %}
 # Graph Algorithms — Shortest Paths
 
 **At a glance — which algorithm to use:**
@@ -23,6 +24,7 @@ permalink: /graph-shortest-paths/
 | Heuristic-guided (grid, map) | A* | O(E log V) |
 
 ---
+
 
 ## Table of Contents
 
@@ -980,3 +982,5 @@ int main() {
 | K Stops | Bellman-Ford | O(k × E) | O(V) |
 | Min Effort Path | Dijkstra/BinSearch | O(mn log mn) | O(mn) |
 | Longest Path DAG | Topo+DP | O(V+E) | O(V) |
+
+{% endraw %}

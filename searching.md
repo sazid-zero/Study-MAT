@@ -7,11 +7,13 @@ permalink: /searching/
 [⬅️ Back to Home]({{ '/' | relative_url }})
 
 ---
+{% raw %}
 # Searching Algorithms — Complete Problem Set
 
 Searching is one of the most tested algorithm families in job written exams and coding rounds. This file covers every variant you need: Binary Search (basic through advanced), Ternary Search, and 2D Matrix Search.
 
 ---
+
 
 ## Table of Contents
 
@@ -1320,3 +1322,5 @@ return result;
 | 2D Row+Col Sorted (Staircase) | O(m+n) | O(1) |
 | 2D Row Sorted Only | O(m log n) | O(1) |
 | 2D Peak Element | O(m log n) | O(1) |
+
+{% endraw %}

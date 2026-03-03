@@ -7,6 +7,7 @@ permalink: /sliding-window/
 [⬅️ Back to Home]({{ '/' | relative_url }})
 
 ---
+{% raw %}
 # Sliding Window Technique — Problem Set
 
 The **sliding window** technique maintains a contiguous subarray or substring (the "window") that expands or contracts as it moves across the input. It avoids recomputing results from scratch on every step, reducing O(n²) or O(nk) brute-force solutions to **O(n)**.
@@ -14,6 +15,7 @@ The **sliding window** technique maintains a contiguous subarray or substring (t
 > **Relationship to Two Pointers:** Sliding window IS a two-pointer technique. `left` and `right` define the window boundaries. The difference is the *intent* — you're maintaining an aggregate (sum, frequency count, condition) over a dynamic range, not just searching for a pair.
 
 ---
+
 
 ## Table of Contents
 
@@ -746,3 +748,5 @@ Is window size fixed?
 | Subarray Product < k | O(n) | O(1) |
 | Max Consecutive Ones III | O(n) | O(1) |
 | Subarray Sum Equals k | O(n) | O(n) |
+
+{% endraw %}

@@ -7,6 +7,7 @@ permalink: /tree-algorithms/
 [⬅️ Back to Home]({{ '/' | relative_url }})
 
 ---
+{% raw %}
 # Tree Algorithms
 
 ## Node Definitions
@@ -28,6 +29,7 @@ struct TrieNode {
 ```
 
 ---
+
 
 ## Table of Contents
 
@@ -1189,3 +1191,5 @@ TreeNode* deserialize(string data) {
 | Naive DFS | O(n) | O(n) |
 | Binary Lifting | O(n log n) | O(log n) |
 | Euler Tour + RMQ | O(n log n) | O(1) |
+
+{% endraw %}
