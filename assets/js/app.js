@@ -41,6 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
   highlightCurrentPage();
   setupSmoothScroll();
   wrapTables();
+  highlightSearchQuery();
   
   // Update layout BEFORE transition starts (prevents lag)
   barba.hooks.beforeEnter((data) => {
@@ -94,10 +95,70 @@ document.addEventListener('DOMContentLoaded', () => {
     highlightCurrentPage();
     setupSmoothScroll();
     wrapTables();
+    highlightSearchQuery();
   });
 
   registerServiceWorker();
 });
+
+// ── Search result highlighting ──
+// Reads ?q= param, highlights matching text on the page, and scrolls to it.
+function highlightSearchQuery() {
+  const params = new URLSearchParams(window.location.search);
+  const query = params.get('q');
+  if (!query) return;
+
+  // Remove any previous highlights
+  document.querySelectorAll('mark.search-page-highlight').forEach(m => {
+    const parent = m.parentNode;
+    parent.replaceChild(document.createTextNode(m.textContent), m);
+    parent.normalize();
+  });
+
+  const contentEl = document.querySelector('.docs-content') || document.querySelector('.content') || document.querySelector('main') || document.body;
+  const lowerQuery = query.toLowerCase();
+  const walker = document.createTreeWalker(contentEl, NodeFilter.SHOW_TEXT, null, false);
+  const matches = [];
+
+  while (walker.nextNode()) {
+    const node = walker.currentNode;
+    // Skip script/style nodes
+    if (node.parentElement && /^(SCRIPT|STYLE|MARK|CODE|PRE)$/i.test(node.parentElement.tagName)) continue;
+    const idx = node.textContent.toLowerCase().indexOf(lowerQuery);
+    if (idx !== -1) {
+      matches.push({ node, idx });
+    }
+  }
+
+  let firstMark = null;
+
+  // Wrap matches in reverse order to preserve node offsets
+  for (let i = matches.length - 1; i >= 0; i--) {
+    const { node, idx } = matches[i];
+    try {
+      const range = document.createRange();
+      range.setStart(node, idx);
+      range.setEnd(node, idx + query.length);
+      const mark = document.createElement('mark');
+      mark.className = 'search-page-highlight';
+      range.surroundContents(mark);
+      firstMark = mark;
+    } catch (_) { /* skip edge cases */ }
+  }
+
+  // Scroll to the first match (after a small delay for rendering)
+  if (firstMark) {
+    setTimeout(() => {
+      const headerOffset = 110;
+      const top = firstMark.getBoundingClientRect().top + window.pageYOffset - headerOffset;
+      window.scrollTo({ top, behavior: 'smooth' });
+    }, 350);
+  }
+
+  // Clean the URL bar (remove ?q= but keep the hash)
+  const cleanUrl = window.location.pathname + window.location.hash;
+  window.history.replaceState(null, '', cleanUrl);
+}
 
 function registerServiceWorker() {
   if ('serviceWorker' in navigator) {

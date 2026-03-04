@@ -323,6 +323,42 @@ body.is-loading {
   overflow: hidden;
 }
 
+/* Search breadcrumb separator (Page › Section) */
+.search-breadcrumb {
+  color: var(--text-muted);
+  margin: 0 0.15em;
+  font-weight: 400;
+}
+
+/* Highlighted match inside search dropdown */
+.search-mark {
+  background: rgba(96, 165, 250, 0.3);
+  color: var(--primary-light);
+  padding: 0 2px;
+  border-radius: 2px;
+}
+
+/* Keyboard-active item in dropdown */
+.search-item.kb-active {
+  background: rgba(96, 165, 250, 0.15);
+  padding-left: 1.5rem;
+}
+
+/* On-page highlight when arriving from search */
+.search-page-highlight {
+  background: rgba(96, 165, 250, 0.35);
+  color: var(--text-primary);
+  padding: 2px 4px;
+  border-radius: 3px;
+  animation: hlFade 4s ease forwards;
+}
+
+@keyframes hlFade {
+  0%   { background: rgba(96, 165, 250, 0.5); }
+  70%  { background: rgba(96, 165, 250, 0.35); }
+  100% { background: transparent; }
+}
+
 /* Header Actions */
 .header-actions {
   display: flex;

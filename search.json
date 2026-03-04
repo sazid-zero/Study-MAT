@@ -10,9 +10,8 @@ layout: null
       {
         "title": {{ page.title | jsonify }},
         "url": {{ page.url | relative_url | jsonify }},
-        "content": {{ page.content | strip_html | strip_newlines | truncatewords: 1000 | jsonify }},
-        "excerpt": {{ page.content | strip_html | strip_newlines | truncatewords: 30 | jsonify }},
-        "layout": {{ page.layout | jsonify }}
+        "content": {{ page.content | strip_html | strip_newlines | jsonify }},
+        "html": {{ page.content | jsonify }}
       }
       {% assign first = false %}
       {% endunless %}
