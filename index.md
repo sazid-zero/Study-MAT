@@ -225,6 +225,12 @@ title: Home
       <p>GCD, LCM, Sieve of Eratosthenes, modular arithmetic, fast exponentiation, and combinatorics for competitive programming.</p>
     </a>
 
+    <a href="{{ '/sqa-guide/' | relative_url }}" class="feature-card">
+      <span class="feature-icon"><i class="fas fa-bug"></i></span>
+      <h3>Software Quality Assurance</h3>
+      <p>Testing fundamentals, Selenium/Playwright, API testing, bug management, and everything you need for QA assessments.</p>
+    </a>
+
     <div class="feature-card" style="background: linear-gradient(135deg, rgba(96, 165, 250, 0.1), rgba(167, 139, 250, 0.1)); border-color: var(--primary);">
       <span class="feature-icon"><i class="fas fa-star"></i></span>
       <h3>More Coming Soon</h3>
